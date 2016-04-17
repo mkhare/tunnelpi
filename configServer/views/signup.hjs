@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" type="text/css" href="/scripts/semantic.min.css">
+    <script src="/scripts/semantic.min.js"></script>
+</head>
+<body>
+<form class="ui form" action="/signup" method="post">
+    <div class="field">
+        <label>E-mail</label>
+        <input type="text" name="email" placeholder="E-mail">
+    </div>
+    <div class="field">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Password">
+    </div>
+    <button class="ui button" type="submit">Submit</button>
+</form>
+</body>
+</html>

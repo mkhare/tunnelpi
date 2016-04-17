@@ -1,0 +1,111 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files (x86)\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'mongoose' ]
+2 info using npm@2.15.0
+3 info using node@v4.4.2
+4 verbose install initial load of C:\Users\AMIT\WebstormProjects\configServer\package.json
+5 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\better-console\package.json
+6 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\body-parser\package.json
+7 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\connect-flash\package.json
+8 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\cookie-parser\package.json
+9 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\debug\package.json
+10 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\del\package.json
+11 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\express\package.json
+12 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\extend\package.json
+13 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp\package.json
+14 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-autoprefixer\package.json
+15 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-chmod\package.json
+16 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-clone\package.json
+17 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-concat\package.json
+18 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-concat-css\package.json
+19 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-copy\package.json
+20 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-dedupe\package.json
+21 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-flatten\package.json
+22 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-header\package.json
+23 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-help\package.json
+24 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-if\package.json
+25 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-less\package.json
+26 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-minify-css\package.json
+27 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-notify\package.json
+28 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-plumber\package.json
+29 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-print\package.json
+30 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-rename\package.json
+31 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-replace\package.json
+32 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-rtlcss\package.json
+33 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-uglify\package.json
+34 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-util\package.json
+35 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\gulp-watch\package.json
+36 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\hjs\package.json
+37 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\map-stream\package.json
+38 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\mongodb\package.json
+39 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\morgan\package.json
+40 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\passport-local\package.json
+41 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\require-dot-file\package.json
+42 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\run-sequence\package.json
+43 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\semantic-ui\package.json
+44 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\serve-favicon\package.json
+45 verbose installManyTop reading scoped package data from C:\Users\AMIT\WebstormProjects\configServer\node_modules\yamljs\package.json
+46 info package.json better-console@0.2.4 license should be a valid SPDX license expression
+47 info package.json gulp-clone@1.0.0 No license field.
+48 info package.json gulp-copy@0.0.2 No license field.
+49 info package.json gulp-concat-css@2.2.0 No license field.
+50 info package.json gulp-minify-css@1.2.4 No repository field.
+51 info package.json gulp-notify@2.2.0 No license field.
+52 info package.json gulp-rename@1.2.2 No license field.
+53 info package.json hjs@0.0.6 No license field.
+54 info package.json connect-flash@0.1.1 No license field.
+55 info package.json passport-local@1.0.0 No license field.
+56 verbose readDependencies loading dependencies from C:\Users\AMIT\WebstormProjects\configServer\package.json
+57 silly cache add args [ 'mongoose', null ]
+58 verbose cache add spec mongoose
+59 silly cache add parsed spec Result {
+59 silly cache add   raw: 'mongoose',
+59 silly cache add   scope: null,
+59 silly cache add   name: 'mongoose',
+59 silly cache add   rawSpec: '',
+59 silly cache add   spec: 'latest',
+59 silly cache add   type: 'tag' }
+60 silly addNamed mongoose@latest
+61 verbose addNamed "latest" is being treated as a dist-tag for mongoose
+62 info addNameTag [ 'mongoose', 'latest' ]
+63 silly mapToRegistry name mongoose
+64 silly mapToRegistry using default registry
+65 silly mapToRegistry registry https://registry.npmjs.org/
+66 silly mapToRegistry data Result {
+66 silly mapToRegistry   raw: 'mongoose',
+66 silly mapToRegistry   scope: null,
+66 silly mapToRegistry   name: 'mongoose',
+66 silly mapToRegistry   rawSpec: '',
+66 silly mapToRegistry   spec: 'latest',
+66 silly mapToRegistry   type: 'tag' }
+67 silly mapToRegistry uri https://registry.npmjs.org/mongoose
+68 verbose addNameTag registry:https://registry.npmjs.org/mongoose not in flight; fetching
+69 verbose request uri https://registry.npmjs.org/mongoose
+70 verbose request no auth needed
+71 info attempt registry request try #1 at 12:24:54 AM
+72 verbose request id a08c817cc960862d
+73 http request GET https://registry.npmjs.org/mongoose
+74 info retry will retry, error on last attempt: Error: getaddrinfo ENOENT registry.npmjs.org:443
+75 info attempt registry request try #2 at 12:25:04 AM
+76 http request GET https://registry.npmjs.org/mongoose
+77 info retry will retry, error on last attempt: Error: getaddrinfo ENOENT registry.npmjs.org:443
+78 info attempt registry request try #3 at 12:26:04 AM
+79 http request GET https://registry.npmjs.org/mongoose
+80 verbose stack Error: getaddrinfo ENOENT registry.npmjs.org:443
+80 verbose stack     at Object.exports._errnoException (util.js:870:11)
+80 verbose stack     at errnoException (dns.js:32:15)
+80 verbose stack     at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:78:26)
+81 verbose cwd C:\Users\AMIT\WebstormProjects\configServer\semantic
+82 error Windows_NT 6.2.9200
+83 error argv "C:\\Program Files (x86)\\nodejs\\node.exe" "C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "mongoose"
+84 error node v4.4.2
+85 error npm  v2.15.0
+86 error code ENOENT
+87 error errno ENOENT
+88 error syscall getaddrinfo
+89 error enoent getaddrinfo ENOENT registry.npmjs.org:443
+89 error enoent This is most likely not a problem with npm itself
+89 error enoent and is related to npm not being able to find a file.
+90 verbose exit [ 1, true ]
