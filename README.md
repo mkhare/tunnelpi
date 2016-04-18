@@ -11,4 +11,4 @@ You can run the projects either by importing in Webstorm IDE or by running 'app.
 
 Requirements:
 
-1. MongoDB should be running at its default port. You can change the port number or DB URL in config.js file in config directory of project. 
+1. MongoDB should be running at its default port. You can change the port number or DB URL in config.js file in config directory of project.  
