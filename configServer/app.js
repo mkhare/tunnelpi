@@ -23,6 +23,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/scripts', express.static(__dirname + '/node_modules/semantic-ui/dist/'));
 app.set('view engine', 'hjs');
 
+app.use(session({secret:'ssshhh', resave: true, saveUninitialized:true}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({secret: 'hellothere', resave: true, saveUninitialized: true}));
@@ -36,8 +37,17 @@ require('./routes/login')(app, passport);
 require('./config/passport')(app, passport);
 require('./routes/signup')(app, passport);
 require('./routes/profile')(app);
+var User = require('./model/User');
+var Usergws = require('./model/Usergws');
 
 app.get('/', function (req, res) {
-
-    res.render('index', {title: "Amit"});
+    if(req.session.email){
+        Usergws.find({email : req.session.email}, function (err, usersfromDB) {
+            if(err) console.log(err);
+            res.render('profile', {connected_gateways: usersfromDB.length, user : req.session.email, usersList : usersfromDB});
+        });
+    }
+    else {
+        res.render('index', {title: "Login or Signup"});
+    }
 });

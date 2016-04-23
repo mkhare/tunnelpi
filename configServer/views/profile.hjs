@@ -7,14 +7,30 @@
     <script src="/scripts/semantic.min.js"></script>
 </head>
 <body>
-<div> User : {{user}} </div>
-<div> No. of connected gateways : {{connected_gateways}} </div>
-<div> Connected gateways details : </div>
-{{#usersList}}
+<div class="ui large menu">
+    <a class="active item">
+        Home
+    </a>
+    <div class="right menu">
+        <form class="item" action="logout">
+            <button class="ui primary button">Logout</button>
+        </form>
+    </div>
+</div>
+<center>
+<h2 class="ui header">
+    <img src="/images/avatar/user1.png" class="ui circular image">
+    {{user}}
+</h2>
+<h3 class="ui header">No. of connected gateways : {{connected_gateways}}</h3>
+
+<h4 class="ui header">Connected gateways details : </h4>
+    {{#usersList}}
     <b>{{subscribeKey}}</b>
     <b>{{publishKey}}</b>
     <b>{{channelName}}</b>
     <br>
 {{/usersList}}
+</center>
 </body>
 </html>

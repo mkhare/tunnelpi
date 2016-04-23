@@ -11,9 +11,8 @@ module.exports = function (app, passport) {
             console.log(req.user.email);
             Usergws.find({email : req.user.email}, function (err, usersfromDB) {
                 if(err) console.log(err);
-                // connectedgws = usersfromDB.length;
                 console.log(usersfromDB.length);
-                // users = usersfromDB;
+                req.session.email = req.user.email;
                 res.render('profile', {connected_gateways: usersfromDB.length, user : req.user.email, usersList : usersfromDB});
             })
             // res.render('profile', {connected_gateways: connectedgws, user : req.user.username, usersList : users});
@@ -24,5 +23,24 @@ module.exports = function (app, passport) {
 
     app.post('/', passport.authenticate('gateway-auth', function (req, res) {
     }));
+    
+    app.get('/logout', function (req, res) {
+        req.session.destroy(function (err) {
+            if(err) console.log(err);
+        });
+        res.render('index', {title: "Login or Signup"});
+    });
+
+    app.get('/login', function (req, res) {
+        if(req.session.email){
+            Usergws.find({email : req.session.email}, function (err, usersfromDB) {
+                if(err) console.log(err);
+                res.render('profile', {connected_gateways: usersfromDB.length, user : req.session.email, usersList : usersfromDB});
+            });
+        }
+        else {
+            res.render('index', {title: "Login or Signup"});
+        }
+    });
 
 }
