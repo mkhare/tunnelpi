@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/gatewayServer.iml" filepath="$PROJECT_DIR$/.idea/gatewayServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/gatewayClient.iml" filepath="$PROJECT_DIR$/.idea/gatewayClient.iml" />
     </modules>
   </component>
 </project>

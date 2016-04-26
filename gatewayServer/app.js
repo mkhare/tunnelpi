@@ -1,25 +1,15 @@
 var request = require('request');
-// var formData = require('form-data');
-//
-// var form = new formData();
-//
-// form.append('email', 'amit@gmail.com');
-// form.append('password', 'abc');
-// form.submit('http://localhost:8888/', function (err, res) {
-//     if(err){
-//         console.log('error in submitting form data');
-//     }
-//     else{
-//         console.log(res);
-//     }
-// })
+
+var configserver = 'http://localhost:8888';
+var sockio = require('socket.io-client')(configserver);
 
 var cred = {
-    email: 'amitchahar@gmail.com',
-    password: 'asdf',
+    uuid : "1",
+    email: 'amit@gmail.com',
+    password: 'abc',
     subscribe_key: 'subkey2',
     publish_key : 'pubkey2',
-    channel_name : 'demochannel2'
+    channel_name : 'ademochannel2'
 };
 
 request.post(
@@ -37,3 +27,14 @@ request.post(
         }
     }
 );
+
+sockio.on('connect', function (data) {
+    console.log('socket connected to server');
+    sockio.emit('creds', cred);
+});
+
+
+sockio.on('disconnect', function(){
+    //sockio.disconnect();
+    console.log('socket disconnected from server side');
+});
