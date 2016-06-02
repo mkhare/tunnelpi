@@ -13,7 +13,7 @@ var cons = require('consolidate');
 var eventEmitter = new events.EventEmitter();
 
 mongoose.connect(configfile.dburl);
-var User = require('./model/User');
+var User = require('./model/user');
 var Usergws = require('./model/Usergws');
 
 var app = express();

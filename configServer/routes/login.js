@@ -6,8 +6,10 @@ module.exports = function (app, passport) {
        loginModules.logincheck(req.user, res, req);
     });
 
-    app.post('/', passport.authenticate('gateway-auth', function (req, res) {
-    }));
+    app.post('/', passport.authenticate('gateway-auth'), function (req, res) {
+	res.writeHead(200, {'Content-Type' : 'text/plain'});
+	res.end('response for posted data');
+    });
     
     app.get('/logout', function (req, res) {
         req.session.destroy(function (err) {
