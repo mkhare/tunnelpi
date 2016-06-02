@@ -88,8 +88,8 @@ eventEmitter.on('credformed', function () {
             if (error)
                 console.log(error);
 
-            if (response)
-                console.log(response);
+            //if (response)
+            //    console.log(response);
 
             if (!error && response.statusCode == 200) {
                 console.log('succesfull login');
