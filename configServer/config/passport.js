@@ -148,7 +148,6 @@ module.exports = function(app, passport, eventEmitter) {
                     publishKey : req.body.publish_key,
                     channelName : req.body.channel_name
                 };
-                var gwDoc = new Usergws(gw);
 
                 Usergws.findOne(gw, function(err, user){
                     if(err){
@@ -158,6 +157,8 @@ module.exports = function(app, passport, eventEmitter) {
                         console.log('creds already exists.');
                     }
                     else{
+                        gw.devices = req.body.devices;
+                        var gwDoc = new Usergws(gw);
                         gwDoc.save(function(err){
                             if(err)
                                 console.log(err);

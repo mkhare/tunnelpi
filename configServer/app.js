@@ -8,6 +8,7 @@ var passport = require('passport');
 var configfile = require('./config/config');
 var session = require('express-session');
 var events = require('events');
+var cons = require('consolidate');
 
 var eventEmitter = new events.EventEmitter();
 
@@ -32,7 +33,9 @@ app.locals.connected_gateways = 0;
 
 app.set('views', path.join(__dirname, 'views'));
 app.use('/scripts', express.static(__dirname + '/node_modules/semantic-ui/dist/'));
+app.engine('ejs', cons.ejs);
 app.set('view engine', 'hjs');
+// app.engine('hogan', cons.hogan);
 
 app.use(session({secret: 'ssshhh', resave: true, saveUninitialized: true}));
 app.use(bodyParser.json());

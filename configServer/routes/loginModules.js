@@ -13,9 +13,9 @@ var logincheck = function (obj, res, req) {
             if(req){
                 req.session.email = obj.email;
             }
-
-            var temp = formattedData(usersfromDB);
-            res.render('profile', {connected_gateways: usersfromDB.length, user : obj.email, usersList : temp});
+            console.log("mongoData : " + usersfromDB);
+            // var temp = formattedData(usersfromDB);
+            res.render('profile.ejs', {connected_gateways: usersfromDB.length, user : obj.email, mongoData : usersfromDB});
         })
     }
     else {
