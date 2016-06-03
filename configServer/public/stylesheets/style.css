@@ -6,3 +6,16 @@ body {
 a {
   color: #00B7FF;
 }
+
+.dot {
+  width: 9px;
+  height: 9px;
+  background-color: red;
+  border-radius: 50%;
+  float: right;
+  margin-top: 5px;
+}
+
+.user-online {
+  background-color: green;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ./partials/head.ejs %>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var socket = io.connect("");
+
+            socket.on('connect', function (data) {
+                socket.emit('beConnect', {msg: "hello server"});
+                socket.on('mongodata', function (mongodata) {
+                    mongodata.data.forEach(function (item, index, array) {
+                        var divid = item.uuid + item.subscribeKey + item.publishKey + item.channelName + item.email;
+                        divid = divid.split('').reverse().join('').split('@').join('').split('.').join('');
+                        $("#" + divid).addClass('user-online');
+                    })
+                })
+            })
+
+            socket.on('beUserOnline', function (data) {
+                console.log('user online event');
+                var ele = data.tagid.toString();
+                console.log(ele);
+                $("#" + ele).addClass('user-online');
+            });
+
+            socket.on('beUserOffline', function (data) {
+                console.log('user offline event');
+                var ele = data.tagid.toString();
+                console.log(ele);
+                $("#" + ele).removeClass('user-online');
+            });
+
+            socket.on('disconnect', function (data) {
+                window.alert("Server disconnected. Please refresh the page.");
+                socket.disconnect();
+            })
+        })
+    </script>
+    <style type="text/css">
+        ul {
+            display: table;
+            margin: 0 auto;
+        }
+
+        .list {
+            text-align: center
+        }
+
+        .list ul {
+            display: inline-block;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<div class="row" id="msg"></div>
+<% include ./partials/header.ejs %>
+<center>
+    <h2 class="ui header">
+        <img src="/images/avatar/user1.png" class="ui circular image">
+        <%= user %>
+    </h2>
+    <h3 class="ui header">No. of connected gateways : <%= connected_gateways %></h3>
+
+    <h3 class="ui header">Connected gateways details : </h3>
+    <br><br>
+</center>
+
+<ul>
+    <%
+    var lastChannel = '';
+    if(mongoData && mongoData[0]) {
+        lastChannel = mongoData[0].channelName;
+
+    mongoData.forEach(function (item, index, array) {
+        var imgid = item.uuid + item.subscribeKey + item.publishKey + item.channelName + item.email;
+        imgid = imgid.toString().split('').reverse().join('');
+        imgid = imgid.split('@').join('');
+        imgid = imgid.split('.').join('');
+
+    if (index == 0) { %>
+
+    <li><h4>Channel Name : <%= item.channelName %></h4>
+        <ul>
+            <li>
+                <h4 class="ui header">Gateway UUID : <%= item.uuid %> &nbsp;
+                    <div id="<%= imgid %>" class="dot"></div>
+                </h4>
+                <ul>
+                    <%
+                    item.devices.forEach(function(device, ind, arr){
+//                        console.log("device data : %j", device);
+                    %>
+                    <li><h5><%= device.devuuid%></h5></li>
+                    <% }); %>
+                </ul><br>
+            </li>
+            <% }
+            else if (item.channelName == lastChannel) { %>
+            <li>
+                <h4 class="ui header">Gateway UUID : <%= item.uuid %> &nbsp;
+                    <div id="<%= imgid %>" class="dot"></div>
+                </h4>
+                <ul>
+                    <% item.devices.forEach(function(device, ind, arr){ %>
+                    <li><h5><%= device.devuuid%></h5></li>
+                    <% }); %>
+                </ul><br>
+            </li>
+            <% }
+            else { %>
+        </ul>
+    </li>
+    <br>
+    <% lastChannel = item.channelName; %>
+
+    <li><h4> Channel Name : <%= item.channelName %></h4>
+        <ul>
+            <li>
+                <h4 class="ui header">Gateway UUID : <%= item.uuid %> &nbsp;
+                    <div id="<%= imgid %>" class="dot"></div>
+                </h4>
+                <ul>
+                    <% item.devices.forEach(function(device, ind, arr){
+                    %>
+                    <li><h5><%= device.devuuid%></h5></li>
+                    <% }); %>
+                </ul><br>
+            </li>
+            <% }
+            });
+            %>
+        </ul>
+    </li>
+</ul>
+
+<%
+}
+%>
+</ul>
+
+</body>
+</html>

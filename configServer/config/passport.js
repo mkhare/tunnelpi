@@ -35,7 +35,7 @@
 
 
 
-module.exports = function(app, passport) {
+module.exports = function(app, passport, eventEmitter) {
     var LocalStrategy   = require('passport-local').Strategy;
     var mongoose = require('mongoose');
     var User = mongoose.model('User');
@@ -140,14 +140,14 @@ module.exports = function(app, passport) {
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
                 }
 
-                console.log('Everything is good');
+                console.log('Everything is good ' + req.body.uuid);
                 var gw = {
+                    uuid : req.body.uuid,
                     email : req.body.email,
                     subscribeKey : req.body.subscribe_key,
                     publishKey : req.body.publish_key,
                     channelName : req.body.channel_name
                 };
-                var gwDoc = new Usergws(gw);
 
                 Usergws.findOne(gw, function(err, user){
                     if(err){
@@ -157,10 +157,13 @@ module.exports = function(app, passport) {
                         console.log('creds already exists.');
                     }
                     else{
+                        gw.devices = req.body.devices;
+                        var gwDoc = new Usergws(gw);
                         gwDoc.save(function(err){
                             if(err)
                                 console.log(err);
                             console.log('new user added successfully');
+                            eventEmitter.emit('newUserAdded', {uuid : gw.email});
                         });
                     }
                 });
