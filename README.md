@@ -21,6 +21,7 @@ Note : use sudo command to run the the pubnub-client and pubnub-gateway.
 The C program files folder (c-core-master) is present in project directory of pubnub_client and pubnub_gateway. A command line option can be passed to build the C project or use already built C project.
 
 for example, in pubnub_client nodejs project directory,
+
     $ sudo node app.js
 The above command will build or rebuild the executable files in /c-core-master/posix directory.
 
