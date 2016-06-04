@@ -24,7 +24,19 @@ var options = {
     spawnOptions: {shell: true, detached: true}
 };
 
-var pubnubclient = sudo(['sh', '-c', './pubnub_gateway']);
+var pubnubclient = "";
+if(process.argv && process.argv.length > 2){
+    if(process.argv[2] == 'nobuild'){
+        pubnubclient = sudo(['sh', '-c', './directrunscript']);
+    }
+    else{
+        console.log('incorrect command line argument');
+        process.exit(1);
+    }
+}
+else{
+    pubnubclient = sudo(['sh', '-c', './buildscript']);
+}
 // var pubnubclient = spawn('sh', ['-c', './pubnub_client'], {shell:true, detached: true});
 pubnubclient.stdout.setEncoding('utf8');
 // linereader = rl.createInterface(pubnubclient.stdout, pubnubclient.stdin);
@@ -37,7 +49,7 @@ pubnubclient.stdout.on('data', function (data) {
 
     if (pninfofound == false) {
         data = data.split('\n');
-        console.log(data);
+        //console.log(data);
         data.forEach(function (item) {
             var parts = item.split(' ');
             // console.log("parts : " + parts[0]);
