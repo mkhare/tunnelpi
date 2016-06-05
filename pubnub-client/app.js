@@ -14,7 +14,7 @@ var cred = {
     subscribe_key: 'subkey2',
     publish_key: 'pubkey2',
     channel_name: 'ademochannel2',
-    devices : [{devuuid : 'bluetoothDev1'}, {devuuid : 'bluetoothDev2'}]
+    devices: [{devuuid: 'bluetoothDev1'}, {devuuid: 'bluetoothDev2'}]
 };
 
 
@@ -24,17 +24,17 @@ var options = {
     spawnOptions: {shell: true}
 };
 var pubnubclient = "";
-if(process.argv && process.argv.length > 2){
-	if(process.argv[2] == 'nobuild'){
-		pubnubclient = sudo(['sh', '-c', './directrunscript']);
-	}
-	else{
-		console.log('incorrect command line argument');
-		process.exit(1);
-	}
+if (process.argv && process.argv.length > 2) {
+    if (process.argv[2] == 'nobuild') {
+        pubnubclient = sudo(['sh', '-c', './directrunscript']);
+    }
+    else {
+        console.log('incorrect command line argument');
+        process.exit(1);
+    }
 }
-else{
-	pubnubclient = sudo(['sh', '-c', './buildscript']);
+else {
+    pubnubclient = sudo(['sh', '-c', './buildscript']);
 }
 // var pubnubclient = spawn('sh', ['-c', './pubnub_client'], {shell:true, detached: true});
 pubnubclient.stdout.setEncoding('utf8');
@@ -65,9 +65,9 @@ pubnubclient.stdout.on('data', function (data) {
                 cred.channel_name = parts[1];
             }
         })
-        if(pninfofound){
+        if (pninfofound) {
             eventEmitter.emit('credformed');
-    }
+        }
 
     }
 
@@ -77,33 +77,14 @@ pubnubclient.on('close', function (data) {
     console.log('connection closed');
 });
 
-
-eventEmitter.on('credformed', function () {
-
-    request.post(
-        'http://localhost:8888', {form: cred},
-        function (error, response, body) {
-            console.log("server is sending request");
-            if (error)
-                console.log(error);
-
-            //if (response)
-            //    console.log(response);
-
-            if (!error && response.statusCode == 200) {
-                console.log('succesfull login');
-            }
-        }
-    );
-
-    sockio.on('connect', function (data) {
-        console.log('socket connected to server');
+sockio.on('connect', function (data) {
+    console.log('socket connected to server');
+    eventEmitter.on('credformed', function (data) {
         sockio.emit('creds', cred);
     });
+});
 
-
-    sockio.on('disconnect', function () {
-        //sockio.disconnect();
-        console.log('socket disconnected from server side');
-    });
+sockio.on('disconnect', function () {
+    //sockio.disconnect();
+    console.log('socket disconnected from server side');
 });

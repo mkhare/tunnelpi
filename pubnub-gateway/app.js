@@ -79,31 +79,11 @@ pubnubclient.on('close', function (data) {
 });
 
 
-eventEmitter.on('credformed', function () {
-
-    request.post(
-        'http://localhost:8888', {form: cred},
-        function (error, response, body) {
-            console.log("server is sending request");
-            if (error)
-                console.log(error);
-
-            //if (response)
-            //    console.log(response);
-
-            if (!error && response.statusCode == 200) {
-                console.log('succesfull login');
-            }
-        }
-    );
-
-    sockio.on('connect', function (data) {
-        console.log('socket connected to server');
+sockio.on('connect', function (data) {
+    console.log('socket connected to server');
+    eventEmitter.on('credformed', function (data) {
         sockio.emit('creds', cred);
     });
-
-
-
 });
 
 sockio.on('disconnect', function () {
