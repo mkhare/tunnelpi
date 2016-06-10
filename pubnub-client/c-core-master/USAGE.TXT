@@ -1,0 +1,27 @@
+Remote Bluetooth Monitor (RBM) - Version 0.1 
+============================================
+
+Capabilities:
+-------------
+This software is capable of monitoring Bluetooth packets from a remote IP connected place.  This software is depends on BLUEZ btmon, PUBNUB etc.,
+
+How to compile:
+---------------
+cd  c-core-master/posix
+make clean
+make all
+
+How to run:
+-----------
+1) BLUEZ should be preinstalled.  This RBM depends on BLUEZ btmon. Run the following programs in superuser mode.
+       
+2) At the gateway side (where the bluetooth pactets are displayed / analyzed)
+       run the "pubnub_gateway" binary
+       
+3) At the client side (where the bluetooth packets are caputred) 
+       run the "pubnub_client" binary.
+       This creates a temp file at /tmp/blecapture.txt
+
+4) At the gateway side all the remote captured packets are stored at /tmp/blecatpure2.txt
+       run the "btmon -f /tmp/blecaputre2.txt"
+

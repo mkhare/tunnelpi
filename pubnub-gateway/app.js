@@ -24,7 +24,19 @@ var options = {
     spawnOptions: {shell: true, detached: true}
 };
 
-var pubnubclient = sudo(['sh', '-c', './pubnub_gateway']);
+var pubnubclient = "";
+if(process.argv && process.argv.length > 2){
+    if(process.argv[2] == 'nobuild'){
+        pubnubclient = sudo(['sh', '-c', './directrunscript']);
+    }
+    else{
+        console.log('incorrect command line argument');
+        process.exit(1);
+    }
+}
+else{
+    pubnubclient = sudo(['sh', '-c', './buildscript']);
+}
 // var pubnubclient = spawn('sh', ['-c', './pubnub_client'], {shell:true, detached: true});
 pubnubclient.stdout.setEncoding('utf8');
 // linereader = rl.createInterface(pubnubclient.stdout, pubnubclient.stdin);
@@ -37,7 +49,7 @@ pubnubclient.stdout.on('data', function (data) {
 
     if (pninfofound == false) {
         data = data.split('\n');
-        console.log(data);
+        //console.log(data);
         data.forEach(function (item) {
             var parts = item.split(' ');
             // console.log("parts : " + parts[0]);
@@ -67,31 +79,11 @@ pubnubclient.on('close', function (data) {
 });
 
 
-eventEmitter.on('credformed', function () {
-
-    request.post(
-        'http://localhost:8888', {form: cred},
-        function (error, response, body) {
-            console.log("server is sending request");
-            if (error)
-                console.log(error);
-
-            if (response)
-                console.log(response);
-
-            if (!error && response.statusCode == 200) {
-                console.log('succesfull login');
-            }
-        }
-    );
-
-    sockio.on('connect', function (data) {
-        console.log('socket connected to server');
+sockio.on('connect', function (data) {
+    console.log('socket connected to server');
+    eventEmitter.on('credformed', function (data) {
         sockio.emit('creds', cred);
     });
-
-
-
 });
 
 sockio.on('disconnect', function () {

@@ -1,0 +1,5 @@
+#! /bin/sh
+cd ./c-core-master/posix \
+&& make clean \
+&& make all \
+&& ./pubnub_client
