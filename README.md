@@ -11,6 +11,10 @@ pubnub-gateway : receives bluetooth packets from pubnub.
 
 BLE devices are currently hardcoded for the GUI. 
 
+pubnub-client requires btmon. 
+
+http://stackoverflow.com/questions/23152592/bluetooth-sniffer-how-can-i-install-btmon-on-raspberry-pi
+
 These projects are tested on Raspberry Pi 3 and used the mongo-server installed on ubuntu PC.
 
 These projects are implemented using Jetbrains Webstorm IDE.
