@@ -9,7 +9,7 @@ var eventEmitter = new events.EventEmitter();
 
 var cred = {
     uuid: "1",
-    email: 'abc@gmail.com',
+    email: 'amit@gmail.com',
     password: 'abc',
     subscribe_key: 'subkey2',
     publish_key: 'pubkey2',
