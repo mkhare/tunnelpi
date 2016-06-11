@@ -9,7 +9,7 @@ var eventEmitter = new events.EventEmitter();
 
 var cred = {
     uuid: "2",
-    email: 'amit@gmail.com',
+    email: 'abc@gmail.com',
     password: 'abc',
     subscribe_key: 'subkey2',
     publish_key: 'pubkey2',
@@ -43,6 +43,9 @@ pubnubclient.stdout.setEncoding('utf8');
 // pubnubclient.unref();
 
 var pninfofound = false;
+
+//this variable is added to handle the case 'gateway become online before server become online'
+var credready = false;
 pubnubclient.stdout.on('data', function (data) {
 // linereader.on('line', function (data) {
     console.log(data);
@@ -67,6 +70,7 @@ pubnubclient.stdout.on('data', function (data) {
             }
         })
         if(pninfofound){
+            credready = true;
             eventEmitter.emit('credformed');
     }
 
@@ -75,14 +79,33 @@ pubnubclient.stdout.on('data', function (data) {
 });
 
 pubnubclient.on('close', function (data) {
-    console.log('connection closed');
+    console.log('bluetooth program stopped.');
 });
 
-
+// var firstTimeConnect = true;
 sockio.on('connect', function (data) {
     console.log('socket connected to server');
-    eventEmitter.on('credformed', function (data) {
+    if(credready){
+        console.log("socket connected already atleast once");
         sockio.emit('creds', cred);
+    }
+    eventEmitter.on('credformed', function (data) {
+        request.post(configserver, {form: cred},function (error, response, body) {
+            console.log("gateway is sending request");
+            if (error)
+                console.log(error);
+
+            // if (response)
+            //     console.log(response);
+
+            if (!error && response.statusCode == 200) {
+                console.log('succesfull login');
+            }
+        });
+
+        // firstTimeConnect = false;
+        sockio.emit('creds', cred);
+        
     });
 });
 

@@ -20,7 +20,7 @@ var app = express();
 
 var server = http.createServer(app);
 var port = 8888;
-server.listen(port, 'localhost', function () {
+server.listen(port, '0.0.0.0', function () {
     console.log('Server is running...');
     var updatedata = {online: 0};
     Usergws.update({}, updatedata, {multi:true}, function (err) {
@@ -127,10 +127,12 @@ io.sockets.on("connection", function (socket) {
                 Usergws.findOne(gw, function(err, user){
                     if(err){
                         console.log(err);
+                        socket.disconnect(true);
                     }
                     if(user){
                         console.log('In socket stream : creds already exists.');
                         console.log("auth success : %j", gw);
+                        console.log("user online event emitted");
                         eventEmitter.emit('UserOnline', {tagid : imgid});
                         var updateData = {online : 1};
                         Usergws.findOneAndUpdate(gw, updateData, function (err, numbereffected, raw) {
@@ -144,7 +146,8 @@ io.sockets.on("connection", function (socket) {
                         eventEmitter.on('newUserAdded', function (eventdata) {
                             var updateData = {online : 1};
                             Usergws.findOneAndUpdate(gw, updateData, function (err, numbereffected, raw) {
-
+                            	console.log("user online event emitted");
+                            	eventEmitter.emit('UserOnline', {tagid : imgid});
                             });
                         });
                         // socket.on('disconnect', function (eventdata) {

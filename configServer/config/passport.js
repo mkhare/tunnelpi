@@ -127,8 +127,10 @@ module.exports = function(app, passport, eventEmitter) {
             console.log(email);
             console.log(password);
             User.findOne({ email :  email }, function(err, user) {
-                if (err)
+                if (err){
+                    console.log("user does not exist");
                     return done(err);
+                }
 
                 if (!user) {
                     console.log('user not found');
@@ -157,13 +159,14 @@ module.exports = function(app, passport, eventEmitter) {
                         console.log('creds already exists.');
                     }
                     else{
+                    	var tempgwobj = gw;
                         gw.devices = req.body.devices;
                         var gwDoc = new Usergws(gw);
                         gwDoc.save(function(err){
                             if(err)
                                 console.log(err);
                             console.log('new user added successfully');
-                            eventEmitter.emit('newUserAdded', {uuid : gw.email});
+                            eventEmitter.emit('newUserAdded', {gwinfo : tempgwobj});
                         });
                     }
                 });
