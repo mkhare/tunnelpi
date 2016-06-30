@@ -8,12 +8,13 @@ var pubnub = require("pubnub")({
 var channel = proj_config.set1.channel_name;
 
 function delete_file(filename){
-	fs.statSync(filename, function(err, stat) {
+	fs.stat(filename, function(err, stat) {
     if(err == null) {
         fs.unlinkSync(filename);
 		console.log("Old log file deleted.");
-    } 
-    else {
+    } else if(err.code == 'ENOENT') {
+		// file does not exist
+	} else {
         console.log("error while deleting file: " + filename);
     }
 });
@@ -23,11 +24,26 @@ module.exports.subscribe_data = function(){
 	
 	pubnub.subscribe({
 		channel  : channel,
-		callback : write_to_file
+		callback : output_method
 	});
 
-	var first_write = true;
 	var logfile_name = __dirname + "/public/btmonlog.txt"
+	delete_file(logfile_name);	//deleted old log file
+
+	function output_method(message){
+		if(process.argv && process.argv.length > 2){
+			if(process.argv[2] == 'nolog'){
+				log(message);
+			} else {
+				console.log('incorrect command line argument');
+				process.exit(1);
+			}
+		} else {
+			write_to_file(message);
+		}
+	}
+
+	var first_write = true;
 	function write_to_file(message){
 		var buf = new Buffer(message);
 		if(first_write){

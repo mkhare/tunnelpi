@@ -2,6 +2,18 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var cons = require('consolidate');
+var fs = require('fs');
+
+function download_file(filename, res){
+	fs.stat(filename, function(err, stat) {
+		if(err == null) {
+			res.download(filename);
+		} 
+		else {
+			res.sendStatus(404);
+		}
+	});
+}
 
 module.exports = function(){
 	console.log("starting server...");
@@ -9,7 +21,13 @@ module.exports = function(){
 	var server = http.createServer(app);
 	var port = 9999;
 	server.listen(port, '0.0.0.0', function () {
-		console.log('Server is running...');
+		if(process.argv && process.argv.length > 2 && process.argv[2] != 'nolog'){
+			console.log('incorrect command line argument');
+			process.exit(1);
+			
+		} else {
+			console.log('Server is running...');
+		}
 	});
 
 	app.set('views', path.join(__dirname, 'views'));
@@ -18,6 +36,6 @@ module.exports = function(){
 
 	app.get('/', function(req, res){
 		var file = __dirname + "/public/btmonlog.txt";
-		res.download(file);
-	})
+		download_file(file, res);
+	});
 }
