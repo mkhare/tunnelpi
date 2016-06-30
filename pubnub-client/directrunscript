@@ -1,3 +1,4 @@
 #! /bin/sh
-cd ./c-core-master/posix \
-&& ./pubnub_client
+btmon
+# cd ./c-core-master/posix \
+# && ./pubnub_client
