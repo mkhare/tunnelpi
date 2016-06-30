@@ -54,7 +54,7 @@ var credready = true;
 
 pubnubclient.stdout.on('data', function (data) {
 // linereader.on('line', function (data) {
-    console.log(data);
+    // console.log(data);
     pubnub_base.publish_data(data);
     // if (pninfofound == false) {
     //     data = data.split('\n');
