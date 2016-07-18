@@ -9,15 +9,62 @@ var channel = proj_config.set1.channel_name;
 
 function delete_file(filename){
 	fs.stat(filename, function(err, stat) {
-    if(err == null) {
-        fs.unlinkSync(filename);
-		console.log("Old log file deleted.");
-    } else if(err.code == 'ENOENT') {
+		if(err == null) {
+			fs.unlinkSync(filename);
+			console.log("Old log file deleted.");
+		} else if(err.code == 'ENOENT') {
 		// file does not exist
 	} else {
-        console.log("error while deleting file: " + filename);
-    }
+		console.log("error while deleting file: " + filename);
+	}
 });
+}
+
+module.exports.publish_location = function (username) {
+	// var locations = [{
+	// 	latlng: [39.370375, -100.756138],
+	// 	data : {uuid : "1"}
+	// },
+	// {
+	// 	latlng: [50.370375, -100.756138],
+	// 	data : {uuid : "2"}
+	// }];
+
+	// for (var i = 0; i < locations.length; i++) {
+
+ 	//	   locations[i] = {
+	// 		marker: locations[i].marker,
+	// 		latlng: [
+	// 			locations[i].latlng[0],
+ 	//                locations[i].latlng[1]
+	// 		]
+	// 	}
+	// }
+
+	// var location = {latlng: [39.370375, -100.756138]};
+
+	// setInterval(function(){
+	// pubnub.publish({
+	// 	channel: username,
+	// 	message: {point_1: location}
+	// })}, 2000);
+	var gwuuid = JSON.stringify(proj_config.set1.uuid);
+	var point = {
+		latlng: [42.370375, -90.756138],
+		data : gwuuid
+	};
+	var pointname = "point_" + gwuuid;
+	var msg = {};
+	msg[pointname] = point;
+	console.log("msg sent : " + JSON.stringify(msg));
+
+	setInterval(function(){
+		pubnub.publish({
+			channel: username,
+			message: msg
+		});
+
+	}, 2000);
 }
 
 module.exports.subscribe_data = function(){
@@ -57,7 +104,7 @@ module.exports.subscribe_data = function(){
 	}
 
 	function log(message) {
-  		var buf = new Buffer(message);
+		var buf = new Buffer(message);
 		console.log(buf.toString());
 	}
 }

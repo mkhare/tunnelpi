@@ -7,8 +7,10 @@
             var socket = io.connect("");
 
             socket.on('connect', function (data) {
-                socket.emit('beConnect', {msg: "hello server"});
+                var username = $('#username').html();
+                socket.emit('beConnect', {uname: username});
                 socket.on('mongodata', function (mongodata) {
+                    console.log("mongodata : " + mongodata);
                     mongodata.data.forEach(function (item, index, array) {
                         var divid = item.uuid + item.subscribeKey + item.publishKey + item.channelName + item.email;
                         divid = divid.split('').reverse().join('').split('@').join('').split('.').join('');
@@ -35,9 +37,63 @@
                 window.alert("Server disconnected. Please refresh the page.");
                 socket.disconnect();
             })
+
+            socket.on('eoninit', function (data) {
+                console.log('json data : ' + JSON.stringify(data));
+                var pn = PUBNUB.init({
+                    publish_key: data.publish_key,
+                    subscribe_key: data.subscribe_key
+                });
+
+                var username = $('#username').html();
+//                console.log("channel name received from server : " + data.channel_name);
+
+//                mb_token: 'pk.eyJ1IjoiYW1pdGNoYWhhcjM4NCIsImEiOiJjaXFsdXBmenAwMDU2ZnBubnV5dG9rY241In0.fhR8Vj-CCDSioBvBNKGnUA',
+//                        mb_id: 'amitchahar384.0lgk03ih',
+
+                var map = eon.map({
+                    pubnub: pn,
+                    id: 'map',
+                    mb_token: 'pk.eyJ1IjoiYW1pdGNoYWhhcjM4NCIsImEiOiJjaXFsdXBmenAwMDU2ZnBubnV5dG9rY241In0.fhR8Vj-CCDSioBvBNKGnUA',
+                    mb_id: 'amitchahar384.0lgk03ih',
+                    subscribe_key: 'data.subscribe_key',
+                    channel: username,
+//                    message: function (data) {
+////                        console.log("data in mapview : ");
+//
+//                        for ( var obj in data){
+////                            console.log("obj in data : " + JSON.stringify(data[obj]));
+//                            map.setView(data[obj].latlng, 2);
+//                            break;
+//                        }
+////                        map.setView(data.point_10.latlng, 2);
+//                    },
+                    connect: connect,
+                    marker: function (latlng, data) {
+
+                        var marker = new L.RotatedMarker(latlng, {
+                        });
+                        console.log("data in marker : " + JSON.stringify(data));
+                        marker.bindPopup('UUID : ' + data);
+                        return marker;
+                    }
+                });
+
+                function connect() {
+
+                };
+            })
         })
     </script>
     <style type="text/css">
+        html, body {
+            height: 100%;
+        }
+
+        .ui.grid {
+            height: 100%;
+        }
+
         ul {
             display: table;
             margin: 0 auto;
@@ -51,6 +107,12 @@
             display: inline-block;
             text-align: left;
         }
+
+        #map {
+            height: 100%;
+            width: 100%;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -59,86 +121,100 @@
 <center>
     <h2 class="ui header">
         <img src="/images/avatar/user1.png" class="ui circular image">
-        <%= user %>
+        <div id="username"><%= user %></div>
     </h2>
-    <h3 class="ui header">No. of connected gateways : <%= connected_gateways %></h3>
-
-    <h3 class="ui header">Connected gateways details : </h3>
-    <br><br>
 </center>
 
-<ul>
-    <%
-    var lastChannel = '';
-    if(mongoData && mongoData[0]) {
-        lastChannel = mongoData[0].channelName;
-
-    mongoData.forEach(function (item, index, array) {
-        var imgid = item.uuid + item.subscribeKey + item.publishKey + item.channelName + item.email;
-        imgid = imgid.toString().split('').reverse().join('');
-        imgid = imgid.split('@').join('');
-        imgid = imgid.split('.').join('');
-
-    if (index == 0) { %>
-
-    <li><h4>Channel Name : <%= item.channelName %></h4>
+<div class="ui padded equal height stackable grid">
+    <div class="eight wide center aligned column">
+        <h3 class="ui header">No. of connected gateways : <%= connected_gateways %></h3>
+        <h3 class="ui header">Connected gateways details : </h3>
+        <br><br>
         <ul>
-            <li>
-                <h4 class="ui header">Gateway UUID : <%= item.uuid %> &nbsp;
-                    <div id="<%= imgid %>" class="dot"></div>
-                </h4>
+            <%
+            var lastChannel = '';
+            if(mongoData && mongoData[0]) {
+                lastChannel = mongoData[0].channelName;
+
+            mongoData.forEach(function (item, index, array) {
+                var imgid = item.uuid + item.subscribeKey + item.publishKey + item.channelName + item.email;
+                imgid = imgid.toString().split('').reverse().join('');
+                imgid = imgid.split('@').join('');
+                imgid = imgid.split('.').join('');
+
+            if (index == 0) { %>
+
+            <li><h4>Channel Name : <%= item.channelName %></h4>
                 <ul>
-                    <%
-                    item.devices.forEach(function(device, ind, arr){
+                    <li>
+                        <h4 class="ui header">Gateway UUID : <%= item.uuid %> &nbsp;
+                            <div id="<%= imgid %>" class="dot"></div>
+                        </h4>
+                        <ul>
+                            <%
+                            item.devices.forEach(function(device, ind, arr){
 //                        console.log("device data : %j", device);
-                    %>
-                    <li><h5><%= device.devuuid%></h5></li>
-                    <% }); %>
-                </ul><br>
+                            %>
+                            <li><h5><%= device.devuuid %></h5></li>
+                            <% }); %>
+                        </ul>
+                        <br>
+                    </li>
+                    <% }
+                    else if (item.channelName == lastChannel) { %>
+                    <li>
+                        <h4 class="ui header">Gateway UUID : <%= item.uuid %> &nbsp;
+                            <div id="<%= imgid %>" class="dot"></div>
+                        </h4>
+                        <ul>
+                            <% item.devices.forEach(function(device, ind, arr){ %>
+                            <li><h5><%= device.devuuid %></h5></li>
+                            <% }); %>
+                        </ul>
+                        <br>
+                    </li>
+                    <% }
+                    else { %>
+                </ul>
             </li>
-            <% }
-            else if (item.channelName == lastChannel) { %>
-            <li>
-                <h4 class="ui header">Gateway UUID : <%= item.uuid %> &nbsp;
-                    <div id="<%= imgid %>" class="dot"></div>
-                </h4>
-                <ul>
-                    <% item.devices.forEach(function(device, ind, arr){ %>
-                    <li><h5><%= device.devuuid%></h5></li>
-                    <% }); %>
-                </ul><br>
-            </li>
-            <% }
-            else { %>
-        </ul>
-    </li>
-    <br>
-    <% lastChannel = item.channelName; %>
+            <br>
+            <% lastChannel = item.channelName; %>
 
-    <li><h4> Channel Name : <%= item.channelName %></h4>
-        <ul>
-            <li>
-                <h4 class="ui header">Gateway UUID : <%= item.uuid %> &nbsp;
-                    <div id="<%= imgid %>" class="dot"></div>
-                </h4>
+            <li><h4> Channel Name : <%= item.channelName %></h4>
                 <ul>
-                    <% item.devices.forEach(function(device, ind, arr){
+                    <li>
+                        <h4 class="ui header">Gateway UUID : <%= item.uuid %> &nbsp;
+                            <div id="<%= imgid %>" class="dot"></div>
+                        </h4>
+                        <ul>
+                            <% item.devices.forEach(function(device, ind, arr){
+                            %>
+                            <li><h5><%= device.devuuid %></h5></li>
+                            <% }); %>
+                        </ul>
+                        <br>
+                    </li>
+                    <% }
+                    });
                     %>
-                    <li><h5><%= device.devuuid%></h5></li>
-                    <% }); %>
-                </ul><br>
+                </ul>
             </li>
-            <% }
-            });
-            %>
         </ul>
-    </li>
-</ul>
 
-<%
-}
-%>
-</ul>
+        <%
+        }
+        %>
+        </ul>
+    </div>
+    <!--<div class="ui vertical divider"></div>-->
+    <div class="eight wide column">
+        <div class="ui grid">
+            <div class="sixteen wide column">
+                <div id='map'></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

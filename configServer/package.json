@@ -51,6 +51,7 @@
     "nconf": "^0.8.4",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "pubnub": "^3.15.2",
     "require-dot-file": "^0.4.0",
     "run-sequence": "^1.1.5",
     "semantic-ui": "^2.1.8",

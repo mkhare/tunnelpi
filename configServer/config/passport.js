@@ -125,7 +125,7 @@ module.exports = function(app, passport, eventEmitter) {
         function(req, email, password, done) {
             console.log('Inside passport');
             console.log(email);
-            console.log(password);
+            //console.log(password);
             User.findOne({ email :  email }, function(err, user) {
                 if (err){
                     console.log("user does not exist");
