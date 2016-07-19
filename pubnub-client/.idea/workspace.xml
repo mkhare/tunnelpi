@@ -157,7 +157,7 @@
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files (x86)\nodejs\node.exe" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../configServer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../pubnub-gateway" />
   </component>
   <component name="RunManager" selected="Node.js.bin\www">
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
@@ -247,12 +247,12 @@
       <workItem from="1468556533599" duration="1674000" />
       <workItem from="1468767072375" duration="1502000" />
       <workItem from="1468817912277" duration="14099000" />
-      <workItem from="1468908117239" duration="7069000" />
+      <workItem from="1468908117239" duration="7683000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105001000" />
+    <option name="totallyTimeSpent" value="105615000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">

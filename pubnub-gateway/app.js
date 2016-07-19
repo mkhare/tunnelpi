@@ -9,7 +9,7 @@ var eventEmitter = new events.EventEmitter();
 var proj_config = require('./proj_config');
 var pubnub_base = require('./pubnub_base');
 var gw_util = require('./gw_util');
-require('./gateway-specific');
+require('./gateway-specific')();
 
 var gwlocation = gw_util.get_location();
 var cred = {
