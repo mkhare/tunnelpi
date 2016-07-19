@@ -23,7 +23,9 @@ var cred = {
     devices: [{devuuid: 'bluetoothDev1'}, {devuuid: 'bluetoothDev2'}]
 };
 
-pubnub_base.publish_location(cred.email);
+// pubnub_base.publish_location(gwlocation);
+// pubnub_base.publish_location_using_ip();
+pubnub_base.publish_location_using_ip_eurekapi();
 
 sockio.on('connect', function (data) {
     console.log('socket connected to server');

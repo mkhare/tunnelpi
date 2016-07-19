@@ -1,5 +1,7 @@
 var fs = require('fs');
 var proj_config = require('./proj_config');
+var gw_util = require('./gw_util');
+var http = require('http');
 
 var pubnub = require("pubnub")({
 	publish_key   : proj_config.set1.publish_key,
@@ -20,37 +22,36 @@ function delete_file(filename){
 });
 }
 
-module.exports.publish_location = function (username) {
-	// var locations = [{
-	// 	latlng: [39.370375, -100.756138],
-	// 	data : {uuid : "1"}
-	// },
-	// {
-	// 	latlng: [50.370375, -100.756138],
-	// 	data : {uuid : "2"}
-	// }];
+module.exports.publish_location_using_ip = function () {
+	http.get({'host': 'freegeoip.net', 'port': 80, 'path': '/json/'}, function(resp) {
+		resp.on('data', function(gloc) {
+			gloc = JSON.parse(gloc);
+			var loc = [gloc.latitude, gloc.longitude];
+			console.log("Public IP address : " + gloc.ip);
+			// console.log('loc : ' + gloc);
+			module.exports.publish_location(loc);
+		});
+	});
+}
 
-	// for (var i = 0; i < locations.length; i++) {
+module.exports.publish_location_using_ip_eurekapi = function () {
+	var servicepath = '/iplocation/v1.8/locateip?key=' + proj_config.set1.eurekapi_key + '&ip=local-ip&format=json';
+	// console.log('service path : ' + servicepath);
+	http.get({'host': 'api.eurekapi.com', 'port': 80, 'path': servicepath}, function(resp) {
+		resp.on('data', function(gloc) {
+			// console.log('gloc : ' + gloc);
+			gloc = JSON.parse(gloc);
+			var loc = [gloc.geolocation_data.latitude, gloc.geolocation_data.longitude];
+			console.log("Public IP address : " + gloc.ip_address);
+			module.exports.publish_location(loc);
+		});
+	});
+}
 
- 	//	   locations[i] = {
-	// 		marker: locations[i].marker,
-	// 		latlng: [
-	// 			locations[i].latlng[0],
- 	//                locations[i].latlng[1]
-	// 		]
-	// 	}
-	// }
-
-	// var location = {latlng: [39.370375, -100.756138]};
-
-	// setInterval(function(){
-	// pubnub.publish({
-	// 	channel: username,
-	// 	message: {point_1: location}
-	// })}, 2000);
+module.exports.publish_location = function (loc) {
 	var gwuuid = JSON.stringify(proj_config.set1.uuid);
 	var point = {
-		latlng: [42.370375, -90.756138],
+		latlng: loc,
 		data : gwuuid
 	};
 	var pointname = "point_" + gwuuid;
@@ -60,12 +61,12 @@ module.exports.publish_location = function (username) {
 
 	setInterval(function(){
 		pubnub.publish({
-			channel: username,
+			channel: proj_config.set1.email,
 			message: msg
 		});
 
 	}, 2000);
-}
+};
 
 module.exports.subscribe_data = function(){
 	
