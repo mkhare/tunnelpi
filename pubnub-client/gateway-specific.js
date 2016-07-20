@@ -1,5 +1,6 @@
 module.exports = function(){
 	var pubnub_base = require('./pubnub_base');
+	var sudo = require('sudo');
 	var options = {
     	cachePassword: true,
     	prompt: 'Password, yo? ',

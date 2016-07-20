@@ -113,7 +113,6 @@ io.sockets.on("connection", function (socket) {
             channelName : data.channel_name
         };
         var connectedDevices = data.devices;
-        var gwlocation = data.location;
 
         console.log('imgid : ' + imgid);
         User.findOne({email : data.email}, function (err, user) {
@@ -151,7 +150,6 @@ io.sockets.on("connection", function (socket) {
                     }
                     else{
                         var tempgwobj = gw;
-                        tempgwobj.location = gwlocation;
                         tempgwobj.devices = connectedDevices;
 
                         //console.log("temp object : " + JSON.stringify(tempgwobj));

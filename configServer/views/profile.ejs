@@ -51,6 +51,44 @@
 //                mb_token: 'pk.eyJ1IjoiYW1pdGNoYWhhcjM4NCIsImEiOiJjaXFsdXBmenAwMDU2ZnBubnV5dG9rY241In0.fhR8Vj-CCDSioBvBNKGnUA',
 //                        mb_id: 'amitchahar384.0lgk03ih',
 
+                var urlreq_channel_name = username + "_urlreq";
+                var urlresp_channel_name = username + "_urlresp";
+                var url_not_recvd = true;
+//                console.log('url channel name : ' + url_channel_name)
+                pn.subscribe({
+                    channel: urlresp_channel_name,
+                    callback: url_received
+                });
+
+                function url_received(urldata) {
+//                    urldata = JSON.parse(urldata);
+                    clearInterval(urlreq_timer);
+                    if(url_not_recvd){
+                        console.log("Received url : " + JSON.stringify(urldata));
+                        var gwurlid = '#' + urldata.gwurlid;
+                        var gwurl = urldata.gwurl;
+                        $(gwurlid).wrap("<a target='_blank' href='" + gwurl + "'></a>");
+                        $(gwurlid).css('color', 'blue');
+//                        url_not_recvd = false;
+                    }
+                }
+
+                var urlreq_timer = setInterval(function () {
+                    pn.publish({
+                        channel: urlreq_channel_name,
+                        message: "url request",
+                        callback: log,
+                        error: retry
+                    });
+
+                    function log(e) {
+                        console.log("requesting url over pubnub");
+                    }
+
+                    function retry() {
+                        console.log('error occurred.');
+                    }
+                }, 1000);
                 var map = eon.map({
                     pubnub: pn,
                     id: 'map',
@@ -71,8 +109,7 @@
                     connect: connect,
                     marker: function (latlng, data) {
 
-                        var marker = new L.RotatedMarker(latlng, {
-                        });
+                        var marker = new L.RotatedMarker(latlng, {});
                         console.log("data in marker : " + JSON.stringify(data));
                         marker.bindPopup('UUID : ' + data);
                         return marker;
@@ -142,12 +179,14 @@
                 imgid = imgid.split('@').join('');
                 imgid = imgid.split('.').join('');
 
+                var urlid = imgid + 'url';
+
             if (index == 0) { %>
 
             <li><h4>Channel Name : <%= item.channelName %></h4>
                 <ul>
                     <li>
-                        <h4 class="ui header">Gateway UUID : <%= item.uuid %> &nbsp;
+                        <h4 class="ui header" id="<%= urlid %>">Gateway UUID : <%= item.uuid %> &nbsp;
                             <div id="<%= imgid %>" class="dot"></div>
                         </h4>
                         <ul>
@@ -163,7 +202,7 @@
                     <% }
                     else if (item.channelName == lastChannel) { %>
                     <li>
-                        <h4 class="ui header">Gateway UUID : <%= item.uuid %> &nbsp;
+                        <h4 class="ui header" id="<%= urlid %>">Gateway UUID : <%= item.uuid %> &nbsp;
                             <div id="<%= imgid %>" class="dot"></div>
                         </h4>
                         <ul>
@@ -183,7 +222,7 @@
             <li><h4> Channel Name : <%= item.channelName %></h4>
                 <ul>
                     <li>
-                        <h4 class="ui header">Gateway UUID : <%= item.uuid %> &nbsp;
+                        <h4 class="ui header" id="<%= urlid %>">Gateway UUID : <%= item.uuid %> &nbsp;
                             <div id="<%= imgid %>" class="dot"></div>
                         </h4>
                         <ul>

@@ -19,8 +19,7 @@ var cred = {
     subscribe_key: proj_config.set1.subscribe_key,
     publish_key: proj_config.set1.publish_key,
     channel_name: proj_config.set1.channel_name,
-    location: gwlocation,
-    devices: [{devuuid: 'bluetoothDev1'}, {devuuid: 'bluetoothDev2'}]
+    devices: [{devuuid: 'bluetoothDev1'}, {devuuid: 'bluetoothDev2'}],
 };
 
 // pubnub_base.publish_location(gwlocation);
