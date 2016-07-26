@@ -1,18 +1,18 @@
 Bluetooth monitor ver 5.37
-= New Index: 00:1A:7D:DA:71:13 (BR/EDR,USB,hci0)                [hci0] 0.746616
-= Open Index: 00:1A:7D:DA:71:13                                 [hci0] 0.746618
-= Index Info: 00:1A:7D:DA:71:13 (Cambridge Silicon Radio)       [hci0] 0.746619
+= New Index: 00:1A:7D:DA:71:13 (BR/EDR,USB,hci0)                [hci0] 0.073455
+= Open Index: 00:1A:7D:DA:71:13                                 [hci0] 0.073457
+= Index Info: 00:1A:7D:DA:71:13 (Cambridge Silicon Radio)       [hci0] 0.073458
 @ Class of Device Changed: 0x000000
 @ New Settings: 0x0ada
             connectable discoverable bondable ssp br/edr le secure-conn 
-= Close Index: 00:1A:7D:DA:71:13                              [hci0] 137.945137
-= Open Index: 00:1A:7D:DA:71:13                               [hci0] 139.274089
-< HCI Command: Reset (0x03|0x0003) plen 0                     [hci0] 139.274855
-> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 139.389902
+= Close Index: 00:1A:7D:DA:71:13                              [hci0] 574.078432
+= Open Index: 00:1A:7D:DA:71:13                               [hci0] 582.937590
+< HCI Command: Reset (0x03|0x0003) plen 0                     [hci0] 582.937690
+> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 583.053044
       Reset (0x03|0x0003) ncmd 1
         Status: Success (0x00)
-< HCI Command: Read Local Supported F.. (0x04|0x0003) plen 0  [hci0] 139.389953
-> HCI Event: Command Complete (0x0e) plen 12                  [hci0] 139.390888
+< HCI Command: Read Local Supported F.. (0x04|0x0003) plen 0  [hci0] 583.053114
+> HCI Event: Command Complete (0x0e) plen 12                  [hci0] 583.054020
       Read Local Supported Features (0x04|0x0003) ncmd 1
         Status: Success (0x00)
         Features: 0xff 0xff 0x8f 0xfe 0xdb 0xff 0x5b 0x87
@@ -67,38 +67,38 @@ Bluetooth monitor ver 5.37
           Inquiry TX Power Level
           Enhanced Power Control
           Extended features
-< HCI Command: Read Local Version Inf.. (0x04|0x0001) plen 0  [hci0] 139.390960
-> HCI Event: Command Complete (0x0e) plen 12                  [hci0] 139.391890
+< HCI Command: Read Local Version Inf.. (0x04|0x0001) plen 0  [hci0] 583.054110
+> HCI Event: Command Complete (0x0e) plen 12                  [hci0] 583.056025
       Read Local Version Information (0x04|0x0001) ncmd 1
         Status: Success (0x00)
         HCI version: Bluetooth 4.0 (0x06) - Revision 8891 (0x22bb)
         LMP version: Bluetooth 4.0 (0x06) - Subversion 8891 (0x22bb)
         Manufacturer: Cambridge Silicon Radio (10)
-< HCI Command: Read BD ADDR (0x04|0x0009) plen 0              [hci0] 139.391924
-> HCI Event: Command Complete (0x0e) plen 10                  [hci0] 139.392890
+< HCI Command: Read BD ADDR (0x04|0x0009) plen 0              [hci0] 583.056091
+> HCI Event: Command Complete (0x0e) plen 10                  [hci0] 583.057002
       Read BD ADDR (0x04|0x0009) ncmd 1
         Status: Success (0x00)
         Address: 00:1A:7D:DA:71:13 (cyber-blue(HK)Ltd)
-< HCI Command: Read Buffer Size (0x04|0x0005) plen 0          [hci0] 139.393028
-> HCI Event: Command Complete (0x0e) plen 11                  [hci0] 139.394882
+< HCI Command: Read Buffer Size (0x04|0x0005) plen 0          [hci0] 583.057151
+> HCI Event: Command Complete (0x0e) plen 11                  [hci0] 583.058977
       Read Buffer Size (0x04|0x0005) ncmd 1
         Status: Success (0x00)
         ACL MTU: 310  ACL max packet: 10
         SCO MTU: 64   SCO max packet: 8
-< HCI Command: Read Class of Device (0x03|0x0023) plen 0      [hci0] 139.394932
-> HCI Event: Command Complete (0x0e) plen 7                   [hci0] 139.395866
+< HCI Command: Read Class of Device (0x03|0x0023) plen 0      [hci0] 583.059019
+> HCI Event: Command Complete (0x0e) plen 7                   [hci0] 583.060015
       Read Class of Device (0x03|0x0023) ncmd 1
         Status: Success (0x00)
         Class: 0x000000
           Major class: Miscellaneous
           Minor class: 0x00
-< HCI Command: Read Local Name (0x03|0x0014) plen 0           [hci0] 139.395903
-> HCI Event: Command Complete (0x0e) plen 252                 [hci0] 139.414864
+< HCI Command: Read Local Name (0x03|0x0014) plen 0           [hci0] 583.060049
+> HCI Event: Command Complete (0x0e) plen 252                 [hci0] 583.078985
       Read Local Name (0x03|0x0014) ncmd 1
         Status: Success (0x00)
         Name: CSR8510 A10
-< HCI Command: Read Voice Setting (0x03|0x0025) plen 0        [hci0] 139.414908
-> HCI Event: Command Complete (0x0e) plen 6                   [hci0] 139.415865
+< HCI Command: Read Voice Setting (0x03|0x0025) plen 0        [hci0] 583.079025
+> HCI Event: Command Complete (0x0e) plen 6                   [hci0] 583.079956
       Read Voice Setting (0x03|0x0025) ncmd 1
         Status: Success (0x00)
         Setting: 0x0060
@@ -107,41 +107,41 @@ Bluetooth monitor ver 5.37
           Input Sample Size: 16-bit
           # of bits padding at MSB: 0
           Air Coding Format: CVSD
-< HCI Command: Read Number of Support.. (0x03|0x0038) plen 0  [hci0] 139.415949
-> HCI Event: Command Complete (0x0e) plen 5                   [hci0] 139.416864
+< HCI Command: Read Number of Support.. (0x03|0x0038) plen 0  [hci0] 583.079972
+> HCI Event: Command Complete (0x0e) plen 5                   [hci0] 583.080981
       Read Number of Supported IAC (0x03|0x0038) ncmd 1
         Status: Success (0x00)
         Number of IAC: 2
-< HCI Command: Read Current IAC LAP (0x03|0x0039) plen 0      [hci0] 139.416895
-> HCI Event: Command Complete (0x0e) plen 8                   [hci0] 139.417862
+< HCI Command: Read Current IAC LAP (0x03|0x0039) plen 0      [hci0] 583.081004
+> HCI Event: Command Complete (0x0e) plen 8                   [hci0] 583.081964
       Read Current IAC LAP (0x03|0x0039) ncmd 1
         Status: Success (0x00)
         Number of IAC: 1
         Access code: 0x9e8b33 (General Inquiry)
-< HCI Command: Set Event Filter (0x03|0x0005) plen 1          [hci0] 139.417908
+< HCI Command: Set Event Filter (0x03|0x0005) plen 1          [hci0] 583.081996
         Type: Clear All Filters (0x00)
-> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 139.418864
+> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 583.082956
       Set Event Filter (0x03|0x0005) ncmd 1
         Status: Success (0x00)
-< HCI Command: Write Connection Accep.. (0x03|0x0016) plen 2  [hci0] 139.418927
+< HCI Command: Write Connection Accep.. (0x03|0x0016) plen 2  [hci0] 583.082970
         Timeout: 20000.000 msec (0x7d00)
-> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 139.419865
+> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 583.083955
       Write Connection Accept Timeout (0x03|0x0016) ncmd 1
         Status: Success (0x00)
-< HCI Command: LE Read Buffer Size (0x08|0x0002) plen 0       [hci0] 139.419904
-> HCI Event: Command Complete (0x0e) plen 7                   [hci0] 139.420865
+< HCI Command: LE Read Buffer Size (0x08|0x0002) plen 0       [hci0] 583.083968
+> HCI Event: Command Complete (0x0e) plen 7                   [hci0] 583.084984
       LE Read Buffer Size (0x08|0x0002) ncmd 1
         Status: Success (0x00)
         Data packet length: 0
         Num data packets: 0
-< HCI Command: LE Read Local Supporte.. (0x08|0x0003) plen 0  [hci0] 139.420932
-> HCI Event: Command Complete (0x0e) plen 12                  [hci0] 139.421872
+< HCI Command: LE Read Local Supporte.. (0x08|0x0003) plen 0  [hci0] 583.085007
+> HCI Event: Command Complete (0x0e) plen 12                  [hci0] 583.085960
       LE Read Local Supported Features (0x08|0x0003) ncmd 1
         Status: Success (0x00)
         Features: 0x01 0x00 0x00 0x00 0x00 0x00 0x00 0x00
           LE Encryption
-< HCI Command: LE Read Supported States (0x08|0x001c) plen 0  [hci0] 139.421938
-> HCI Event: Command Complete (0x0e) plen 12                  [hci0] 139.422865
+< HCI Command: LE Read Supported States (0x08|0x001c) plen 0  [hci0] 583.085984
+> HCI Event: Command Complete (0x0e) plen 12                  [hci0] 583.086955
       LE Read Supported States (0x08|0x001c) ncmd 1
         Status: Success (0x00)
         States: 0x000000001fffffff
@@ -197,8 +197,8 @@ Bluetooth monitor ver 5.37
           Initiating State
             and Connection State (Master Role)
             and Master Role & Master Role
-< HCI Command: Read Local Supported C.. (0x04|0x0002) plen 0  [hci0] 139.422934
-> HCI Event: Command Complete (0x0e) plen 68                  [hci0] 139.428864
+< HCI Command: Read Local Supported C.. (0x04|0x0002) plen 0  [hci0] 583.086968
+> HCI Event: Command Complete (0x0e) plen 68                  [hci0] 583.092974
       Read Local Supported Commands (0x04|0x0002) ncmd 1
         Status: Success (0x00)
         Commands: 170 entries
@@ -372,30 +372,30 @@ Bluetooth monitor ver 5.37
           LE Receiver Test (Octet 28 - Bit 4)
           LE Transmitter Test (Octet 28 - Bit 5)
           LE Test End (Octet 28 - Bit 6)
-< HCI Command: Write Simple Pairing M.. (0x03|0x0056) plen 1  [hci0] 139.428934
+< HCI Command: Write Simple Pairing M.. (0x03|0x0056) plen 1  [hci0] 583.093065
         Mode: Enabled (0x01)
-> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 139.429861
+> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 583.093971
       Write Simple Pairing Mode (0x03|0x0056) ncmd 1
         Status: Success (0x00)
-< HCI Command: Write Inquiry Mode (0x03|0x0045) plen 1        [hci0] 139.429927
+< HCI Command: Write Inquiry Mode (0x03|0x0045) plen 1        [hci0] 583.094027
         Mode: Inquiry Result with RSSI or Extended Inquiry Result (0x02)
-> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 139.430859
+> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 583.094962
       Write Inquiry Mode (0x03|0x0045) ncmd 1
         Status: Success (0x00)
-< HCI Command: Read Inquiry Response... (0x03|0x0058) plen 0  [hci0] 139.430909
-> HCI Event: Command Complete (0x0e) plen 5                   [hci0] 139.431873
+< HCI Command: Read Inquiry Response... (0x03|0x0058) plen 0  [hci0] 583.095014
+> HCI Event: Command Complete (0x0e) plen 5                   [hci0] 583.095971
       Read Inquiry Response TX Power Level (0x03|0x0058) ncmd 1
         Status: Success (0x00)
         TX power: 4 dBm
-< HCI Command: Read Local Extended Fe.. (0x04|0x0004) plen 1  [hci0] 139.431965
+< HCI Command: Read Local Extended Fe.. (0x04|0x0004) plen 1  [hci0] 583.096028
         Page: 1
-> HCI Event: Command Complete (0x0e) plen 14                  [hci0] 139.432873
+> HCI Event: Command Complete (0x0e) plen 14                  [hci0] 583.096960
       Read Local Extended Features (0x04|0x0004) ncmd 1
         Status: Success (0x00)
         Page: 1/1
         Features: 0x01 0x00 0x00 0x00 0x00 0x00 0x00 0x00
           Secure Simple Pairing (Host Support)
-< HCI Command: Set Event Mask (0x03|0x0001) plen 8            [hci0] 139.432984
+< HCI Command: Set Event Mask (0x03|0x0001) plen 8            [hci0] 583.097060
         Mask: 0x3dbff807fffbffff
           Inquiry Complete
           Inquiry Result
@@ -448,70 +448,70 @@ Bluetooth monitor ver 5.37
           Keypress Notification
           Remote Host Supported Features Notification
           LE Meta
-> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 139.434860
+> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 583.098957
       Set Event Mask (0x03|0x0001) ncmd 1
         Status: Success (0x00)
-< HCI Command: Read Stored Link Key (0x03|0x000d) plen 7      [hci0] 139.434929
+< HCI Command: Read Stored Link Key (0x03|0x000d) plen 7      [hci0] 583.099018
         Address: 00:00:00:00:00:00 (OUI 00-00-00)
         Read all: 0x01
-> HCI Event: Command Complete (0x0e) plen 8                   [hci0] 139.435867
+> HCI Event: Command Complete (0x0e) plen 8                   [hci0] 583.099954
       Read Stored Link Key (0x03|0x000d) ncmd 1
         Status: Success (0x00)
         Max num keys: 16
         Num keys: 0
-< HCI Command: Write Default Link Pol.. (0x02|0x000f) plen 2  [hci0] 139.435907
+< HCI Command: Write Default Link Pol.. (0x02|0x000f) plen 2  [hci0] 583.100017
         Link policy: 0x000f
           Enable Role Switch
           Enable Hold Mode
           Enable Sniff Mode
           Enable Park State
-> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 139.436865
+> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 583.100958
       Write Default Link Policy Settings (0x02|0x000f) ncmd 1
         Status: Success (0x00)
-< HCI Command: Read Page Scan Activity (0x03|0x001b) plen 0   [hci0] 139.436943
-> HCI Event: Command Complete (0x0e) plen 8                   [hci0] 139.437867
+< HCI Command: Read Page Scan Activity (0x03|0x001b) plen 0   [hci0] 583.101032
+> HCI Event: Command Complete (0x0e) plen 8                   [hci0] 583.101954
       Read Page Scan Activity (0x03|0x001b) ncmd 1
         Status: Success (0x00)
         Interval: 1280.000 msec (0x0800)
         Window: 11.250 msec (0x0012)
-< HCI Command: Read Page Scan Type (0x03|0x0046) plen 0       [hci0] 139.437933
-> HCI Event: Command Complete (0x0e) plen 5                   [hci0] 139.438865
+< HCI Command: Read Page Scan Type (0x03|0x0046) plen 0       [hci0] 583.102012
+> HCI Event: Command Complete (0x0e) plen 5                   [hci0] 583.102962
       Read Page Scan Type (0x03|0x0046) ncmd 1
         Status: Success (0x00)
         Type: Standard Scan (0x00)
-< HCI Command: LE Set Event Mask (0x08|0x0001) plen 8         [hci0] 139.438932
+< HCI Command: LE Set Event Mask (0x08|0x0001) plen 8         [hci0] 583.102994
         Mask: 0x000000000000001f
           LE Connection Complete
           LE Advertising Report
           LE Connection Update Complete
           LE Read Remote Used Features Complete
           LE Long Term Key Request
-> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 139.439871
+> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 583.103982
       LE Set Event Mask (0x08|0x0001) ncmd 1
         Status: Success (0x00)
-< HCI Command: LE Read Advertising Ch.. (0x08|0x0007) plen 0  [hci0] 139.439960
-> HCI Event: Command Complete (0x0e) plen 5                   [hci0] 139.440858
+< HCI Command: LE Read Advertising Ch.. (0x08|0x0007) plen 0  [hci0] 583.104021
+> HCI Event: Command Complete (0x0e) plen 5                   [hci0] 583.104961
       LE Read Advertising Channel TX Power (0x08|0x0007) ncmd 1
         Status: Success (0x00)
         TX power: 8 dBm
-< HCI Command: LE Read White List Size (0x08|0x000f) plen 0   [hci0] 139.440926
-> HCI Event: Command Complete (0x0e) plen 5                   [hci0] 139.441865
+< HCI Command: LE Read White List Size (0x08|0x000f) plen 0   [hci0] 583.104987
+> HCI Event: Command Complete (0x0e) plen 5                   [hci0] 583.105984
       LE Read White List Size (0x08|0x000f) ncmd 1
         Status: Success (0x00)
         Size: 25
-< HCI Command: LE Clear White List (0x08|0x0010) plen 0       [hci0] 139.441928
-> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 139.442865
+< HCI Command: LE Clear White List (0x08|0x0010) plen 0       [hci0] 583.106016
+> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 583.106984
       LE Clear White List (0x08|0x0010) ncmd 1
         Status: Success (0x00)
-< HCI Command: Write LE Host Supported (0x03|0x006d) plen 2   [hci0] 139.442933
+< HCI Command: Write LE Host Supported (0x03|0x006d) plen 2   [hci0] 583.107017
         Supported: 0x01
         Simultaneous: 0x00
-> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 139.443865
+> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 583.107955
       Write LE Host Supported (0x03|0x006d) ncmd 1
         Status: Success (0x00)
-< HCI Command: Delete Stored Link Key (0x03|0x0012) plen 7    [hci0] 139.443981
+< HCI Command: Delete Stored Link Key (0x03|0x0012) plen 7    [hci0] 583.107994
         Address: 00:00:00:00:00:00 (OUI 00-00-00)
         Delete all: 0x01
-> HCI Event: Command Complete (0x0e) plen 6                   [hci0] 139.445867
+> HCI Event: Command Complete (0x0e) plen 6                   [hci0] 583.108962
       Delete Stored Link Key (0x03|0x0012) ncmd 1
         Status: 

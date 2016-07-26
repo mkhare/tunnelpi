@@ -3,6 +3,7 @@ var proj_config = require('./proj_config');
 var gw_util = require('./gw_util');
 var http = require('http');
 var ngrok = require('ngrok');
+var request = require('request');
 
 var pubnub = require("pubnub")({
     publish_key: proj_config.set1.publish_key,
@@ -36,14 +37,39 @@ module.exports.send_server_url = function () {
     // console.log("channel name for url : " + url_channel_name)
     pubnub.subscribe({
         channel: urlreq_channel_name,
-        callback: send_url
+        callback: send_url_using_ngrok_clientAPI
     });
+
+    function send_url_using_ngrok_clientAPI(message) {
+        var port = proj_config.set1.serverport;
+        if (url_to_send == "") {
+            http.get({'host': 'localhost', 'port': 4040, 'path': '/api/tunnels'}, function (resp) {
+                resp.on('data', function (tunnelsdata) {
+                    tunnelsdata = JSON.parse(tunnelsdata);
+                    tunnelsdata = tunnelsdata.tunnels;
+
+                    for (var i in tunnelsdata) {
+                        // console.log("tunnelsdata : " + JSON.stringify(tunnelsdata[i]));
+                        if (tunnelsdata[i].config.addr == "localhost:" + port) {
+                            url_to_send = tunnelsdata[i].public_url;
+                            console.log("pu : " + url_to_send);
+                            publish_url_data(url_to_send);
+                            break;
+                        }
+                    }
+
+                })
+            });
+        } else {
+            publish_url_data(url_to_send);
+        }
+    }
 
     function send_url(message) {
         console.log('message received : ' + message);
         if (url_to_send == "") {
             ngrok.connect(proj_config.set1.serverport, function (err, url) {
-                if(err){
+                if (err) {
                     console.log("error while starting ngrok.");
                     return;
                 }
@@ -52,12 +78,12 @@ module.exports.send_server_url = function () {
                 publish_url_data(url_to_send);
             })
         }
-        else{
+        else {
             publish_url_data(url_to_send);
         }
     }
 
-    function publish_url_data(urlparam){
+    function publish_url_data(urlparam) {
         var urlid = imgid + 'url';
         var urldata = {gwurlid: urlid, gwurl: urlparam}
         console.log("url data : " + JSON.stringify(urldata));
