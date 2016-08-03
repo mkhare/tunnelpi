@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean isReceiverRegistered;
     private Button btn_publish, btn_subscribe, btn_BTPublish, btn_deviceAddress;
 
-    static Pubnub pubnub;
-    static String PUBLISH_KEY = "pub-c-b032ad96-906e-4a98-94b9-4b5e76ccd4e2";
-    static String SUBSCRIBE_KEY = "sub-c-c90fa6ea-38a2-11e6-bbf4-0619f8945a4f";
+    private Pubnub pubnub;
+    static String PUBLISH_KEY = WisperoGWPreferences.PN_PUBLISH_KEY;
+    static String SUBSCRIBE_KEY = WisperoGWPreferences.PN_SUBSCRIBE_KEY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createViewObjects() {
-        pubnub = new Pubnub(PUBLISH_KEY, SUBSCRIBE_KEY);
+        pubnub = WisperoGWPreferences.pubnub;
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 //        mRegistrationProgressBar = (ProgressBar) findViewById(R.id.registrationProgressBar);
         tv_commlog = (TextView) findViewById(R.id.tv_commlog);

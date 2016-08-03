@@ -16,6 +16,8 @@
 
 package com.wispero.wisperogw;
 
+import com.pubnub.api.Pubnub;
+
 public class WisperoGWPreferences {
 
     //sharedPreferences
@@ -23,6 +25,7 @@ public class WisperoGWPreferences {
     public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
     public static final String BT_DATA_PUBLISH_CHANNEL = "bluetoothDataPublishChannel";
     public static final String BT_DEVICE_ADDRESS = "bluetoothDeviceAddress";
+    public static final String SPREF_USER_EMAIL = "";
 
     //intent-filters
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
@@ -30,6 +33,11 @@ public class WisperoGWPreferences {
     public static final String GCM_MESSAGE_RECEIVED = "pubnubMessageReceivedFromGCM";
 
     //hard-coded data
+    public static final String PN_SUBSCRIBE_KEY = "sub-c-c90fa6ea-38a2-11e6-bbf4-0619f8945a4f";
+    public static final String PN_PUBLISH_KEY = "pub-c-b032ad96-906e-4a98-94b9-4b5e76ccd4e2";
+    public static final Pubnub pubnub = new Pubnub(PN_PUBLISH_KEY, PN_SUBSCRIBE_KEY);
+    public static final Pubnub PUBNUB = new Pubnub(PN_PUBLISH_KEY, PN_SUBSCRIBE_KEY);
+    public static final String SERVER_URL = "http://3947e72a.ngrok.io";
     public static final String DEFAULT_BT_ADDRESS = "00:1A:7D:DA:71:13";
     public static final String DEFAULT_PN_PUBLISH_CHANNEL = "hello";
 }

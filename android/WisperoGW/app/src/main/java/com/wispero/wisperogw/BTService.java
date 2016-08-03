@@ -42,7 +42,7 @@ public class BTService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         Log.i("btservice", "in bluetooth service");
-        pubnub = MainActivity.pubnub;
+        pubnub = WisperoGWPreferences.pubnub;
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());

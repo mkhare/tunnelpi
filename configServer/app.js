@@ -53,6 +53,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 
 require('./routes/login')(app, passport);
+require('./ard_routes/ard_login')(app, passport);
 require('./config/passport')(app, passport, eventEmitter);
 require('./routes/signup')(app, passport);
 require('./routes/profile')(app);
