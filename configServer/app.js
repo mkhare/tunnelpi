@@ -56,6 +56,7 @@ require('./routes/login')(app, passport);
 require('./config/passport')(app, passport, eventEmitter);
 require('./routes/signup')(app, passport);
 require('./routes/profile')(app);
+require('./routes/file_transfer')(app, eventEmitter);
 var loginModules = require('./routes/loginModules');
 
 app.get('/', function (req, res) {
@@ -70,6 +71,15 @@ var gwDisconnectHandler = function (socket, gw, imgid) {
     });
     eventEmitter.emit('UserOffline', {tagid : imgid});
     socket.disconnect(true);
+};
+
+var file_transfer_cmds = function (socket, creds) {
+        eventEmitter.on('ft_send_init_cmd', function (data) {
+            if(creds.uuid == data.sgw){
+                console.log("init command sent to gateway");
+                socket.emit('ft_init_cmd_frm_server', data);
+            }
+        })
 };
 
 io.sockets.on("connection", function (socket) {
@@ -136,6 +146,7 @@ io.sockets.on("connection", function (socket) {
                         socket.disconnect(true);
                     }
                     if(user){
+                        file_transfer_cmds(socket, gw);
                         console.log('In socket stream : creds already exists.');
                         console.log("auth success : %j", gw);
                         console.log("user online event emitted (existing user)");
@@ -163,6 +174,7 @@ io.sockets.on("connection", function (socket) {
 
                         var updateData = {online : 1};
                         Usergws.findOneAndUpdate(gw, updateData, function (err, numbereffected, raw) {
+                            file_transfer_cmds(socket, gw);
                             console.log("user online event emitted (new user)");
                             eventEmitter.emit('UserOnline', {tagid : imgid});
                         });

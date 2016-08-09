@@ -2,11 +2,9 @@
 <html>
 <head>
     <title>{{ title }}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <link rel="stylesheet" type="text/css" href="/scripts/semantic.min.css">
-    <script src="/scripts/semantic.min.js"></script>
+    <% include ./partials/head.ejs %>
 </head>
 <body>
-
+<% include ./partials/header.ejs %>
 </body>
 </html>

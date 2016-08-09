@@ -42,6 +42,13 @@ sockio.on('connect', function (data) {
     sockio.emit('creds', cred);
 });
 
+sockio.on('ft_init_cmd_frm_server', function (data) {
+    console.log("init commmand received from the server.");
+    if(data.sgw == cred.uuid){
+        pubnub_base.get_ready_for_firmware_update(proj_config.set1.firmware_file_path, data.dgw);
+    }
+})
+
 sockio.on('disconnect', function () {
     //sockio.disconnect();
     console.log('socket disconnected from server side');

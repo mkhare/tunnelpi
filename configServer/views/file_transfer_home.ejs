@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Firmware Update</title>
+    <% include ./partials/head.ejs %>
+</head>
+<body>
+<% include ./partials/header.ejs %>
+<div class="ui one column stackable center aligned grid">
+    <div class="six wide column">
+        <form class="ui form" method='post' action="file_transfer_init">
+
+            <div class="field">
+                <label>Source Gateway UUID</label>
+                <div class="ui small input">
+                    <input type="text" placeholder="Enter here ...." name="sourcegw">
+                </div>
+            </div>
+            <div class="field">
+                <label>Destination gateway UUID</label>
+                <div class="ui small input">
+                    <input type="text" placeholder="Enter here ...." name="destgw">
+                </div>
+            </div>
+            <button class="ui blue middle aligned submit button" type="submit">Start</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

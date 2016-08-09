@@ -1,20 +1,22 @@
-module.exports = function(){
-	var pubnub_base = require('./pubnub_base');
-	var sudo = require('sudo');
-	var options = {
-    	cachePassword: true,
-    	prompt: 'Password, yo? ',
-    	spawnOptions: {shell: true, stdio: 'inherit'}
-	};
+module.exports = function () {
+    var pubnub_base = require('./pubnub_base');
+    var sudo = require('sudo');
+    require('./FT_to_BLE')();
 
-	var pubnubclient = "";
-	pubnubclient = sudo(['sh', '-c', 'btmon']);
-	pubnubclient.stdout.setEncoding('utf8');
-	pubnubclient.stdout.on('data', function (data) {
-    	pubnub_base.publish_data(data);
-	});
+    var options = {
+        cachePassword: true,
+        prompt: 'Password, yo? ',
+        spawnOptions: {shell: true, stdio: 'inherit'}
+    };
 
-	pubnubclient.on('close', function (data) {
-    	console.log('bluetooth program stopped.');
-	});
+    var pubnubclient = "";
+    pubnubclient = sudo(['sh', '-c', 'btmon']);
+    pubnubclient.stdout.setEncoding('utf8');
+    pubnubclient.stdout.on('data', function (data) {
+        pubnub_base.publish_data(data);
+    });
+
+    pubnubclient.on('close', function (data) {
+        console.log('bluetooth program stopped.');
+    });
 }
