@@ -11,6 +11,7 @@ var events = require('events');
 var cons = require('consolidate');
 var proj_config = require('./proj_config');
 var eventEmitter = new events.EventEmitter();
+var socket_manager = require('./routes/socket_manager');
 
 var pubnub = require("pubnub")({
     publish_key   : proj_config.set1.publish_key,
@@ -20,6 +21,7 @@ var pubnub = require("pubnub")({
 mongoose.connect(configfile.dburl);
 var User = require('./model/user');
 var Usergws = require('./model/Usergws');
+var gw_sockets = require('./model/gw_sockets');
 
 var app = express();
 
@@ -28,6 +30,12 @@ var port = 8888;
 server.listen(port, '0.0.0.0', function () {
     console.log('Server is running...');
     var updatedata = {online: 0};
+    gw_sockets.remove({}, function (err) {
+        if(err){
+            console.log("error : cleaning sockets collection");
+        }
+    })
+
     Usergws.update({}, updatedata, {multi:true}, function (err) {
         if(err)
             console.log("error updating data at server start");
@@ -56,7 +64,7 @@ require('./routes/login')(app, passport);
 require('./config/passport')(app, passport, eventEmitter);
 require('./routes/signup')(app, passport);
 require('./routes/profile')(app);
-require('./routes/file_transfer')(app, eventEmitter);
+require('./routes/file_transfer')(app, eventEmitter, io);
 var loginModules = require('./routes/loginModules');
 
 app.get('/', function (req, res) {
@@ -64,6 +72,7 @@ app.get('/', function (req, res) {
 });
 
 var gwDisconnectHandler = function (socket, gw, imgid) {
+    socket_manager.remove_socket_from_db(socket);
     console.log('client disconnected');
     var updateData = {online : 0};
     Usergws.findOneAndUpdate(gw, updateData, function (err, numbereffected, raw) {
@@ -73,14 +82,9 @@ var gwDisconnectHandler = function (socket, gw, imgid) {
     socket.disconnect(true);
 };
 
-var file_transfer_cmds = function (socket, creds) {
-        eventEmitter.on('ft_send_init_cmd', function (data) {
-            if(creds.uuid == data.sgw){
-                console.log("init command sent to gateway");
-                socket.emit('ft_init_cmd_frm_server', data);
-            }
-        })
-};
+var sock_connected_to_gw = function (socket, creds) {
+    socket_manager.add_socket_to_db(socket, creds);
+}
 
 io.sockets.on("connection", function (socket) {
     console.log('client connected');
@@ -146,7 +150,8 @@ io.sockets.on("connection", function (socket) {
                         socket.disconnect(true);
                     }
                     if(user){
-                        file_transfer_cmds(socket, gw);
+                        // file_transfer_cmds(socket, gw);
+                        sock_connected_to_gw(socket, gw);
                         console.log('In socket stream : creds already exists.');
                         console.log("auth success : %j", gw);
                         console.log("user online event emitted (existing user)");
@@ -174,7 +179,8 @@ io.sockets.on("connection", function (socket) {
 
                         var updateData = {online : 1};
                         Usergws.findOneAndUpdate(gw, updateData, function (err, numbereffected, raw) {
-                            file_transfer_cmds(socket, gw);
+                            // file_transfer_cmds(socket, gw);
+                            sock_connected_to_gw(socket, gw);
                             console.log("user online event emitted (new user)");
                             eventEmitter.emit('UserOnline', {tagid : imgid});
                         });
