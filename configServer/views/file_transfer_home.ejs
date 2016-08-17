@@ -3,12 +3,63 @@
 <head>
     <title>Firmware Update</title>
     <% include ./partials/head.ejs %>
+    <script>
+        $(document).ready(function () {
+            var socket = io.connect("/ftnsp");
+            console.log("socket on ft : ", io);
+
+            var username = '<%= user%>'.trim();
+            $('#progress_log_div').css('visibility', 'hidden');
+            $('#ft_init_form').submit(processForm);
+
+            socket.on('connect', function (data) {
+                socket.emit('beFTconnect', {user : username});
+                socket.on('old_log_data', function (data) {
+                    var data_string = "";
+                    data.logs.forEach(function (item) {
+                        data_string = data_string + item.logline + '\n';
+                    })
+                    $('#progress_log_ta').val(function (_, val) {
+                        return val + data_string;
+                    })
+                })
+            });
+
+            socket.on('disconnect', function (data) {
+                window.alert("Server disconnected. Please refresh the page.");
+                socket.disconnect();
+            })
+
+            function processForm(e) {
+                $.ajax({
+                    url: 'file_transfer_init',
+                    dataType: 'text',
+                    type: 'post',
+                    contentType: 'application/x-www-form-urlencoded',
+                    data: $(this).serialize(),
+                    success: function (data, textStatus, jQxhr) {
+                        $('#progress_log_div').css('visibility', 'visible');
+                        if(textStatus == "success") {
+                            $('#progress_log_ta').val(function (_, val) {
+                                return val + "Firmware upgrade process started \n";
+                            })
+                        }
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        console.log(errorThrown);
+                    }
+                });
+
+                e.preventDefault();
+            }
+        })
+    </script>
 </head>
 <body>
 <% include ./partials/header.ejs %>
 <div class="ui one column stackable center aligned grid">
     <div class="six wide column">
-        <form class="ui form" method='post' action="file_transfer_init">
+        <form class="ui form" method='post' action="file_transfer_init" id="ft_init_form">
 
             <div class="field">
                 <label>Source Gateway UUID</label>
@@ -17,7 +68,7 @@
                 </div>
             </div>
             <div class="field">
-                <label>Destination gateway UUID</label>
+                <label>Destination gateway UUID (comma separated UUID's for multiple gateways)</label>
                 <div class="ui small input">
                     <input type="text" placeholder="Enter here ...." name="destgw">
                 </div>
@@ -25,6 +76,17 @@
             <button class="ui blue middle aligned submit button" type="submit">Start</button>
         </form>
     </div>
+    <div class="row" id="progress_log_div">
+        <div class="ui segment">
+            <div class="ten wide column">
+                <div class="field">
+                    <label>Progress : </label><br>
+                    <textarea id="progress_log_ta" style="width: 700px; height: 400px"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 </body>
 </html>

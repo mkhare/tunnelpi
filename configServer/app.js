@@ -22,6 +22,8 @@ mongoose.connect(configfile.dburl);
 var User = require('./model/user');
 var Usergws = require('./model/Usergws');
 var gw_sockets = require('./model/gw_sockets');
+var bFT_sockets = require('./model/browser_FT_sockets');
+var ft_log = require('./model/ft_log');
 
 var app = express();
 
@@ -33,6 +35,12 @@ server.listen(port, '0.0.0.0', function () {
     gw_sockets.remove({}, function (err) {
         if(err){
             console.log("error : cleaning sockets collection");
+        }
+    })
+
+    bFT_sockets.remove({}, function (err) {
+        if(err){
+            console.log("error : cleaning browser sockets collection");
         }
     })
 
@@ -72,6 +80,15 @@ app.get('/', function (req, res) {
 });
 
 var gwDisconnectHandler = function (socket, gw, imgid) {
+    // gw_sockets.find({sock_id : socket.id}, function (err, data) {
+    //     if(err){
+    //         console.log("error : reading gw_sockets db");
+    //     } else if(data.length() > 0){
+    //         socket_manager.remove_socket_from_db(socket);
+    //     } else {
+    //         socket_manager.remove_browser_socket_from_db(socket);
+    //     }
+    // })
     socket_manager.remove_socket_from_db(socket);
     console.log('client disconnected');
     var updateData = {online : 0};
@@ -84,6 +101,14 @@ var gwDisconnectHandler = function (socket, gw, imgid) {
 
 var sock_connected_to_gw = function (socket, creds) {
     socket_manager.add_socket_to_db(socket, creds);
+    socket.on('ft_logdata', function (data) {
+        var doc = new ft_log(data);
+        doc.save(function (err) {
+            if(err){
+                console.log("error : saving log to db : ", data);
+            }
+        })
+    })
 }
 
 io.sockets.on("connection", function (socket) {
@@ -100,6 +125,7 @@ io.sockets.on("connection", function (socket) {
 
     //This event is used to notify the client about already online gateways.
     socket.on('beConnect', function (data) {
+        // socket_manager.add_browser_socket_to_db(socket, data.uname);
         console.log("message from browser : " + data.uname);
         socket.emit('eoninit', proj_config.set1);
         Usergws.find({email: data.uname, online: 1}, function (err, mongodata) {

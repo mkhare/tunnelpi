@@ -3,14 +3,22 @@
         Home
     </a>
     <!--<form class="active item" action="file_transfer_home" id="header_item_firmware_update">-->
-        <!--<a class="active item" onclick="document.getElementById('header_item_firmware_update').submit();">Firmware Update</a>-->
+    <!--<a class="active item" onclick="document.getElementById('header_item_firmware_update').submit();">Firmware Update</a>-->
     <!--</form>-->
     <a class="active item" href="file_transfer_home">
         Firmware Update
     </a>
+
     <div class="right menu">
-        <form class="item" action="logout">
-            <button class="ui primary button">Logout</button>
-        </form>
+        <div class="ui pointing dropdown link item">
+            <b><span class="text" id="header_email">user name</span>
+            <i class="dropdown icon"></i></b>
+            <div class="menu">
+                <a class="item" href="logout">Logout</a>
+            </div>
+        </div>
     </div>
 </div>
+        <!--<form class="item" action="logout">-->
+        <!--<button class="ui primary button">Logout</button>-->
+        <!--</form>-->

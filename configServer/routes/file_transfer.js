@@ -5,11 +5,34 @@
 var loginModules = require('./loginModules');
 var gw_sockets = require('../model/gw_sockets');
 var FT_Comm = require('./file_transfer_comm');
+var socket_manager = require('./socket_manager');
+var ft_log = require('../model/ft_log');
 
 module.exports = function (app, eventEmitter, io) {
+    var ftnsp = io.of("/ftnsp");
+
+    ftnsp.on("connection", function (socket) {
+        console.log("connected to ftnsp socket");
+
+        socket.on('beFTconnect', function (data) {
+            socket_manager.add_browser_socket_to_db(socket, data.user);
+            ft_log.find({email : data.user}, function (err, mongodata) {
+                if(err){
+                    console.log("error finding log data");
+                    return;
+                }
+                socket.emit('old_log_data', {logs : mongodata});
+            })
+        });
+
+        socket.on('disconnect', function (data) {
+            socket_manager.remove_browser_socket_from_db(socket);
+        });
+    })
+    
     app.get('/file_transfer_home', function (req, res) {
         if (req.session.email) {
-            res.render('file_transfer_home.ejs', {});
+            res.render('file_transfer_home.ejs', {user : req.session.email});
         } else {
             res.render('index', {title: "Login or Signup"});
         }
@@ -25,6 +48,7 @@ module.exports = function (app, eventEmitter, io) {
 
     app.post('/file_transfer_init', function (req, res) {
         if (req.session.email) {
+            res.sendStatus(200);
             var sourcegw = req.body.sourcegw;
             var destgw = req.body.destgw;
             var arr = destgw.split(',');
@@ -50,7 +74,7 @@ module.exports = function (app, eventEmitter, io) {
                         console.log('error : destination gateway ' + dgw + ' not online.');
                     } else {
                         var sock = io.sockets.sockets[sgw_info[0].sock_id];
-                        var ft_comm = new FT_Comm(sgw_info[0], dgw_info[0], sock);
+                        var ft_comm = new FT_Comm(sgw_info[0], dgw_info[0], sock, io);
                         ft_comm.file_transfer_init();
                         // file_transfer_init(sgw_info[0], dgw_info[0]);
                     }

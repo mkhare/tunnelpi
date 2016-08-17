@@ -1,0 +1,2581 @@
+Bluetooth monitor ver 5.37
+= New Index: 00:1A:7D:DA:71:13 (BR/EDR,USB,hci0)                [hci0] 0.758929
+= Open Index: 00:1A:7D:DA:71:13                                 [hci0] 0.758930
+= Index Info: 00:1A:7D:DA:71:13 (Cambridge Silicon Radio)       [hci0] 0.758930
+> HCI Event: LE Meta Event (0x3e) plen 19                     [hci0] 286.122565
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Public (0x00)
+        Address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Data length: 7
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        16-bit Service UUIDs (complete): 1 entry
+          Unknown (0x12ab)
+        RSSI: -52 dBm (0xcc)
+> HCI Event: LE Meta Event (0x3e) plen 25                     [hci0] 286.124532
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Scan response - SCAN_RSP (0x04)
+        Address type: Public (0x00)
+        Address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Data length: 13
+        Name (short): commService
+        RSSI: -52 dBm (0xcc)
+< HCI Command: LE Create Connection (0x08|0x000d) plen 25     [hci0] 286.160625
+        Scan interval: 60.000 msec (0x0060)
+        Scan window: 30.000 msec (0x0030)
+        Filter policy: White list is not used (0x00)
+        Peer address type: Public (0x00)
+        Peer address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Own address type: Public (0x00)
+        Min connection interval: 7.50 msec (0x0006)
+        Max connection interval: 15.00 msec (0x000c)
+        Connection latency: 0x0000
+        Supervision timeout: 2000 msec (0x00c8)
+        Min connection length: 2.500 msec (0x0004)
+        Max connection length: 3.750 msec (0x0006)
+> HCI Event: Command Status (0x0f) plen 4                     [hci0] 286.164821
+      LE Create Connection (0x08|0x000d) ncmd 1
+        Status: Success (0x00)
+> HCI Event: LE Meta Event (0x3e) plen 19                     [hci0] 286.224289
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Public (0x00)
+        Address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Data length: 7
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        16-bit Service UUIDs (complete): 1 entry
+          Unknown (0x12ab)
+        RSSI: -52 dBm (0xcc)
+> HCI Event: LE Meta Event (0x3e) plen 19                     [hci0] 286.327004
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Public (0x00)
+        Address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Data length: 7
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        16-bit Service UUIDs (complete): 1 entry
+          Unknown (0x12ab)
+        RSSI: -52 dBm (0xcc)
+> HCI Event: LE Meta Event (0x3e) plen 19                     [hci0] 286.438751
+      LE Connection Complete (0x01)
+        Status: Success (0x00)
+        Handle: 68
+        Role: Master (0x00)
+        Peer address type: Public (0x00)
+        Peer address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Connection interval: 15.00 msec (0x000c)
+        Connection latency: 0.00 msec (0x0000)
+        Supervision timeout: 2000 msec (0x00c8)
+        Master clock accuracy: 0x00
+< HCI Command: LE Read Remote Used Fe.. (0x08|0x0016) plen 2  [hci0] 286.439018
+        Handle: 68
+@ Device Connected: B8:27:EB:EA:C5:B8 (1) flags 0x0000
+> HCI Event: Command Status (0x0f) plen 4                     [hci0] 286.442752
+      LE Read Remote Used Features (0x08|0x0016) ncmd 1
+        Status: Success (0x00)
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2        [hci0] 286.442801
+        Scanning: Disabled (0x00)
+        Filter duplicates: Disabled (0x00)
+> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 286.449862
+      LE Set Scan Enable (0x08|0x000c) ncmd 1
+        Status: Success (0x00)
+> HCI Event: LE Meta Event (0x3e) plen 12                     [hci0] 286.481054
+      LE Read Remote Used Features (0x04)
+        Status: Success (0x00)
+        Handle: 68
+        Features: 0x01 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+          LE Encryption
+< ACL Data TX: Handle 68 flags 0x00 dlen 7                    [hci0] 286.486838
+      ATT: Exchange MTU Request (0x02) len 2
+        Client RX MTU: 256
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 286.496158
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 16                   [hci0] 286.540683
+      LE L2CAP: Connection Parameter Update Request (0x12) ident 1 len 8
+        Min interval: 40
+        Max interval: 56
+        Slave latency: 0
+        Timeout multiplier: 200
+< HCI Command: LE Connection Update (0x08|0x0013) plen 14     [hci0] 286.540801
+        Handle: 68
+        Min connection interval: 50.00 msec (0x0028)
+        Max connection interval: 70.00 msec (0x0038)
+        Connection latency: 0x0000
+        Supervision timeout: 2000 msec (0x00c8)
+        Min connection length: 0.000 msec (0x0000)
+        Max connection length: 0.000 msec (0x0000)
+@ New Conn Param: B8:27:EB:EA:C5:B8 (1) hint 0 min 0x0028 max 0x0038 latency 0x0000 timeout 0x00c8
+> ACL Data RX: Handle 68 flags 0x02 dlen 7                    [hci0] 286.541204
+      ATT: Exchange MTU Response (0x03) len 2
+        Server RX MTU: 256
+< ACL Data TX: Handle 68 flags 0x00 dlen 11                   [hci0] 286.542618
+      ATT: Read By Group Type Request (0x10) len 6
+        Handle range: 0x0001-0xffff
+        Attribute group type: Primary Service (0x2800)
+> HCI Event: Command Status (0x0f) plen 4                     [hci0] 286.546471
+      LE Connection Update (0x08|0x0013) ncmd 1
+        Status: Success (0x00)
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 286.556625
+        Num handles: 1
+        Handle: 68
+        Count: 1
+< ACL Data TX: Handle 68 flags 0x00 dlen 10                   [hci0] 286.556713
+      LE L2CAP: Connection Parameter Update Response (0x13) ident 1 len 2
+        Result: Connection Parameters accepted (0x0000)
+> ACL Data RX: Handle 68 flags 0x02 dlen 24                   [hci0] 286.571069
+      ATT: Read By Group Type Response (0x11) len 19
+        Attribute data length: 6
+        Attribute group list: 3 entries
+        Handle range: 0x0001-0x0005
+        UUID: Generic Access Profile (0x1800)
+        Handle range: 0x0006-0x0009
+        UUID: Generic Attribute Profile (0x1801)
+        Handle range: 0x000a-0x0016
+        UUID: Unknown (0x12ab)
+< ACL Data TX: Handle 68 flags 0x00 dlen 11                   [hci0] 286.571676
+      ATT: Read By Group Type Request (0x10) len 6
+        Handle range: 0x0017-0xffff
+        Attribute group type: Primary Service (0x2800)
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 286.571646
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 286.586821
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 9                    [hci0] 286.601037
+      ATT: Error Response (0x01) len 4
+        Read By Group Type Request (0x10)
+        Handle: 0x0017
+        Error: Attribute Not Found (0x0a)
+< ACL Data TX: Handle 68 flags 0x00 dlen 11                   [hci0] 286.604280
+      ATT: Read By Type Request (0x08) len 6
+        Handle range: 0x000a-0x0016
+        Attribute type: Characteristic (0x2803)
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 286.616975
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 27                   [hci0] 286.631340
+> ACL Data RX: Handle 68 flags 0x01 dlen 7                    [hci0] 286.631969
+      ATT: Read By Type Response (0x09) len 29
+        Attribute data length: 7
+        Attribute data list: 4 entries
+        Handle: 0x000b
+        Value: 1e0c00cd34
+        Handle: 0x000e
+        Value: 1e0f00ab78
+        Handle: 0x0011
+        Value: 1e1200ab21
+        Handle: 0x0014
+        Value: 1e1500ef56
+< ACL Data TX: Handle 68 flags 0x00 dlen 11                   [hci0] 286.633022
+      ATT: Read By Type Request (0x08) len 6
+        Handle range: 0x0016-0x0016
+        Attribute type: Characteristic (0x2803)
+> HCI Event: LE Meta Event (0x3e) plen 10                     [hci0] 286.646220
+      LE Connection Update Complete (0x03)
+        Status: Success (0x00)
+        Handle: 68
+        Connection interval: 70.00 msec (0x0038)
+        Connection latency: 0.00 msec (0x0000)
+        Supervision timeout: 2000 msec (0x00c8)
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 286.652309
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 9                    [hci0] 286.721956
+      ATT: Error Response (0x01) len 4
+        Read By Type Request (0x08)
+        Handle: 0x0016
+        Error: Attribute Not Found (0x0a)
+< ACL Data TX: Handle 68 flags 0x00 dlen 7                    [hci0] 483.714193
+      ATT: Read Request (0x0a) len 2
+        Handle: 0x000f
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 483.788222
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 9                    [hci0] 483.850571
+      ATT: Error Response (0x01) len 4
+        Read Request (0x0a)
+        Handle: 0x000f
+        Error: Insufficient Authentication (0x05)
+< ACL Data TX: Handle 68 flags 0x00 dlen 11                   [hci0] 483.851256
+      SMP: Pairing Request (0x01) len 6
+        IO capability: NoInputNoOutput (0x03)
+        OOB data: Authentication data not present (0x00)
+        Authentication requirement: Bonding, No MITM, Legacy, No Keypresses (0x01)
+        Max encryption key size: 16
+        Initiator key distribution: <none> (0x00)
+        Responder key distribution: EncKey (0x01)
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 483.920687
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 11                   [hci0] 483.989997
+      SMP: Pairing Response (0x02) len 6
+        IO capability: NoInputNoOutput (0x03)
+        OOB data: Authentication data not present (0x00)
+        Authentication requirement: Bonding, No MITM, Legacy, No Keypresses (0x01)
+        Max encryption key size: 16
+        Initiator key distribution: <none> (0x00)
+        Responder key distribution: EncKey (0x01)
+< ACL Data TX: Handle 68 flags 0x00 dlen 21                   [hci0] 483.993272
+      SMP: Pairing Confirm (0x03) len 16
+        Confim value: f6167061021a73a4d3eabf7e3b0fe426
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 484.060045
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 21                   [hci0] 484.129447
+      SMP: Pairing Confirm (0x03) len 16
+        Confim value: 286f13352e9ced2de261749be89cbd2f
+< ACL Data TX: Handle 68 flags 0x00 dlen 21                   [hci0] 484.130093
+      SMP: Pairing Random (0x04) len 16
+        Random value: f23aa6e83d747912f0b99ff8c8d6b4ef
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 484.199455
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 21                   [hci0] 484.268915
+      SMP: Pairing Random (0x04) len 16
+        Random value: 03b8688313cf8f6ca271d38658af811b
+< HCI Command: LE Start Encryption (0x08|0x0019) plen 28      [hci0] 484.270864
+        Handle: 68
+        Random number: 0x0000000000000000
+        Encrypted diversifier: 0x0000
+        Long term key: 0844ba687e9edc04a580184f8c8da348
+> HCI Event: Command Status (0x0f) plen 4                     [hci0] 484.278168
+      LE Start Encryption (0x08|0x0019) ncmd 1
+        Status: Success (0x00)
+> HCI Event: Encryption Change (0x08) plen 4                  [hci0] 484.687461
+        Status: Success (0x00)
+        Handle: 68
+        Encryption: Enabled with AES-CCM (0x01)
+< ACL Data TX: Handle 68 flags 0x00 dlen 7                    [hci0] 484.688232
+      ATT: Read Request (0x0a) len 2
+        Handle: 0x000f
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 484.757151
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 21                   [hci0] 484.826517
+      SMP: Encryption Information (0x06) len 16
+        Long term key: 0844ba687e9edc04a580184f8c8da348
+> ACL Data RX: Handle 68 flags 0x02 dlen 15                   [hci0] 484.827100
+      SMP: Master Identification (0x07) len 10
+        EDIV: 0x0000
+        Rand: 0x0000000000000000
+> ACL Data RX: Handle 68 flags 0x02 dlen 6                    [hci0] 484.827719
+      ATT: Read Response (0x0b) len 1
+        Value: 30
+< ACL Data TX: Handle 68 flags 0x00 dlen 8                    [hci0] 484.832594
+      ATT: Write Request (0x12) len 3
+        Handle: 0x0015
+          Data: 35
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 484.896551
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 484.972468
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 485.573513
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 766172206673203d207265717569726528276673
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 485.593778
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 485.663132
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 486.008865
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 27293b0a7661722070726f6a5f636f6e66696720
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 486.012105
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 486.081485
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 486.082100
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 3d207265717569726528272e2f70726f6a5f636f
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 486.151649
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 486.221035
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 486.221579
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6e66696727293b0a0a766172207075626e756220
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 486.298135
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 486.360520
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 486.360966
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 3d207265717569726528227075626e7562222928
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 486.430636
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 486.499925
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 487.810927
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 7b0a097075626c6973685f6b65792020203a2070
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 487.825545
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 487.894941
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 487.895269
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 726f6a5f636f6e6669672e736574312e7075626c
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 487.972038
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 488.034444
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 488.034729
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6973685f6b65792c0a097375627363726962655f
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 488.104606
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 488.173992
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 488.174383
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6b6579203a2070726f6a5f636f6e6669672e7365
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 488.244126
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 488.313691
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 488.538184
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 74312e7375627363726962655f6b65790a7d293b
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 488.592952
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 488.662407
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 488.662866
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 0a766172206368616e6e656c203d2070726f6a5f
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 488.732529
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 488.801913
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 488.802288
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 636f6e6669672e736574312e6368616e6e656c5f
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 488.879012
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 488.941449
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 488.970500
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6e616d653b0a0a6d6f64756c652e6578706f7274
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 489.011560
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 489.080981
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 489.081167
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 732e7375627363726962655f64617461203d2066
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 489.151143
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 489.220587
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 489.921288
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 756e6374696f6e28297b0a090a097075626e7562
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 489.988488
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 490.057963
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 490.058498
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 2e737562736372696265287b0a09096368616e6e
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 490.128092
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 490.197491
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 490.197999
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 656c20203a206368616e6e656c2c0a090963616c
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 490.267702
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 490.337115
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 490.351648
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6c6261636b203a2077726974655f746f5f66696c
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 490.407210
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 490.476692
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 490.477203
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 650a097d293b0a0a097661722066697273745f77
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 490.546794
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 490.616243
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 490.616605
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 72697465203d20747275653b0a09766172206c6f
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 490.686415
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 490.762433
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 490.762825
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6766696c655f6e616d65203d202262746d6f6e6c
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 490.825997
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 490.895410
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 490.972235
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6f672e747874220a0966756e6374696f6e207772
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 491.035332
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 491.104787
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 491.105061
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6974655f746f5f66696c65286d65737361676529
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 491.181950
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 491.244405
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 492.064193
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 7b0a090976617220627566203d206e6577204275
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 492.082410
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 492.151918
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 492.152299
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 66666572286d657373616765293b0a0909696628
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 492.222047
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 492.291494
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 492.515547
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 66697273745f7772697465297b0a09090966732e
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 492.571109
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 492.640554
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 492.640946
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 777269746546696c6553796e63286c6f6766696c
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 492.710735
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 492.780166
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 492.780960
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 655f6e616d652c206275662e746f537472696e67
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 492.857327
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 492.919791
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 492.920486
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 2829293b0a09090966697273745f777269746520
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 492.989966
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 493.059413
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 493.059682
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 3d2066616c73653b0a09097d0a0909656c73657b
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 493.129614
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 493.199100
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 493.199558
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 0a09090966732e617070656e6446696c6553796e
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 493.269240
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 493.338695
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 493.339136
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 63286c6f6766696c655f6e616d652c206275662e
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 493.408877
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 493.478364
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 493.892516
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 746f537472696e672829293b0a09097d0a090963
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 493.897668
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 493.967150
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 493.967624
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6f6e736f6c652e6c6f6728224461746120726563
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 494.037286
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 494.106779
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 494.107192
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 65697665642066726f6d207075626e756220616e
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 494.183947
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 494.246427
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 494.329098
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 64207772697474656e20746f2022202b206c6f67
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 494.386456
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 494.455934
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 494.456336
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 66696c655f6e616d65293b0a097d0a0a0966756e
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 494.526114
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 494.595582
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 494.595935
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6374696f6e206c6f67286d65737361676529207b
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 494.672790
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 494.735223
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 494.735649
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 0a2020090976617220627566203d206e65772042
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 494.805430
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 494.874898
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 494.875225
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 7566666572286d657373616765293b0a0909636f
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 494.945102
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 495.014570
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 495.014949
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6e736f6c652e6c6f67286275662e746f53747269
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 495.091772
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 495.154276
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 495.154818
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6e672829293b0a097d0a7d0a0a6d6f64756c652e
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 495.224430
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 495.293926
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 495.294318
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6578706f7274732e7075626c6973685f64617461
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 495.364131
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 495.433603
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 495.433911
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 203d2066756e6374696f6e2864617461297b0a0a
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 495.510793
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 495.573275
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 495.573840
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 097075626e75622e7075626c697368287b0a0909
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 495.643490
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 495.712974
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 495.713382
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6368616e6e656c20203a206368616e6e656c2c0a
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 495.783167
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 495.852643
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 495.852973
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 09096d65737361676520203a20646174612c0a09
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 495.922844
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 495.992331
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 495.993557
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 0963616c6c6261636b203a206c6f672c0a090965
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 496.062509
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 496.132009
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 496.132369
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 72726f72202020203a2072657472790a097d293b
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 496.202222
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 496.271702
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 496.272125
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 0a0a0966756e6374696f6e206c6f67286529207b
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 496.341917
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 496.411397
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 496.412007
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 20636f6e736f6c652e6c6f67282253656e64696e
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 496.481643
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 496.551129
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 496.752977
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 672064617461206f766572207075626e75622229
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 496.767985
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 496.830504
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 496.830958
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 3b207d0a0966756e6374696f6e20726574727928
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 496.900693
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 496.970198
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                   [hci0] 496.970575
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 29207b20636f6e736f6c652e6c6f672827657272
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 497.047384
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 497.109934
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 26                   [hci0] 497.110435
+      ATT: Write Request (0x12) len 21
+        Handle: 0x000c
+          Data: 6f72206f636375727265642e27293b207d0a7d
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 497.180143
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                    [hci0] 497.249764
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 7                    [hci0] 497.250130
+      ATT: Read Request (0x0a) len 2
+        Handle: 0x0012
+> HCI Event: Number of Completed Packets (0x13) plen 5        [hci0] 497.319854
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> HCI Event: Disconnect Complete (0x05) plen 4                [hci0] 497.466492
+        Status: Success (0x00)
+        Handle: 68
+        Reason: Remote User Terminated Connection (0x13)
+@ Device Disconnected: B8:27:EB:EA:C5:B8 (1) reason 3
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2        [hci0] 497.497476
+        Scanning: Disabled (0x00)
+        Filter duplicates: Enabled (0x01)
+> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 497.498403
+      LE Set Scan Enable (0x08|0x000c) ncmd 1
+        Status: Command Disallowed (0x0c)
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2        [hci0] 497.498428
+        Scanning: Enabled (0x01)
+        Filter duplicates: Enabled (0x01)
+> HCI Event: Command Complete (0x0e) plen 4                   [hci0] 497.499410
+      LE Set Scan Enable (0x08|0x000c) ncmd 1
+        Status: Success (0x00)
+> HCI Event: LE Meta Event (0x3e) plen 19                    [hci0] 1252.857412
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Public (0x00)
+        Address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Data length: 7
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        16-bit Service UUIDs (complete): 1 entry
+          Unknown (0x12ab)
+        RSSI: -50 dBm (0xce)
+> HCI Event: LE Meta Event (0x3e) plen 25                    [hci0] 1252.859415
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Scan response - SCAN_RSP (0x04)
+        Address type: Public (0x00)
+        Address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Data length: 13
+        Name (short): commService
+        RSSI: -50 dBm (0xce)
+< HCI Command: LE Create Connection (0x08|0x000d) plen 25    [hci0] 1252.862212
+        Scan interval: 60.000 msec (0x0060)
+        Scan window: 30.000 msec (0x0030)
+        Filter policy: White list is not used (0x00)
+        Peer address type: Public (0x00)
+        Peer address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Own address typedle 68 flags 0x00 dlen 7                   [hci0] 1259.076012
+      ATT: Read Request (0x0a) len 2
+        Handle: 0x000f
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1259.110721
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 9                   [hci0] 1259.179978
+      ATT: Error Response (0x01) len 4
+        Read Request (0x0a)
+        Handle: 0x000f
+        Error: Insufficient Authentication (0x05)
+< ACL Data TX: Handle 68 flags 0x00 dlen 11                  [hci0] 1259.180348
+      SMP: Pairing Request (0x01) len 6
+        IO capability: NoInputNoOutput (0x03)
+        OOB data: Authentication data not present (0x00)
+        Authentication requirement: Bonding, No MITM, Legacy, No Keypresses (0x01)
+        Max encryption key size: 16
+        Initiator key distribution: <none> (0x00)
+        Responder key distribution: EncKey (0x01)
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1259.250780
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 11                  [hci0] 1259.320046
+      SMP: Pairing Response (0x02) len 6
+        IO capability: NoInputNoOutput (0x03)
+        OOB data: Authentication data not present (0x00)
+        Authentication requirement: Bonding, No MITM, Legacy, No Keypresses (0x01)
+        Max encryption key size: 16
+        Initiator key distribution: <none> (0x00)
+        Responder key distribution: EncKey (0x01)
+< ACL Data TX: Handle 68 flags 0x00 dlen 21                  [hci0] 1259.320892
+      SMP: Pairing Confirm (0x03) len 16
+        Confim value: 5ba69a64292e3ccce410897e1c04c9e7
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1259.397765
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 21                  [hci0] 1259.460185
+      SMP: Pairing Confirm (0x03) len 16
+        Confim value: 3932d9d2216fa82d20cf46789578885b
+< ACL Data TX: Handle 68 flags 0x00 dlen 21                  [hci0] 1259.460693
+      SMP: Pairing Random (0x04) len 16
+        Random value: 2558a1e1f76a54fa811a0ee2258e7b09
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1259.530789
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 21                  [hci0] 1259.600212
+      SMP: Pairing Random (0x04) len 16
+        Random value: c08bd7fdc4278668080deef71452c683
+< HCI Command: LE Start Encryption (0x08|0x0019) plen 28     [hci0] 1259.601042
+        Handle: 68
+        Random number: 0x0000000000000000
+        Encrypted diversifier: 0x0000
+        Long term key: 89152cd7c2e14447258f45f444eacfc3
+> HCI Event: Command Status (0x0f) plen 4                    [hci0] 1259.609817
+      LE Start Encryption (0x08|0x0019) ncmd 1
+        Status: Success (0x00)
+> HCI Event: Encryption Change (0x08) plen 4                 [hci0] 1260.020921
+        Status: Success (0x00)
+        Handle: 68
+        Encryption: Enabled with AES-CCM (0x01)
+< ACL Data TX: Handle 68 flags 0x00 dlen 7                   [hci0] 1260.021351
+      ATT: Read Request (0x0a) len 2
+        Handle: 0x000f
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1260.090907
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 21                  [hci0] 1260.160303
+      SMP: Encryption Information (0x06) len 16
+        Long term key: 89152cd7c2e14447258f45f444eacfc3
+> ACL Data RX: Handle 68 flags 0x02 dlen 15                  [hci0] 1260.160966
+      SMP: Master Identification (0x07) len 10
+        EDIV: 0x0000
+        Rand: 0x0000000000000000
+> ACL Data RX: Handle 68 flags 0x02 dlen 6                   [hci0] 1260.168087
+      ATT: Read Response (0x0b) len 1
+        Value: 30
+< ACL Data TX: Handle 68 flags 0x00 dlen 7                   [hci0] 1260.172031
+      ATT: Read Request (0x0a) len 2
+        Handle: 0x000f
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1260.230981
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 6                   [hci0] 1260.300231
+      ATT: Read Response (0x0b) len 1
+        Value: 30
+< ACL Data TX: Handle 68 flags 0x00 dlen 8                   [hci0] 1260.300744
+      ATT: Write Request (0x12) len 3
+        Handle: 0x0015
+          Data: 35
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1260.370966
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1260.440254
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 8                   [hci0] 1260.440870
+      ATT: Write Request (0x12) len 3
+        Handle: 0x0015
+          Data: 35
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1260.510991
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1260.580301
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1261.118030
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 766172206673203d207265717569726528276673
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1261.141098
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1261.210401
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1261.210706
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 27293b0a7661722070726f6a5f636f6e66696720
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1261.281125
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1261.350442
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1261.350676
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 3d207265717569726528272e2f70726f6a5f636f
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1261.421184
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1261.490493
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1261.490800
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6e66696727293b0a0a766172207075626e756220
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1261.568213
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1261.630505
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1261.631441
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 3d207265717569726528227075626e7562222928
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1261.701255
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1261.770537
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1261.770951
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 7b0a097075626c6973685f6b65792020203a2070
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1261.848284
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1261.910566
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1261.910929
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 726f6a5f636f6e6669672e736574312e7075626c
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1261.981296
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1262.050593
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1263.112688
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6973685f6b65792c0a097375627363726962655f
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1263.171523
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1263.240814
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1263.241137
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6b6579203a2070726f6a5f636f6e6669672e7365
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1263.311618
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1263.520910
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1263.521539
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 74312e7375627363726962655f6b65790a7d293b
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1263.598672
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1263.660929
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1263.661311
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 0a766172206368616e6e656c203d2070726f6a5f
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1263.731675
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1263.800973
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1263.801674
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 636f6e6669672e736574312e6368616e6e656c5f
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1263.871690
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1263.941001
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1263.941370
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6e616d653b0a0a6d6f64756c652e6578706f7274
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1264.011734
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1264.081017
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1264.081374
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 732e7375627363726962655f64617461203d2066
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1264.151749
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1264.221019
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1264.221323
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 756e6374696f6e28297b0a090a097075626e7562
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1264.291778
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1264.361075
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1264.361442
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 2e737562736372696265287b0a09096368616e6e
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1264.431807
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1264.507745
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1264.508100
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 656c20203a206368616e6e656c2c0a090963616c
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1264.571835
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1264.641146
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1266.562257
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6c6261636b203a2077726974655f746f5f66696c
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1266.602278
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1266.671559
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1266.674199
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 650a097d293b0a0a097661722066697273745f77
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1266.742305
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1266.811601
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1266.811938
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 72697465203d20747275653b0a09766172206c6f
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1266.882314
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1266.951630
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1266.952008
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6766696c655f6e616d65203d202262746d6f6e6c
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1267.022364
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1267.091660
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1267.092054
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6f672e747874220a0966756e6374696f6e207772
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1267.162380
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1267.238317
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1267.238678
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6974655f746f5f66696c65286d65737361676529
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1267.302409
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1267.371720
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1267.372111
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 7b0a090976617220627566203d206e6577204275
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1267.442452
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1267.511750
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1267.512159
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 66666572286d657373616765293b0a0909696628
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1267.582465
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1267.658381
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1267.658871
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 66697273745f7772697465297b0a09090966732e
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1267.722472
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1267.791809
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1267.792153
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 777269746546696c6553796e63286c6f6766696c
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1267.862526
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1267.931838
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1267.932180
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 655f6e616d652c206275662e746f537472696e67
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1268.002585
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1268.071844
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1268.072192
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 2829293b0a09090966697273745f777269746520
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1268.142578
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1268.212024
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1268.212327
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 3d2066616c73653b0a09097d0a0909656c73657b
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1268.282618
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1268.358514
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1268.358809
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 0a09090966732e617070656e6446696c6553796e
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1268.422658
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1268.491945
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1268.492320
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 63286c6f6766696c655f6e616d652c206275662e
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1268.562663
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1268.631973
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1268.632403
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 746f537472696e672829293b0a09097d0a090963
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1268.702706
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1268.778628
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1268.779000
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6f6e736f6c652e6c6f6728224461746120726563
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1268.842736
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1268.912046
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1268.912449
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 65697665642066726f6d207075626e756220616e
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1268.982776
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1269.052062
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1269.052466
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 64207772697474656e20746f2022202b206c6f67
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1269.122791
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1269.192103
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1269.192446
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 66696c655f6e616d65293b0a097d0a0a0966756e
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1269.262838
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1269.332140
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1269.332426
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6374696f6e206c6f67286d65737361676529207b
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1269.402870
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1269.472191
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1269.701840
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 0a2020090976617220627566203d206e65772042
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1269.752943
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1269.822220
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1270.096893
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 7566666572286d657373616765293b0a0909636f
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1270.103013
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1270.172336
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1270.172791
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6e736f6c652e6c6f67286275662e746f53747269
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1270.243046
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1270.312368
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1270.312802
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6e672829293b0a097d0a7d0a0a6d6f64756c652e
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1270.383062
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1270.459003
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1270.459473
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6578706f7274732e7075626c6973685f64617461
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1270.523107
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1270.592427
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1270.592830
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 203d2066756e6374696f6e2864617461297b0a0a
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1270.663136
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1270.732455
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1270.732842
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 097075626e75622e7075626c697368287b0a0909
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1270.803150
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1270.872487
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1270.872912
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6368616e6e656c20203a206368616e6e656c2c0a
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1270.943197
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1271.019105
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1271.627299
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 09096d65737361676520203a20646174612c0a09
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1271.643365
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1271.712695
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1271.713647
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 0963616c6c6261636b203a206c6f672c0a090965
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1271.783415
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1271.852693
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1271.853407
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 72726f72202020203a2072657472790a097d293b
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1271.923389
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1271.999314
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1271.999690
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 0a0a0966756e6374696f6e206c6f67286529207b
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1272.063427
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1272.132756
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1277.315285
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 20636f6e736f6c652e6c6f67282253656e64696e
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1277.384566
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1277.453883
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1277.455955
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 672064617461206f766572207075626e75622229
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1277.524554
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1277.593894
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1277.594288
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 3b207d0a0966756e6374696f6e20726574727928
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1277.671583
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1277.803931
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1277.804235
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 29207b20636f6e736f6c652e6c6f672827657272
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1277.874642
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1277.943969
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 26                  [hci0] 1277.945021
+      ATT: Write Request (0x12) len 21
+        Handle: 0x000c
+          Data: 6f72206f636375727265642e27293b207d0a7d
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1278.014692
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1278.083952
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 7                   [hci0] 1278.084334
+      ATT: Read Request (0x0a) len 2
+        Handle: 0x0012
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1278.154631
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 7                   [hci0] 1278.223969
+      ATT: Read Response (0x0b) len 2
+        Value: 3535
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1278.225768
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 766172206673203d207265717569726528276673
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1278.294623
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1278.363882
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1278.366495
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 27293b0a7661722070726f6a5f636f6e66696720
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1278.434601
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1278.503895
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1278.504284
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 3d207265717569726528272e2f70726f6a5f636f
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1278.574578
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1278.650574
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1278.650945
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6e66696727293b0a0a766172207075626e756220
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1278.714557
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1278.783853
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1278.784234
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 3d207265717569726528227075626e7562222928
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1278.854517
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1278.923815
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1278.924213
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 7b0a097075626c6973685f6b65792020203a2070
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1279.001491
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1279.063806
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1279.064160
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 726f6a5f636f6e6669672e736574312e7075626c
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1279.134492
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1279.203786
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1279.204138
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6973685f6b65792c0a097375627363726962655f
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1279.281453
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1279.343753
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1279.344135
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6b6579203a2070726f6a5f636f6e6669672e7365
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1279.414411
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1279.483745
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1279.484088
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 74312e7375627363726962655f6b65790a7d293b
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1279.554387
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1279.630418
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1279.630758
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 0a766172206368616e6e656c203d2070726f6a5f
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1279.694383
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1279.763675
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1279.764029
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 636f6e6669672e736574312e6368616e6e656c5f
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1279.834375
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1279.903675
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1279.903967
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6e616d653b0a0a6d6f64756c652e6578706f7274
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1279.974342
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1280.043654
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1280.043901
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 732e7375627363726962655f64617461203d2066
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1280.121323
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1280.183631
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1280.183915
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 756e6374696f6e28297b0a090a097075626e7562
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1280.254314
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1280.323598
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1280.323901
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 2e737562736372696265287b0a09096368616e6e
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1280.394282
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1280.470286
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1280.470605
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 656c20203a206368616e6e656c2c0a090963616c
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1280.534231
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1280.603569
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1280.603936
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6c6261636b203a2077726974655f746f5f66696c
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1280.674252
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1280.743546
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1280.743905
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 650a097d293b0a0a097661722066697273745f77
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1280.814227
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1280.883555
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1280.884727
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 72697465203d20747275653b0a09766172206c6f
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1280.954193
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1281.023506
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1281.024111
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6766696c655f6e616d65203d202262746d6f6e6c
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1281.094190
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1281.163488
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1281.163865
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6f672e747874220a0966756e6374696f6e207772
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1281.241169
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1281.303491
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1281.303884
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6974655f746f5f66696c65286d65737361676529
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1281.374151
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1281.443469
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1281.443848
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 7b0a090976617220627566203d206e6577204275
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1281.514111
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1281.583451
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1282.057194
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 66666572286d657373616765293b0a0909696628
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1282.074083
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1282.143388
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1282.143825
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 66697273745f7772697465297b0a09090966732e
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1282.214053
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1282.283310
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1282.283618
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 777269746546696c6553796e63286c6f6766696c
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1282.353996
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1282.423330
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1282.423621
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 655f6e616d652c206275662e746f537472696e67
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1282.500974
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1282.563296
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1282.563586
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 2829293b0a09090966697273745f777269746520
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1282.633954
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1282.703290
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1282.703563
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 3d2066616c73653b0a09097d0a0909656c73657b
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1282.780947
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1282.843268
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1282.843607
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 0a09090966732e617070656e6446696c6553796e
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1282.913915
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1282.983252
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1282.983597
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 63286c6f6766696c655f6e616d652c206275662e
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1283.060896
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1283.123216
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1283.123553
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 746f537472696e672829293b0a09097d0a090963
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1283.193878
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1283.263199
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1283.263556
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6f6e736f6c652e6c6f6728224461746120726563
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1283.333858
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1283.403157
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1283.403515
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 65697665642066726f6d207075626e756220616e
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1283.474839
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1283.543152
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1283.592459
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 64207772697474656e20746f2022202b206c6f67
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1283.613817
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1283.683155
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1283.683439
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 66696c655f6e616d65293b0a097d0a0a0966756e
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1283.753803
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1283.829812
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1283.830135
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6374696f6e206c6f67286d65737361676529207b
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1283.893799
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1283.963106
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1283.963499
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 0a2020090976617220627566203d206e65772042
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1284.033764
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1284.103062
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1284.103375
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 7566666572286d657373616765293b0a0909636f
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1284.173759
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1284.249718
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1284.250044
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6e736f6c652e6c6f67286275662e746f53747269
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1284.313727
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1284.383064
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1284.383399
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6e672829293b0a097d0a7d0a0a6d6f64756c652e
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1284.453710
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1284.523022
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1284.523255
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6578706f7274732e7075626c6973685f64617461
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1284.600705
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1284.663027
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1284.663296
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 203d2066756e6374696f6e2864617461297b0a0a
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1284.733673
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1284.803009
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1284.803313
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 097075626e75622e7075626c697368287b0a0909
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1284.880668
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1284.942976
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1284.943321
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 6368616e6e656c20203a206368616e6e656c2c0a
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1285.013632
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1285.082974
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1285.083230
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 09096d65737361676520203a20646174612c0a09
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1285.153633
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1285.222940
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1285.223266
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 0963616c6c6261636b203a206c6f672c0a090965
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1285.293617
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1285.369597
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1285.369944
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 72726f72202020203a2072657472790a097d293b
+> HCI Event: Number of Completed Packets (0x13) plen 5       [hci0] 1285.433583
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 5                   [hci0] 1285.502919
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 68 flags 0x00 dlen 27                  [hci0] 1285.503254
+      ATT: Write Request (0x12) len 22
+        Handle: 0x000c
+          Data: 0a0a0966756e6374696f6e206c6f67286529207b
+> HCI Event: Number50 msec (0x0006)
+> HCI Event: Command Status (0x0f) plen 4                       [hci0] 0.843186
+      LE Create Connection (0x08|0x000d) ncmd 1
+        Status: Success (0x00)
+> HCI Event: LE Meta Event (0x3e) plen 19                       [hci0] 0.919150
+      LE Connection Complete (0x01)
+        Status: Success (0x00)
+        Handle: 68
+        Role: Master (0x00)
+        Peer address type: Public (0x00)
+        Peer address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Connection interval: 15.00 msec (0x000c)
+        Connection latency: 0.00 msec (0x0000)
+        Supervision timeout: 2000 msec (0x00c8)
+        Master clock accuracy: 0x00
+< HCI Command: LE Read Remote Used Feat.. (0x08|0x0016) plen 2  [hci0] 0.919355
+        Handle: 68
+@ Device Connected: B8:27:EB:EA:C5:B8 (1) flags 0x0000
+> HCI Event: Command Status (0x0f) plen 4                       [hci0] 0.923124
+      LE Read Remote Used Features (0x08|0x0016) ncmd 0
+        Status: Success (0x00)
+> HCI Event: Command Status (0x0f) plen 4                       [hci0] 1.019108
+      NOP (0x00|0x0000) ncmd 1
+        Status: Success (0x00)
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2          [hci0] 1.019190
+        Scanning: Disabled (0x00)
+        Filter duplicates: Disabled (0x00)
+> HCI Event: Command Complete (0x0e) plen 4                     [hci0] 1.028075
+      LE Set Scan Enable (0x08|0x000c) ncmd 1
+        Status: Success (0x00)
+> HCI Event: LE Meta Event (0x3e) plen 12                       [hci0] 1.051090
+      LE Read Remote Used Features (0x04)
+        Status: Success (0x00)
+        Handle: 68
+        Features: 0x01 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+          LE Encryption
+< ACL Data TX: Handle 68 flags 0x00 dlen 7                      [hci0] 1.057849
+      ATT: Exchange MTU Request (0x02) len 2
+        Client RX MTU: 256
+> HCI Event: Number of Completed Packets (0x13) plen 5          [hci0] 1.065096
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 16                     [hci0] 1.079913
+      LE L2CAP: Connection Parameter Update Request (0x12) ident 1 len 8
+        Min interval: 40
+        Max interval: 56
+        Slave latency: 0
+        Timeout multiplier: 200
+< HCI Command: LE Connection Update (0x08|0x0013) plen 14       [hci0] 1.079980
+        Handle: 68
+        Min connection interval: 50.00 msec (0x0028)
+        Max connection interval: 70.00 msec (0x0038)
+        Connection latency: 0x0000
+        Supervision timeout: 2000 msec (0x00c8)
+        Min connection length: 0.000 msec (0x0000)
+        Max connection length: 0.000 msec (0x0000)
+@ New Conn Param: B8:27:EB:EA:C5:B8 (1) hint 0 min 0x0028 max 0x0038 latency 0x0000 timeout 0x00c8
+> ACL Data RX: Handle 68 flags 0x02 dlen 7                      [hci0] 1.080491
+      ATT: Exchange MTU Response (0x03) len 2
+        Server RX MTU: 256
+< ACL Data TX: Handle 68 flags 0x00 dlen 11                     [hci0] 1.080911
+      ATT: Read By Group Type Request (0x10) len 6
+        Handle range: 0x0001-0xffff
+        Attribute group type: Primary Service (0x2800)
+> HCI Event: Command Status (0x0f) plen 4                       [hci0] 1.086068
+      LE Connection Update (0x08|0x0013) ncmd 1
+        Status: Success (0x00)
+> HCI Event: Number of Completed Packets (0x13) plen 5          [hci0] 1.096064
+        Num handles: 1
+        Handle: 68
+        Count: 1
+< ACL Data TX: Handle 68 flags 0x00 dlen 10                     [hci0] 1.096112
+      LE L2CAP: Connection Parameter Update Response (0x13) ident 1 len 2
+        Result: Connection Parameters accepted (0x0000)
+> ACL Data RX: Handle 68 flags 0x02 dlen 24                     [hci0] 1.110127
+      ATT: Read By Group Type Response (0x11) len 19
+        Attribute data length: 6
+        Attribute group list: 3 entries
+        Handle range: 0x0001-0x0005
+        UUID: Generic Access Profile (0x1800)
+        Handle range: 0x0006-0x0009
+        UUID: Generic Attribute Profile (0x1801)
+        Handle range: 0x000a-0x0016
+        UUID: Unknown (0x12ab)
+< ACL Data TX: Handle 68 flags 0x00 dlen 11                     [hci0] 1.110672
+      ATT: Read By Group Type Request (0x10) len 6
+        Handle range: 0x0017-0xffff
+        Attribute group type: Primary Service (0x2800)
+> HCI Event: Number of Completed Packets (0x13) plen 5          [hci0] 1.111052
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> HCI Event: Number of Completed Packets (0x13) plen 5          [hci0] 1.125064
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 9                      [hci0] 1.139900
+      ATT: Error Response (0x01) len 4
+        Read By Group Type Request (0x10)
+        Handle: 0x0017
+        Error: Attribute Not Found (0x0a)
+< ACL Data TX: Handle 68 flags 0x00 dlen 11                     [hci0] 1.143144
+      ATT: Read By Type Request (0x08) len 6
+        Handle range: 0x000a-0x0016
+        Attribute type: Characteristic (0x2803)
+> HCI Event: Number of Completed Packets (0x13) plen 5          [hci0] 1.155053
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 27                     [hci0] 1.170073
+> ACL Data RX: Handle 68 flags 0x01 dlen 7                      [hci0] 1.170545
+      ATT: Read By Type Response (0x09) len 29
+        Attribute data length: 7
+        Attribute data list: 4 entries
+        Handle: 0x000b
+        Value: 1e0c00cd34
+        Handle: 0x000e
+        Value: 1e0f00ab78
+        Handle: 0x0011
+        Value: 1e1200ab21
+        Handle: 0x0014
+        Value: 1e1500ef56
+< ACL Data TX: Handle 68 flags 0x00 dlen 11                     [hci0] 1.171580
+      ATT: Read By Type Request (0x08) len 6
+        Handle range: 0x0016-0x0016
+        Attribute type: Characteristic (0x2803)
+> HCI Event: Number of Completed Packets (0x13) plen 5          [hci0] 1.185028
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 9                      [hci0] 1.199889
+      ATT: Error Response (0x01) len 4
+        Read By Type Request (0x08)
+        Handle: 0x0016
+        Error: Attribute Not Found (0x0a)
+> HCI Event: LE Meta Event (0x3e) plen 10                       [hci0] 1.214015
+      LE Connection Update Complete (0x03)
+        Status: Success (0x00)
+        Handle: 68
+        Connection interval: 70.00 msec (0x0038)
+        Connection latency: 0.00 msec (0x0000)
+        Supervision timeout: 2000 msec (0x00c8)
+< ACL Data TX: Handle 68 flags 0x00 dlen 7                     [hci0] 55.657824
+      ATT: Read Request (0x0a) len 2
+        Handle: 0x000f
+> HCI Event: Number of Completed Packets (0x13) plen 5         [hci0] 55.666989
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 9                     [hci0] 55.743719
+      ATT: Error Response (0x01) len 4
+        Read Request (0x0a)
+        Handle: 0x000f
+        Error: Insufficient Authentication (0x05)
+< ACL Data TX: Handle 68 flags 0x00 dlen 11                    [hci0] 55.744456
+      SMP: Pairing Request (0x01) len 6
+        IO capability: NoInputNoOutput (0x03)
+        OOB data: Authentication data not present (0x00)
+        Authentication requirement: Bonding, No MITM, Legacy, No Keypresses (0x01)
+        Max encryption key size: 16
+        Initiator key distribution: <none> (0x00)
+        Responder key distribution: EncKey (0x01)
+> HCI Event: Number of Completed Packets (0x13) plen 5         [hci0] 55.808168
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 11                    [hci0] 55.877307
+      SMP: Pairing Response (0x02) len 6
+        IO capability: NoInputNoOutput (0x03)
+        OOB data: Authentication data not present (0x00)
+        Authentication requirement: Bonding, No MITM, Legacy, No Keypresses (0x01)
+        Max encryption key size: 16
+        Initiator key distribution: <none> (0x00)
+        Responder key distribution: EncKey (0x01)
+< ACL Data TX: Handle 68 flags 0x00 dlen 21                    [hci0] 55.879909
+      SMP: Pairing Confirm (0x03) len 16
+        Confim value: 654cd14fb9bf7af8518be134ab1004a2
+> HCI EvBluetooth monitor ver 5.37
+= New Index: 00:1A:7D:DA:71:13 (BR/EDR,USB,hci0)                [hci0] 0.592725
+= Open Index: 00:1A:7D:DA:71:13                                 [hci0] 0.592726
+= Index Info: 00:1A:7D:DA:71:13 (Cambridge Silicon Radio)       [hci0] 0.592726
+> HCI Event: Command Complete (0x0e) plen 12                    [hci0] 0.596809
+      Read Local Version Information (0x04|0x0001) ncmd 1
+        Status: Success (0x00)
+        HCI version: Bluetooth 4.0 (0x06) - Revision 8891 (0x22bb)
+        LMP version: Bluetooth 4.0 (0x06) - Subversion 8891 (0x22bb)
+        Manufacturer: Cambridge Silicon Radio (10)
+< HCI Command: Write LE Host Supported (0x03|0x006d) plen 2     [hci0] 0.596841
+        Supported: 0x01
+        Simultaneous: 0x00
+> HCI Event: Command Complete (0x0e) plen 4                     [hci0] 0.597802
+      Write LE Host Supported (0x03|0x006d) ncmd 1
+        Status: Success (0x00)
+< HCI Command: Read LE Host Supported (0x03|0x006c) plen 0      [hci0] 0.597832
+> HCI Event: Command Complete (0x0e) plen 6                     [hci0] 0.598798
+      Read LE Host Supported (0x03|0x006c) ncmd 1
+        Status: Success (0x00)
+        Supported: 0x01
+        Simultaneous: 0x00
+< HCI Command: Read BD ADDR (0x04|0x0009) plen 0                [hci0] 0.598822
+> HCI Event: Command Complete (0x0e) plen 10                    [hci0] 0.599798
+      Read BD ADDR (0x04|0x0009) ncmd 1
+        Status: Success (0x00)
+        Address: 00:1A:7D:DA:71:13 (cyber-blue(HK)Ltd)
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2          [hci0] 0.604080
+        Scanning: Disabled (0x00)
+        Filter duplicates: Enabled (0x01)
+> HCI Event: Command Complete (0x0e) plen 4                     [hci0] 0.604809
+      LE Set Scan Enable (0x08|0x000c) ncmd 1
+        Status: Command Disallowed (0x0c)
+< HCI Command: LE Set Scan Parameters (0x08|0x000b) plen 7      [hci0] 0.604834
+        Type: Active (0x01)
+        Interval: 10.000 msec (0x0010)
+        Window: 10.000 msec (0x0010)
+        Own address type: Public (0x00)
+        Filter policy: Accept all advertisement (0x00)
+> HCI Event: Command Complete (0x0e) plen 4                     [hci0] 0.605800
+      LE Set Scan Parameters (0x08|0x000b) ncmd 1
+        Status: Success (0x00)
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2          [hci0] 0.625440
+        Scanning: Enabled (0x01)
+        Filter duplicates: Enabled (0x01)
+> HCI Event: Command Complete (0x0e) plen 4                     [hci0] 0.626750
+      LE Set Scan Enable (0x08|0x000c) ncmd 1
+        Status: Success (0x00)
+> HCI Event: LE Meta Event (0x3e) plen 19                       [hci0] 0.706541
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Public (0x00)
+        Address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Data length: 7
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        16-bit Service UUIDs (complete): 1 entry
+          Unknown (0x12ab)
+        RSSI: -45 dBm (0xd3)
+> HCI Event: LE Meta Event (0x3e) plen 19                       [hci0] 0.805274
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Public (0x00)
+        Address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Data length: 7
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        16-bit Service UUIDs (complete): 1 entry
+          Unknown (0x12ab)
+        RSSI: -44 dBm (0xd4)
+> HCI Event: LE Meta Event (0x3e) plen 25                       [hci0] 0.807244
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Scan response - SCAN_RSP (0x04)
+        Address type: Public (0x00)
+        Address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Data length: 13
+        Name (short): commService
+        RSSI: -43 dBm (0xd5)
+< HCI Command: LE Create Connection (0x08|0x000d) plen 25       [hci0] 0.826647
+        Scan interval: 60.000 msec (0x0060)
+        Scan window: 30.000 msec (0x0030)
+        Filter policy: White list is not used (0x00)
+        Peer address type: Public (0x00)
+        Peer address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Own address type: Public (0x00)
+        Min connection interval: 7.50 msec (0x0006)
+        Max connection interval: 15.00 msec (0x000c)
+        Connection latency: 0x0000
+        Supervision timeout: 2000 msec (0x00c8)
+        Min connection length: 2.500 msec (0x0004)
+        Max connection length: 3.750 msec (0x0006)
+> HCI Event: Command Status (0x0f) plen 4                       [hci0] 0.830184
+      LE Create Connection (0x08|0x000d) ncmd 1
+        Status: Success (0x00)
+> HCI Event: LE Meta Event (0x3e) plen 19                       [hci0] 0.909993
+      LE Connection Complete (0x01)
+        Status: Success (0x00)
+        Handle: 68
+        Role: Master (0x00)
+        Peer address type: Public (0x00)
+        Peer address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Connection interval: 15.00 msec (0x000c)
+        Connection latency: 0.00 msec (0x0000)
+        Supervision timeout: 2000 msec (0x00c8)
+        Master clock accuracy: 0x00
+< HCI Command: LE Read Remote Used Feat.. (0x08|0x0016) plen 2  [hci0] 0.910184
+        Handle: 68
+@ Device Connected: B8:27:EB:EA:C5:B8 (1) flags 0x0000
+> HCI Event: Command Status (0x0f) plen 4                       [hci0] 0.913957
+      LE Read Remote Used Features (0x08|0x0016) ncmd 0
+        Status: Success (0x00)
+> HCI Event: Command Status (0x0f) plen 4                       [hci0] 1.003751
+      NOP (0x00|0x0000) ncmd 1
+        Status: Success (0x00)
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2          [hci0] 1.003802
+        Scanning: Disabled (0x00)
+        Filter duplicates: Disabled (0x00)
+> HCI Event: Command Complete (0x0e) plen 4                     [hci0] 1.012723
+      LE Set Scan Enable (0x08|0x000c) ncmd 1
+        Status: Success (0x00)
+> HCI Event: LE Meta Event (0x3e) plen 12                       [hci0] 1.035674
+      LE Read Remote Used Features (0x04)
+        Status: Success (0x00)
+        Handle: 68
+        Features: 0x01 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+          LE Encryption
+< ACL Data TX: Handle 68 flags 0x00 dlen 7                      [hci0] 1.041478
+      ATT: Exchange MTU Request (0x02) len 2
+        Client RX MTU: 256
+> HCI Event: Number of Completed Packets (0x13) plen 5          [hci0] 1.050635
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 16                     [hci0] 1.064695
+      LE L2CAP: Connection Parameter Update Request (0x12) ident 1 len 8
+        Min interval: 40
+        Max interval: 56
+        Slave latency: 0
+        Timeout multiplier: 200
+< HCI Command: LE Connection Update (0x08|0x0013) plen 14       [hci0] 1.064771
+        Handle: 68
+        Min connection interval: 50.00 msec (0x0028)
+        Max connection interval: 70.00 msec (0x0038)
+        Connection latency: 0x0000
+        Supervision timeout: 2000 msec (0x00c8)
+        Min connection length: 0.000 msec (0x0000)
+        Max connection length: 0.000 msec (0x0000)
+@ New Conn Param: B8:27:EB:EA:C5:B8 (1) hint 0 min 0x0028 max 0x0038 latency 0x0000 timeout 0x00c8
+> ACL Data RX: Handle 68 flags 0x02 dlen 7                      [hci0] 1.065265
+      ATT: Exchange MTU Response (0x03) len 2
+        Server RX MTU: 256
+< ACL Data TX: Handle 68 flags 0x00 dlen 11                     [hci0] 1.066512
+      ATT: Read By Group Type Request (0x10) len 6
+        Handle range: 0x0001-0xffff
+        Attribute group type: Primary Service (0x2800)
+> HCI Event: Command Status (0x0f) plen 4                       [hci0] 1.070581
+      LE Connection Update (0x08|0x0013) ncmd 1
+        Status: Success (0x00)
+> HCI Event: Number of Completed Packets (0x13) plen 5          [hci0] 1.080542
+        Num handles: 1
+        Handle: 68
+        Count: 1
+< ACL Data TX: Handle 68 flags 0x00 dlen 10                     [hci0] 1.080596
+      LE L2CAP: Connection Parameter Update Response (0x13) ident 1 len 2
+        Result: Connection PBluetooth monitor ver 5.37
+= New Index: 00:1A:7D:DA:71:13 (BR/EDR,USB,hci0)                [hci0] 0.297755
+= Open Index: 00:1A:7D:DA:71:13                                 [hci0] 0.297757
+= Index Info: 00:1A:7D:DA:71:13 (Cambridge Silicon Radio)       [hci0] 0.297757
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2          [hci0] 0.307874
+        Scanning: Disabled (0x00)
+        Filter duplicates: Enabled (0x01)
+> HCI Event: Command Complete (0x0e) plen 4                     [hci0] 0.308652
+      LE Set Scan Enable (0x08|0x000c) ncmd 1
+        Status: Command Disallowed (0x0c)
+< HCI Command: LE Set Scan Parameters (0x08|0x000b) plen 7      [hci0] 0.308678
+        Type: Active (0x01)
+        Interval: 10.000 msec (0x0010)
+        Window: 10.000 msec (0x0010)
+        Own address type: Public (0x00)
+        Filter policy: Accept all advertisement (0x00)
+> HCI Event: Command Complete (0x0e) plen 4                     [hci0] 0.309629
+      LE Set Scan Parameters (0x08|0x000b) ncmd 1
+        Status: Success (0x00)
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2          [hci0] 0.326836
+        Scanning: Enabled (0x01)
+        Filter duplicates: Enabled (0x01)
+> HCI Event: Command Complete (0x0e) plen 4                     [hci0] 0.328651
+      LE Set Scan Enable (0x08|0x000c) ncmd 1
+        Status: Success (0x00)
+> HCI Event: LE Meta Event (0x3e) plen 19                       [hci0] 0.362606
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Public (0x00)
+        Address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Data length: 7
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        16-bit Service UUIDs (complete): 1 entry
+          Unknown (0x12ab)
+        RSSI: -50 dBm (0xce)
+> HCI Event: LE Meta Event (0x3e) plen 25                       [hci0] 0.364610
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Scan response - SCAN_RSP (0x04)
+        Address type: Public (0x00)
+        Address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Data length: 13
+        Name (short): commService
+        RSSI: -50 dBm (0xce)
+< HCI Command: LE Create Connection (0x08|0x000d) plen 25       [hci0] 0.381008
+        Scan interval: 60.000 msec (0x0060)
+        Scan window: 30.000 msec (0x0030)
+        Filter policy: White list is not used (0x00)
+        Peer address type: Public (0x00)
+        Peer address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Own address type: Public (0x00)
+        Min connection interval: 7.50 msec (0x0006)
+        Max connection interval: 15.00 msec (0x000c)
+        Connection latency: 0x0000
+        Supervision timeout: 2000 msec (0x00c8)
+        Min connection length: 2.500 msec (0x0004)
+        Max connection length: 3.750 msec (0x0006)
+> HCI Event: Command Status (0x0f) plen 4                       [hci0] 0.384600
+      LE Create Connection (0x08|0x000d) ncmd 1
+        Status: Success (0x00)
+> HCI Event: LE Meta Event (0x3e) plen 19                       [hci0] 0.470592
+      LE Connection Complete (0x01)
+        Status: Success (0x00)
+        Handle: 68
+        Role: Master (0x00)
+        Peer address type: Public (0x00)
+        Peer address: B8:27:EB:EA:C5:B8 (Raspberry Pi Foundation)
+        Connection interval: 15.00 msec (0x000c)
+        Connection latency: 0.00 msec (0x0000)
+        Supervision timeout: 2000 msec (0x00c8)
+        Master clock accuracy: 0x00
+< HCI Command: LE Read Remote Used Feat.. (0x08|0x0016) plen 2  [hci0] 0.470769
+        Handle: 68
+@ Device Connected: B8:27:EB:EA:C5:B8 (1) flags 0x0000
+> HCI Event: Command Status (0x0f) plen 4                       [hci0] 0.474569
+      LE Read Remote Used Features (0x08|0x0016) ncmd 0
+        Status: Success (0x00)
+> HCI Event: Command Status (0x0f) plen 4                       [hci0] 0.564566
+      NOP (0x00|0x0000) ncmd 1
+        Status: Success (0x00)
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2          [hci0] 0.564639
+        Scanning: Disabled (0x00)
+        Filter duplicates: Disabled (0x00)
+> HCI Event: Command Complete (0x0e) plen 4                     [hci0] 0.573558
+      LE Set Scan Enable (0x08|0x000c) ncmd 1
+        Status: Success (0x00)
+> HCI Event: LE Meta Event (0x3e) plen 12                       [hci0] 0.596529
+      LE Read Remote Used Features (0x04)
+        Status: Success (0x00)
+        Handle: 68
+        Features: 0x01 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+          LE Encryption
+< ACL Data TX: Handle 68 flags 0x00 dlen 7                      [hci0] 0.603240
+      ATT: Exchange MTU Request (0x02) len 2
+        Client RX MTU: 256
+> HCI Event: Number of Completed Packets (0x13) plen 5          [hci0] 0.611525
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 16                     [hci0] 0.625597
+      LE L2CAP: Connection Parameter Update Request (0x12) ident 1 len 8
+        Min interval: 40
+        Max interval: 56
+        Slave latency: 0
+        Timeout multiplier: 200
+< HCI Command: LE Connection Update (0x08|0x0013) plen 14       [hci0] 0.625700
+        Handle: 68
+        Min connection interval: 50.00 msec (0x0028)
+        Max connection interval: 70.00 msec (0x0038)
+        Connection latency: 0x0000
+        Supervision timeout: 2000 msec (0x00c8)
+        Min connection length: 0.000 msec (0x0000)
+        Max connection length: 0.000 msec (0x0000)
+@ New Conn Param: B8:27:EB:EA:C5:B8 (1) hint 0 min 0x0028 max 0x0038 latency 0x0000 timeout 0x00c8
+> ACL Data RX: Handle 68 flags 0x02 dlen 7                      [hci0] 0.626161
+      ATT: Exchange MTU Response (0x03) len 2
+        Server RX MTU: 256
+< ACL Data TX: Handle 68 flags 0x00 dlen 11                     [hci0] 0.626658
+      ATT: Read By Group Type Request (0x10) len 6
+        Handle range: 0x0001-0xffff
+        Attribute group type: Primary Service (0x2800)
+> HCI Event: Command Status (0x0f) plen 4                       [hci0] 0.631549
+      LE Connection Update (0x08|0x0013) ncmd 1
+        Status: Success (0x00)
+> HCI Event: Number of Completed Packets (0x13) plen 5          [hci0] 0.641550
+        Num handles: 1
+        Handle: 68
+        Count: 1
+< ACL Data TX: Handle 68 flags 0x00 dlen 10                     [hci0] 0.641622
+      LE L2CAP: Connection Parameter Update Response (0x13) ident 1 len 2
+        Result: Connection Parameters accepted (0x0000)
+> ACL Data RX: Handle 68 flags 0x02 dlen 24                     [hci0] 0.655794
+      ATT: Read By Group Type Response (0x11) len 19
+        Attribute data length: 6
+        Attribute group list: 3 entries
+        Handle range: 0x0001-0x0005
+        UUID: Generic Access Profile (0x1800)
+        Handle range: 0x0006-0x0009
+        UUID: Generic Attribute Profile (0x1801)
+        Handle range: 0x000a-0x0016
+        UUID: Unknown (0x12ab)
+< ACL Data TX: Handle 68 flags 0x00 dlen 11                     [hci0] 0.656383
+      ATT: Read By Group Type Request (0x10) len 6
+        Handle range: 0x0017-0xffff
+        Attribute group type: Primary Service (0x2800)
+> HCI Event: Number of Completed Packets (0x13) plen 5          [hci0] 0.656531
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> HCI Event: Number of Completed Packets (0x13) plen 5          [hci0] 0.671522
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 9                      [hci0] 0.685574
+      ATT: Error Response (0x01) len 4
+        Read By Group Type Request (0x10)
+        Handle: 0x0017
+        Error: Attribute Not Found (0x0a)
+< ACL Data TX: Handle 68 flags 0x00 dlen 11                     [hci0] 0.689062
+      ATT: Read By Type Request (0x08) len 6
+        Handle range: 0x000a-0x0016
+        Attribute type: Characteristic (0x2803)
+> HCI Event: Number of Completed Packets (0x13) plen 5          [hci0] 0.701502
+        Num handles: 1
+        Handle: 68
+        Count: 1
+> ACL Data RX: Handle 68 flags 0x02 dlen 27                     [hci0] 0.715670
+> ACL Data RX: Handle 68 flags 0x01 dlen 7                      [hci0] 0.716235
+      ATT: Read By Type Response (0x09

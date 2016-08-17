@@ -13,13 +13,20 @@ module.exports = {
         firmware_update_channel: "firmware_update_data_channel",
 		firmware_update_req_channel : "firmware_update_req_channel",
         firmware_update_resp_channel : "firmware_update_resp_channel",
-        file_transfer_packet_size : 20
+        file_transfer_packet_size : 20,
+        firmware_version : 2
     },
     codes : {
         success : 1,
         failure : 2,
         blank : 3,
         new_firmware_available : 4,
-        delete_old_file : 5
+        delete_old_file : 5,
+        get_no_of_packets_received_by_BLEdevice : 6
+    },
+    pb_codes : {
+        success : 1,
+        failure : 2,
+        req_ready_for_ft : 3,
     }
 }

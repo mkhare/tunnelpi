@@ -53,3 +53,13 @@ sockio.on('disconnect', function () {
     //sockio.disconnect();
     console.log('socket disconnected from server side');
 });
+
+module.exports.eventEmitter = eventEmitter;
+
+module.exports.ft_logger = function (sgw, dgw, ll) {
+    var ls = proj_config.set1.uuid;
+    var user = proj_config.set1.email;
+    var log_data = {logsource : ls, email : user,sourcegw : sgw, destgw : dgw, logline : ll};
+    sockio.emit('ft_logdata', log_data);
+    console.log(JSON.stringify(log_data));
+}

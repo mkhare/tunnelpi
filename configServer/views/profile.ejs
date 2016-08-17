@@ -5,9 +5,11 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var socket = io.connect("");
+            console.log("socket on profile : ", io.socket);
+            var username = '<%= user%>'.trim();
+            console.log('username : ' + username);
 
             socket.on('connect', function (data) {
-                var username = $('#username').html();
                 socket.emit('beConnect', {uname: username});
                 socket.on('mongodata', function (mongodata) {
                     console.log("mongodata : " + mongodata);
@@ -49,7 +51,7 @@
                     subscribe_key: data.subscribe_key
                 });
 
-                var username = $('#username').html();
+//                var username = $('#username').html();
 //                console.log("channel name received from server : " + data.channel_name);
 
 //                mb_token: 'pk.eyJ1IjoiYW1pdGNoYWhhcjM4NCIsImEiOiJjaXFsdXBmenAwMDU2ZnBubnV5dG9rY241In0.fhR8Vj-CCDSioBvBNKGnUA',
@@ -159,12 +161,12 @@
 <body>
 <div class="row" id="msg"></div>
 <% include ./partials/header.ejs %>
-<center>
-    <h2 class="ui header">
-        <img src="/images/avatar/user1.png" class="ui circular image">
-        <div id="username"><%= user %></div>
-    </h2>
-</center>
+<!--<center>-->
+    <!--<h2 class="ui header">-->
+        <!--<img src="/images/avatar/user1.png" class="ui circular image">-->
+        <!--<div id="username"></div>-->
+    <!--</h2>-->
+<!--</center>-->
 
 <div class="ui padded equal height stackable grid">
     <div class="eight wide center aligned column">

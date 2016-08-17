@@ -2,6 +2,7 @@ module.exports = function () {
     var pubnub_base = require('./pubnub_base');
     var sudo = require('sudo');
     require('./FT_to_BLE')();
+    pubnub_base.resp_for_get_ready();
 
     var options = {
         cachePassword: true,
