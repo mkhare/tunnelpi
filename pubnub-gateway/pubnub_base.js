@@ -130,6 +130,25 @@ module.exports.publish_location_using_ip_eurekapi = function () {
     });
 }
 
+module.exports.publish_location_using_ip_ipinfoAPI = function () {
+    http.get('http://ipinfo.io', function (res) {
+        res.on('data', function (data) {
+            if (typeof data !== 'undefined' && data) {
+                // console.log('gloc : ' + data);
+                data = JSON.parse(data);
+                console.log("ip : " + data.ip);
+                var gloc = data["loc"].toString().split(",");
+                var latitude = parseFloat(gloc[0]);
+                var longitude = parseFloat(gloc[1]);
+                var loc = [latitude, longitude];
+                module.exports.publish_location(loc);
+            } else {
+                console.log("unable to find geolocation");
+            }
+        });
+    })
+}
+
 module.exports.publish_location = function (loc) {
     var gwuuid = JSON.stringify(proj_config.set1.uuid);
     var point = {

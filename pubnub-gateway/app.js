@@ -24,7 +24,8 @@ var cred = {
 
 // pubnub_base.publish_location(gwlocation);
 // pubnub_base.publish_location_using_ip();
-pubnub_base.publish_location_using_ip_eurekapi();
+// pubnub_base.publish_location_using_ip_eurekapi();
+pubnub_base.publish_location_using_ip_ipinfoAPI();
 
 sockio.on('connect', function (data) {
     console.log('socket connected to server');
