@@ -22,7 +22,12 @@ module.exports = function (app, eventEmitter, io) {
                     return;
                 }
                 socket.emit('old_log_data', {logs : mongodata});
+            });
+            
+            eventEmitter.on('beft_logdata', function (ft_logdata) {
+                socket.emit('beft_logdata', ft_logdata);
             })
+            
         });
 
         socket.on('disconnect', function (data) {
@@ -73,10 +78,13 @@ module.exports = function (app, eventEmitter, io) {
                     if (err || dgw_info.length > 1) {
                         console.log('error : destination gateway ' + dgw + ' not online.');
                     } else {
-                        var sock = io.sockets.sockets[sgw_info[0].sock_id];
-                        var ft_comm = new FT_Comm(sgw_info[0], dgw_info[0], sock, io);
-                        ft_comm.file_transfer_init();
-                        // file_transfer_init(sgw_info[0], dgw_info[0]);
+                        var temp = sgw_info[0];
+                        if(typeof temp !== undefined && temp) {
+                            var sock = io.sockets.sockets[sgw_info[0].sock_id];
+                            var ft_comm = new FT_Comm(sgw_info[0], dgw_info[0], sock, io);
+                            ft_comm.file_transfer_init();
+                            // file_transfer_init(sgw_info[0], dgw_info[0]);
+                        }
                     }
                 })
             }

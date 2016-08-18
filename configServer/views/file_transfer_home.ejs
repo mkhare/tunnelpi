@@ -9,19 +9,29 @@
             console.log("socket on ft : ", io);
 
             var username = '<%= user%>'.trim();
-            $('#progress_log_div').css('visibility', 'hidden');
+            //$('#progress_log_div').css('visibility', 'hidden');
             $('#ft_init_form').submit(processForm);
 
             socket.on('connect', function (data) {
                 socket.emit('beFTconnect', {user : username});
                 socket.on('old_log_data', function (data) {
+                    $('#progress_log_ta').val('');
                     var data_string = "";
                     data.logs.forEach(function (item) {
-                        data_string = data_string + item.logline + '\n';
+//                        data_string = data_string + item.logline + '\n';
+                        data_string = data_string + "logsource : " + item.logsource + "  sourcegw : " + item.sourcegw + "  destgw : " + item.destgw + "  logline : " + item.logline + '\n';
                     })
                     $('#progress_log_ta').val(function (_, val) {
                         return val + data_string;
                     })
+                    document.getElementById("progress_log_ta").scrollTop = document.getElementById("progress_log_ta").scrollHeight;
+                })
+                socket.on('beft_logdata', function (item) {
+                    var data_string = "logsource : " + item.logsource + "  sourcegw : " + item.sourcegw + "  destgw : " + item.destgw + "  logline : " + item.logline + '\n';
+                    $('#progress_log_ta').val(function (_, val) {
+                        return val + data_string;
+                    })
+                    document.getElementById("progress_log_ta").scrollTop = document.getElementById("progress_log_ta").scrollHeight;
                 })
             });
 
@@ -38,7 +48,7 @@
                     contentType: 'application/x-www-form-urlencoded',
                     data: $(this).serialize(),
                     success: function (data, textStatus, jQxhr) {
-                        $('#progress_log_div').css('visibility', 'visible');
+                        //$('#progress_log_div').css('visibility', 'visible');
                         if(textStatus == "success") {
                             $('#progress_log_ta').val(function (_, val) {
                                 return val + "Firmware upgrade process started \n";

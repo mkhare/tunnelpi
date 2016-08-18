@@ -107,6 +107,7 @@ var sock_connected_to_gw = function (socket, creds) {
             if(err){
                 console.log("error : saving log to db : ", data);
             }
+            eventEmitter.emit('beft_logdata', data);
         })
     })
 }

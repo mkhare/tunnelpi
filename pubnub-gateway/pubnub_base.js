@@ -67,7 +67,7 @@ module.exports.send_firmware_file_to_ble_devices = function (data_characteristic
         }
         var buf = new Buffer(data);
         var version = parseInt(buf.toString());
-        console.log("current version of firmware on device : " + version);
+        app.ft_logger(latest_firmware_info.source_uuid, latest_firmware_info.dest_uuid, "current version of firmware on peripheral " + peripheral_id + " : " + version);
         if (latest_firmware_info != "" && latest_firmware_info.version > version) {
             var control_code = proj_config.codes.delete_old_file;
 
@@ -80,6 +80,8 @@ module.exports.send_firmware_file_to_ble_devices = function (data_characteristic
                 }
             });
 
+            app.ft_logger(latest_firmware_info.source_uuid, latest_firmware_info.dest_uuid, "firmware update process started on " + peripheral_id);
+
             var channel_name = proj_config.set1.firmware_update_channel + "_" + proj_config.set1.uuid + '_peripheralid_' + peripheral_id;
             // generic_pubnub_subscribe(channel_name, firmware_data_recvd);
 
@@ -87,6 +89,11 @@ module.exports.send_firmware_file_to_ble_devices = function (data_characteristic
                 channel: channel_name,
                 callback: firmware_data_recvd
             });
+            //
+            // pubnub.subscribe({
+            //     channel : proj_config.set1.firmware_update_req_channel,
+            //     callback : firmware_update_finished
+            // })
 
             var logfile_name = __dirname + "/public/firmwarelog.txt";
             delete_file(logfile_name);	//deleted old log file
@@ -110,37 +117,45 @@ module.exports.send_firmware_file_to_ble_devices = function (data_characteristic
             }
 
             var no_of_packets_received = 0;
-            var no_of_packets = latest_firmware_info.no_of_packets;
+            var no_of_packets_sent = latest_firmware_info.no_of_packets;
 
             function firmware_data_recvd(data) {
                 var buf = new Buffer(data);
-                console.log("firmware data received : size : " + buf.length + " data : " + buf.toString());
+                console.log("firmware data received : " + no_of_packets_received + " : size : " + buf.length + " data : " + buf.toString());
                 data_characteristic.write(buf);
                 no_of_packets_received += 1;
                 console.log("sending data to ble device");
-                if (no_of_packets_received == no_of_packets) {
-                    console.log(no_of_packets + " packets sent to ble device");
-                    check_packets_recvd_by_BLEdevice();
-                } else if (no_of_packets_received > no_of_packets) {
+                if (no_of_packets_received == no_of_packets_sent) {
+                    console.log(no_of_packets_sent + " packets sent to ble device");
+                    fu_packets_characteristic.read(function (err, data) {
+                        var buf = new Buffer(data.toString());
+                        var packets_recvd_by_BLEdevice = parseInt(buf.toString());
+                        if (packets_recvd_by_BLEdevice == no_of_packets_sent) {
+                            app.ft_logger(latest_firmware_info.source_uuid, latest_firmware_info.dest_uuid, "firmware transferred to ble device successfully : no of packets : " + packets_recvd_by_BLEdevice)
+                            var version = latest_firmware_info.version;
+                            var version_data = new Buffer(version.toString());
+                            version_characteristic.write(version_data, false, function (err) {
+                                if(err) {
+                                    app.ft_logger(latest_firmware_info.source_uuid, latest_firmware_info.dest_uuid, "failed to update firmware version number on " + peripheral_id);
+                                }
+                                app.ft_logger(latest_firmware_info.source_uuid, latest_firmware_info.dest_uuid, "updated firmware version number on " + peripheral_id);
+                                app.ft_logger(latest_firmware_info.source_uuid, latest_firmware_info.dest_uuid, "firmware updated successfully on " + peripheral_id);
+                            })
+                        } else {
+                            app.ft_logger(latest_firmware_info.source_uuid, latest_firmware_info.dest_uuid, "error : correct data not received");
+                        }
+                    })
+                    no_of_packets_received = 0;
+                } else if (no_of_packets_received > no_of_packets_sent) {
                     console.log(no_of_packets_received + " packets (extra) sent to ble device : error");
+                    no_of_packets_received = 0;
                 }
-            }
 
-            function check_packets_recvd_by_BLEdevice(){
-                fu_packets_characteristic.read(function (err, data) {
-                    var buf = new Buffer(data.toString());
-                    var packets_recvd_by_BLEdevice = parseInt(buf.toString());
-                    if(packets_recvd_by_BLEdevice == no_of_packets_received){
-                        app.ft_logger(latest_firmware_info.source_uuid, latest_firmware_info.dest_uuid, "firmware transferred to ble device successfully : no of packets : " + packets_recvd_by_BLEdevice)
-                        var version = latest_firmware_info.version;
-                        var version_data = new Buffer(version.toString());
-                        version_characteristic.write(version_data, false, function (err) {
-                            app.ft_logger(latest_firmware_info.source_uuid, latest_firmware_info.dest_uuid, "failed to update version on " + peripheral_id);
-                        })
-                    } else {
-                        app.ft_logger(latest_firmware_info.source_uuid, latest_firmware_info.dest_uuid, "error : correct data not received");
-                    }
-                })
+
+                // function check_packets_recvd_by_BLEdevice() {
+                //
+                // }
+
             }
 
             //====================================================================================================================
@@ -168,8 +183,8 @@ module.exports.send_firmware_file_to_ble_devices = function (data_characteristic
             app.ft_logger(latest_firmware_info.source_uuid, latest_firmware_info.dest_uuid, "ready to receive firmware for peripheral : " + peripheral_id);
 
         } else {
-            console.log("firmware already up-to-date");
-            app.ft_logger(latest_firmware_info.source_uuid, latest_firmware_info.dest_uuid, "firmware already up-to-date");
+            // console.log("firmware already up-to-date");
+            app.ft_logger(latest_firmware_info.source_uuid, latest_firmware_info.dest_uuid, "firmware already up-to-date on peripheral : " + peripheral_id);
         }
     })
 }
@@ -267,6 +282,10 @@ module.exports.send_firmware_file = function (filepath, gw_uuid, channel_name) {
                     generic_pubnub_publish(channel_name, chunk);
                     no_of_chunks_sent += 1;
                 }
+                
+                // var update_finished = {"code" : proj_config.pb_codes.update_finished, "channel_name" : channel_name};
+                // generic_pubnub_publish(proj_config.codes.firmware_update_req_channel, update_finished);
+                
             })
             // readstream.on('data', function (chunk) {
             //     var channel_name = proj_config.set1.firmware_update_channel + "_" + gw_uuid;

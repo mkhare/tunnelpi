@@ -7,7 +7,7 @@ module.exports = {
         publish_key: 'pub-c-b032ad96-906e-4a98-94b9-4b5e76ccd4e2',
         subscribe_key: 'sub-c-c90fa6ea-38a2-11e6-bbf4-0619f8945a4f',
         channel_name: 'hello',
-        eurekapi_key: 'SAKA79D34BK8N3JCJ8DZ',
+        eurekapi_key: 'SAK43B4A9ET54EVDVP3Z',
         serverport: 9999,
         firmware_file_path: __dirname + "/public/ff",
         firmware_update_channel: "firmware_update_data_channel",
@@ -27,6 +27,8 @@ module.exports = {
     pb_codes : {
         success : 1,
         failure : 2,
-        req_ready_for_ft : 3,
+        blank : 3,
+        req_ready_for_ft : 4,
+        update_finished : 5
     }
 }
