@@ -10,7 +10,8 @@ var session = require('express-session');
 var events = require('events');
 var cons = require('consolidate');
 var proj_config = require('./proj_config');
-var eventEmitter = new events.EventEmitter();
+var globals = require('./globals');
+var eventEmitter = globals.eventEmitter;
 var socket_manager = require('./routes/socket_manager');
 
 var pubnub = require("pubnub")({
@@ -74,6 +75,8 @@ require('./routes/signup')(app, passport);
 require('./routes/profile')(app);
 require('./routes/file_transfer')(app, eventEmitter, io);
 var loginModules = require('./routes/loginModules');
+
+module.exports.eventEmitter = eventEmitter;
 
 app.get('/', function (req, res) {
     loginModules.logincheck(req.session, res, null);

@@ -7,6 +7,7 @@ var gw_sockets = require('../model/gw_sockets');
 var FT_Comm = require('./file_transfer_comm');
 var socket_manager = require('./socket_manager');
 var ft_log = require('../model/ft_log');
+var logger = require('./logger');
 
 module.exports = function (app, eventEmitter, io) {
     var ftnsp = io.of("/ftnsp");
@@ -16,35 +17,37 @@ module.exports = function (app, eventEmitter, io) {
 
         socket.on('beFTconnect', function (data) {
             socket_manager.add_browser_socket_to_db(socket, data.user);
-            ft_log.find({email : data.user}, function (err, mongodata) {
-                if(err){
+            ft_log.find({email: data.user}, function (err, mongodata) {
+                if (err) {
                     console.log("error finding log data");
                     return;
                 }
-                socket.emit('old_log_data', {logs : mongodata});
+                socket.emit('old_log_data', {logs: mongodata});
             });
-            
+
             eventEmitter.on('beft_logdata', function (ft_logdata) {
-                socket.emit('beft_logdata', ft_logdata);
+                if (data.user == ft_logdata.email) {
+                    socket.emit('beft_logdata', ft_logdata);
+                }
             })
-            
+
         });
 
         socket.on('disconnect', function (data) {
             socket_manager.remove_browser_socket_from_db(socket);
         });
     })
-    
+
     app.get('/file_transfer_home', function (req, res) {
         if (req.session.email) {
-            res.render('file_transfer_home.ejs', {user : req.session.email});
+            res.render('file_transfer_home.ejs', {user: req.session.email});
         } else {
             res.render('index', {title: "Login or Signup"});
         }
     })
 
     app.get('/file_transfer_init', function (req, res) {
-        if(req.session.email){
+        if (req.session.email) {
             res.render('file_transfer_home.ejs', {});
         } else {
             res.render('index', {title: "Login or Signup"});
@@ -59,9 +62,9 @@ module.exports = function (app, eventEmitter, io) {
             var arr = destgw.split(',');
             for (var i in arr) {
                 arr[i] = arr[i].trim();
-                file_transfer_check(sourcegw, arr[i]);
+                file_transfer_check(sourcegw, arr[i], req.session.email);
             }
-            
+
             // eventEmitter.emit('ft_send_init_cmd', {sgw : sourcegw, dgw : arr});
             // loginModules.logincheck(req.session, res, null);
         } else {
@@ -69,7 +72,7 @@ module.exports = function (app, eventEmitter, io) {
         }
     })
 
-    function file_transfer_check(sgw, dgw) {
+    function file_transfer_check(sgw, dgw, email) {
         gw_sockets.find({uuid: sgw}, function (err, sgw_info) {
             if (err || sgw_info.length > 1) {
                 console.log('error : source gateway not online.');
@@ -78,12 +81,15 @@ module.exports = function (app, eventEmitter, io) {
                     if (err || dgw_info.length > 1) {
                         console.log('error : destination gateway ' + dgw + ' not online.');
                     } else {
-                        var temp = sgw_info[0];
-                        if(typeof temp !== undefined && temp) {
+                        var temp1 = sgw_info[0];
+                        var temp2 = dgw_info[0];
+                        if (typeof temp1 !== 'undefined' && temp1 && typeof temp2 !== 'undefined' && temp2) {
                             var sock = io.sockets.sockets[sgw_info[0].sock_id];
                             var ft_comm = new FT_Comm(sgw_info[0], dgw_info[0], sock, io);
                             ft_comm.file_transfer_init();
                             // file_transfer_init(sgw_info[0], dgw_info[0]);
+                        } else {
+                            logger.ft_logger(email, sgw, dgw, "unable to update firmware, please try again");
                         }
                     }
                 })

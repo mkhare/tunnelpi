@@ -120,10 +120,12 @@ module.exports.send_firmware_file_to_ble_devices = function (data_characteristic
             var no_of_packets_sent = latest_firmware_info.no_of_packets;
 
             function firmware_data_recvd(data) {
-                var buf = new Buffer(data);
-                console.log("firmware data received : " + no_of_packets_received + " : size : " + buf.length + " data : " + buf.toString());
-                data_characteristic.write(buf);
-                no_of_packets_received += 1;
+                var buf = new Buffer(data.payload);
+                console.log("sequence no : " + data.seq_no + " : size : " + buf.length + " data : " + buf.toString());
+                if(data.seq_no == (no_of_packets_received + 1)) {
+                    data_characteristic.write(buf);
+                    no_of_packets_received += 1;
+                }
                 console.log("sending data to ble device");
                 if (no_of_packets_received == no_of_packets_sent) {
                     console.log(no_of_packets_sent + " packets sent to ble device");
@@ -273,13 +275,16 @@ module.exports.send_firmware_file = function (filepath, gw_uuid, channel_name) {
             // })
             var chunk_size = parseInt(proj_config.set1.file_transfer_packet_size, 10);
             var no_of_chunks_sent = 0;
+            var packet_no = 0;
             var readstream = fs.createReadStream(filepath, {'bufferSize': chunk_size});
             readstream.on('readable', function () {
                 var chunk;
                 while (null != (chunk = readstream.read(chunk_size))) {
                     console.log("chunk size : " + chunk.length);
                     // var channel_name = proj_config.set1.firmware_update_channel + "_" + gw_uuid;
-                    generic_pubnub_publish(channel_name, chunk);
+                    packet_no += 1;
+                    var data_to_send = {"seq_no" : packet_no, "payload" : chunk};
+                    generic_pubnub_publish(channel_name, data_to_send);
                     no_of_chunks_sent += 1;
                 }
                 
@@ -427,6 +432,25 @@ module.exports.publish_location_using_ip_eurekapi = function () {
             module.exports.publish_location(loc);
         });
     });
+}
+
+module.exports.publish_location_using_ip_ipinfoAPI = function () {
+    http.get('http://ipinfo.io', function (res) {
+        res.on('data', function (data) {
+            if (typeof data !== 'undefined' && data) {
+                // console.log('gloc : ' + data);
+                data = JSON.parse(data);
+                console.log("ip : " + data.ip);
+                var gloc = data["loc"].toString().split(",");
+                var latitude = parseFloat(gloc[0]);
+                var longitude = parseFloat(gloc[1]);
+                var loc = [latitude, longitude];
+                module.exports.publish_location(loc);
+            } else {
+                console.log("unable to find geolocation");
+            }
+        });
+    })
 }
 
 module.exports.publish_location = function (loc) {
