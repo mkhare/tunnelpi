@@ -1,46 +1,9 @@
-// var LocalStrategy = require('passport-local').Strategy;
-// var User = require('../model/User');
-//
-// module.exports = function(passport) {
-//     // used to serialize the user for the session
-//     passport.serializeUser(function(user, done) {
-//         done(null, user.id);
-//     });
-//
-//     // used to deserialize the user
-//     passport.deserializeUser(function(id, done) {
-//         User.findById(id, function(err, user) {
-//             done(err, user);
-//         });
-//     });
-//
-//     passport.use(new LocalStrategy(
-//         function (username, password, done) {
-//             console.log("authenticating the user");
-//             User.findOne({'local.username': username}, function (err, user) {
-//                 if (err)
-//                     return done(err, { message : 'Unknown Error' });
-//
-//                 if (!user)
-//                     return done(null, false, { message : 'User not found' });
-//                     user.verify
-//                 if (!user.validPassword(password))
-//                     return done(null, false, { message : 'Password Incorrect' });
-//
-//                 return done(null, user);
-//             });
-//         }
-//     ));
-// };
-
-
+var LocalStrategy   = require('passport-local').Strategy;
+var User = require('../model/user');
+var Usergws = require('../model/usergws');
 
 module.exports = function(app, passport, eventEmitter) {
-    var LocalStrategy   = require('passport-local').Strategy;
-    var mongoose = require('mongoose');
-    var User = mongoose.model('User');
-    var Usergws = mongoose.model('Usergws');
-    // var User            = require('../model/user');
+    
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
         done(null, user.id);

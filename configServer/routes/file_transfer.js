@@ -25,10 +25,15 @@ module.exports = function (app, eventEmitter, io) {
                 socket.emit('old_log_data', {logs: mongodata});
             });
 
-            eventEmitter.on('beft_logdata', function (ft_logdata) {
+            var beft_logdata_event_listener = function (ft_logdata) {
                 if (data.user == ft_logdata.email) {
                     socket.emit('beft_logdata', ft_logdata);
                 }
+            };
+            eventEmitter.on('beft_logdata', beft_logdata_event_listener);
+
+            socket.on('disconnect', function () {
+                eventEmitter.removeListener('beft_logdata', beft_logdata_event_listener);
             })
 
         });
@@ -36,7 +41,7 @@ module.exports = function (app, eventEmitter, io) {
         socket.on('disconnect', function (data) {
             socket_manager.remove_browser_socket_from_db(socket);
         });
-    })
+    });
 
     app.get('/file_transfer_home', function (req, res) {
         if (req.session.email) {

@@ -4,20 +4,28 @@
     <% include ./partials/head.ejs %>
     <script type="text/javascript">
         $(document).ready(function () {
-            var socket = io.connect("");
-            console.log("socket on profile : ", io.socket);
-            var username = '<%= user%>'.trim();
+
+            var username = '<%= user %>'.trim();
             console.log('username : ' + username);
+
+            var socket = io.connect("/profile_nsp");
+            console.log("socket on profile : ", io.socket);
 
             socket.on('connect', function (data) {
                 socket.emit('beConnect', {uname: username});
                 socket.on('mongodata', function (mongodata) {
                     console.log("mongodata : " + mongodata);
                     mongodata.data.forEach(function (item, index, array) {
-                        var divid = item.uuid + item.subscribeKey + item.publishKey + item.channelName + item.email;
+                        var divid = item.uuid + item.subscribe_key + item.publish_key + item.channel_name + item.email;
                         divid = divid.split('').reverse().join('').split('@').join('').split('.').join('');
                         $("#" + divid).addClass('user-online');
                     })
+                });
+                socket.on("online_peripheral_data", function (peripherals) {
+                    console.log("be_online peripheral data : ", peripherals);
+                    peripherals.forEach(function (tagid) {
+                        $("#" + tagid).addClass('user-online');
+                    });
                 })
             })
 
@@ -26,6 +34,18 @@
                 var ele = data.tagid.toString();
                 console.log(ele);
                 $("#" + ele).addClass('user-online');
+                socket.on("be_peripheral_online", function (peripheral_data) {
+                    var ele = peripheral_data.tagid.toString();
+                    console.log("event : peripheral offline : " + peripheral_data.peripheral_uuid);
+                    $("#" + ele).addClass('user-online');
+                });
+
+                socket.on("be_peripheral_offline", function (peripheral_data) {
+                    var ele = peripheral_data.tagid.toString();
+                    console.log("event : peripheral offline : " + peripheral_data.peripheral_uuid);
+                    $("#" + ele).removeClass('user-online');
+                });
+
             });
 
             socket.on('beUserOffline', function (data) {
@@ -33,6 +53,7 @@
                 var ele = data.tagid.toString();
                 console.log(ele);
                 $("#" + ele).removeClass('user-online');
+
                 //can't  change the link color when the gateway is offline
                 //since the colour has to be changed, when the gateway will be online again
 //                var ele = ele + 'url';
@@ -69,7 +90,7 @@
                 function url_received(urldata) {
 //                    urldata = JSON.parse(urldata);
                     clearInterval(urlreq_timer);
-                    if(url_not_recvd){
+                    if (url_not_recvd) {
                         console.log("Received url : " + JSON.stringify(urldata));
                         var gwurlid = '#' + urldata.gwurlid;
                         var gwurl = urldata.gwurl;
@@ -139,7 +160,8 @@
 
         ul {
             display: table;
-            margin: 0 auto;
+            margin: auto;
+            text-align: left;
         }
 
         .list {
@@ -162,10 +184,10 @@
 <div class="row" id="msg"></div>
 <% include ./partials/header.ejs %>
 <!--<center>-->
-    <!--<h2 class="ui header">-->
-        <!--<img src="/images/avatar/user1.png" class="ui circular image">-->
-        <!--<div id="username"></div>-->
-    <!--</h2>-->
+<!--<h2 class="ui header">-->
+<!--<img src="/images/avatar/user1.png" class="ui circular image">-->
+<!--<div id="username"></div>-->
+<!--</h2>-->
 <!--</center>-->
 
 <div class="ui padded equal height stackable grid">
@@ -180,7 +202,7 @@
                 lastChannel = mongoData[0].channelName;
 
             mongoData.forEach(function (item, index, array) {
-                var imgid = item.uuid + item.subscribeKey + item.publishKey + item.channelName + item.email;
+                var imgid = item.uuid + item.subscribe_key + item.publish_key + item.channel_name + item.email;
                 imgid = imgid.toString().split('').reverse().join('');
                 imgid = imgid.split('@').join('');
                 imgid = imgid.split('.').join('');
@@ -192,30 +214,19 @@
             <li><h4>Channel Name : <%= item.channelName %></h4>
                 <ul>
                     <li>
-                        <h4 class="ui header" id="<%= urlid %>">Gateway UUID : <%= item.uuid %> &nbsp;
+                        <h4 class="ui header" style="display: inline-block;" id="<%= urlid %>">Gateway UUID : <%= item.uuid %> &nbsp;
                             <div id="<%= imgid %>" class="dot"></div>
                         </h4>
-                        <ul>
-                            <%
-                            item.devices.forEach(function(device, ind, arr){
-//                        console.log("device data : %j", device);
-                            %>
-                            <li><h5><%= device.devuuid %></h5></li>
-                            <% }); %>
-                        </ul>
+                        <div id="gw<%= item.uuid %>"></div>
                         <br>
                     </li>
                     <% }
                     else if (item.channelName == lastChannel) { %>
                     <li>
-                        <h4 class="ui header" id="<%= urlid %>">Gateway UUID : <%= item.uuid %> &nbsp;
+                        <h4 class="ui header" style="display: inline-block;" id="<%= urlid %>">Gateway UUID : <%= item.uuid %> &nbsp;
                             <div id="<%= imgid %>" class="dot"></div>
                         </h4>
-                        <ul>
-                            <% item.devices.forEach(function(device, ind, arr){ %>
-                            <li><h5><%= device.devuuid %></h5></li>
-                            <% }); %>
-                        </ul>
+                        <div id="gw<%= item.uuid %>"></div>
                         <br>
                     </li>
                     <% }
@@ -228,15 +239,10 @@
             <li><h4> Channel Name : <%= item.channelName %></h4>
                 <ul>
                     <li>
-                        <h4 class="ui header" id="<%= urlid %>">Gateway UUID : <%= item.uuid %> &nbsp;
+                        <h4 class="ui header" style="display: inline-block;" id="<%= urlid %>">Gateway UUID : <%= item.uuid %> &nbsp;
                             <div id="<%= imgid %>" class="dot"></div>
                         </h4>
-                        <ul>
-                            <% item.devices.forEach(function(device, ind, arr){
-                            %>
-                            <li><h5><%= device.devuuid %></h5></li>
-                            <% }); %>
-                        </ul>
+                        <div id="gw<%= item.uuid %>"></div>
                         <br>
                     </li>
                     <% }
@@ -260,6 +266,62 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+//    setTimeout(function () {
+
+        function build_tagid(peripheral_data){
+            var tagid = peripheral_data.peripheral_uuid + peripheral_data.channel_name + peripheral_data.gw_uuid + peripheral_data.email;
+            tagid = tagid.toString().split('').reverse().join('');
+            tagid = tagid.split('@').join('');
+            tagid = tagid.split('.').join('');
+            return tagid;
+        }
+
+        var username = '<%= user %>'.trim();
+        $.ajax({
+            url: 'fetch_peripherals',
+            dataType: 'json',
+            type: 'GET',
+            data: {"email": username},
+            success: function (data, textStatus, jQxhr) {
+                //$('#progress_log_div').css('visibility', 'visible');
+                if (textStatus == "success") {
+                    console.log("data of ajax req : ", data);
+                    var html_data = "<ul>";
+                    var last_gw_uuid = -1;
+                    data.forEach(function (item) {
+                        if (last_gw_uuid == -1) {
+                            last_gw_uuid = item.gw_uuid;
+                        } else if (last_gw_uuid != item.gw_uuid) {
+//                                var $id = '#' + last_gw_uuid;
+                            html_data += "</ul>";
+                            console.log("peripheral html data : " + html_data);
+                            var $id = '#gw' + last_gw_uuid;
+                            $($id).html(html_data);
+                            html_data = "<ul>"
+                            last_gw_uuid = item.gw_uuid;
+                        }
+                        var tagid = build_tagid(item);
+                        html_data += "<li><h5>Peripheral -> " + item.peripheral_addr + "&nbsp;<div style='visibility: hidden' id=" + tagid + " class='dot'></div></h5></li>";
+                    });
+                    if (html_data != "<ul>") {
+                        html_data += "</ul>";
+                        console.log("peripheral html data : " + html_data);
+                        var $id = '#gw' + last_gw_uuid;
+//                        $($id).val(function (_, val) {
+//                            return val + html_data;
+//                        });
+                        $($id).html(html_data);
+                    }
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+//    }, 5000)
+</script>
 
 </body>
 </html>

@@ -16,7 +16,4 @@ FT_Comm.prototype.file_transfer_init = function() {
     var data = {sgw: this.sgw_info.uuid, dgw: this.dgw_info.uuid};
     this.sock.emit('ft_init_cmd_frm_server', data);
     console.log("init command sent to gateway");
-    
-    
-    // socket.on()
 }

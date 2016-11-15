@@ -1,5 +1,10 @@
+var loginModules = require('./loginModules');
+
 module.exports = function (app, passport) {
-    var loginModules = require('./loginModules');
+
+    app.get('/', function (req, res) {
+        loginModules.logincheck(req.session, res, null);
+    });
 
     app.post('/login', passport.authenticate('local-login', { failureRedirect : '/', failureFlash : true }), function (req, res) {
         console.log('inside login');
@@ -21,5 +26,13 @@ module.exports = function (app, passport) {
     app.get('/login', function (req, res) {
         loginModules.logincheck(req.session, res, null);
     });
+    
+    app.get('/fetch_peripherals', function (req, res) {
+        loginModules.fetch_peripherals(req, res); 
+    })
+
+    app.get('/fetch_gws', function (req, res) {
+        loginModules.fetch_gws(req, res);
+    })
     
 }

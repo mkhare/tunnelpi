@@ -8,12 +8,12 @@
             var socket = io.connect("/ftnsp");
             console.log("socket on ft : ", io);
 
-            var username = '<%= user%>'.trim();
+            var username = '<%= user %>'.trim();
             //$('#progress_log_div').css('visibility', 'hidden');
             $('#ft_init_form').submit(processForm);
 
             socket.on('connect', function (data) {
-                socket.emit('beFTconnect', {user : username});
+                socket.emit('beFTconnect', {user: username});
                 socket.on('old_log_data', function (data) {
                     $('#progress_log_ta').val('');
                     var data_string = "";
@@ -49,7 +49,7 @@
                     data: $(this).serialize(),
                     success: function (data, textStatus, jQxhr) {
                         //$('#progress_log_div').css('visibility', 'visible');
-                        if(textStatus == "success") {
+                        if (textStatus == "success") {
                             $('#progress_log_ta').val(function (_, val) {
                                 return val + "Firmware upgrade process started \n";
                             })
@@ -62,41 +62,219 @@
 
                 e.preventDefault();
             }
+        });
+
+        $(document).on('change', '.list .master.checkbox', function () {
+            console.log("event : master checkbox checked");
+//            $(this).checkbox({
+            // check all children
+//                onChecked: function () {
+            var $cb = $(this).children('input')[0];
+            if ($cb.checked) {
+                var
+                        $childCheckbox = $(this).closest('.checkbox').siblings('.list').find('.checkbox')
+                        ;
+                $childCheckbox.checkbox('check');
+            } else {
+//                ,
+                // uncheck all children
+//                onUnchecked: function () {
+                var
+                        $childCheckbox = $(this).closest('.checkbox').siblings('.list').find('.checkbox')
+                        ;
+                $childCheckbox.checkbox('uncheck');
+            }
+            //            })
+        })
+        ;
+        $(document).on('change', '.list .child.checkbox', function () {
+//            $(this).checkbox({
+            // Fire on load to set parent value
+//                fireOnInit: true,
+            // Change parent state on each child checkbox change
+//                onChange: function () {
+            var
+                    $listGroup = $(this).closest('.list'),
+                    $parentCheckbox = $listGroup.closest('.item').children('.checkbox'),
+                    $checkbox = $listGroup.find('.checkbox'),
+                    allChecked = true,
+                    allUnchecked = true
+                    ;
+            // check to see if all other siblings are checked or unchecked
+            $checkbox.each(function () {
+                if ($(this).checkbox('is checked')) {
+                    allUnchecked = false;
+                }
+                else {
+                    allChecked = false;
+                }
+            });
+            // set parent checkbox state, but dont trigger its onChange callback
+            if (allChecked) {
+                $parentCheckbox.checkbox('set checked');
+            }
+            else if (allUnchecked) {
+                $parentCheckbox.checkbox('set unchecked');
+            }
+            else {
+                $parentCheckbox.checkbox('set indeterminate');
+            }
+//                }
+//            });
         })
     </script>
+    <style type="text/css">
+        li {
+            display: inline-block;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
 <% include ./partials/header.ejs %>
-<div class="ui one column stackable center aligned grid">
-    <div class="six wide column">
+<div class="ui equal height stackable grid">
+    <div class="eight wide center aligned column">
         <form class="ui form" method='post' action="file_transfer_init" id="ft_init_form">
+            <h3>Source Gateway : </h3>
+            <div class="ui celled relaxed list" id="sgws">
 
-            <div class="field">
-                <label>Source Gateway UUID</label>
-                <div class="ui small input">
-                    <input type="text" placeholder="Enter here ...." name="sourcegw">
-                </div>
             </div>
-            <div class="field">
-                <label>Destination gateway UUID (comma separated UUID's for multiple gateways)</label>
-                <div class="ui small input">
-                    <input type="text" placeholder="Enter here ...." name="destgw">
-                </div>
+            <h3>Destination Gateway : </h3>
+            <div class="ui celled relaxed list" id="gws">
+
             </div>
+            <!--<div class="field">-->
+            <!--<label>Source Gateway UUID</label>-->
+            <!--<div class="ui small input">-->
+            <!--<input type="text" placeholder="Enter here ...." name="sourcegw">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="field">-->
+            <!--<label>Destination gateway UUID (comma separated UUID's for multiple gateways)</label>-->
+            <!--<div class="ui small input">-->
+            <!--<input type="text" placeholder="Enter here ...." name="destgw">-->
+            <!--</div>-->
+            <!--</div>-->
             <button class="ui blue middle aligned submit button" type="submit">Start</button>
         </form>
     </div>
-    <div class="row" id="progress_log_div">
-        <div class="ui segment">
-            <div class="ten wide column">
+    <div class="eight wide center aligned column">
+        <div class="row" id="progress_log_div">
+            <div class="ui segment">
+
                 <div class="field">
                     <label>Progress : </label><br>
-                    <textarea id="progress_log_ta" style="width: 700px; height: 400px"></textarea>
+                    <textarea id="progress_log_ta" style="width: 100%; height: 400px"></textarea>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 </div>
+<script type="text/javascript">
+    //    setTimeout(function () {
+
+    function build_tagid(peripheral_data) {
+        var tagid = peripheral_data.peripheral_uuid + peripheral_data.channel_name + peripheral_data.gw_uuid + peripheral_data.email;
+        tagid = tagid.toString().split('').reverse().join('');
+        tagid = tagid.split('@').join('');
+        tagid = tagid.split('.').join('');
+        return tagid;
+    }
+
+    var username = '<%= user %>'.trim();
+    $.ajax({
+        url: 'fetch_gws',
+        dataType: 'json',
+        type: 'GET',
+        data: {"email": username},
+        success: function (data, textStatus, jQxhr) {
+            //$('#progress_log_div').css('visibility', 'visible');
+            if (textStatus == "success") {
+                console.log("data of ajax req : ", data);
+                var initial_html = "<div class='item'>";
+                var html_data = "";
+                var sgw_html_data = "";
+//                var last_gw_uuid = -1;
+                data.forEach(function (item) {
+//                    if (last_gw_uuid == -1) {
+//                        last_gw_uuid = item.uuid;
+//                    } else if (last_gw_uuid != item.uuid) {
+////                                var $id = '#' + last_gw_uuid;
+//                        html_data += "</ul>";
+//                        console.log("gw html data : " + html_data);
+//                        var $id = '#gws';
+//                        $($id).html(html_data);
+//                        html_data = "<ul>"
+//                        last_gw_uuid = item.uuid;
+//                    }
+                    var tagid = "gw" + item.uuid;
+                    var plistid = "plistgw" + item.uuid;
+                    var cboxid = "cgw" + item.uuid;
+                    var cbox_sgw_id
+                    html_data += "<div class='item'><div class='ui master checkbox'><input type='checkbox' name='gw' value=" + item.uuid + " id=" + cboxid + "><label><h5>Gateway -> " + item.uuid + "&nbsp;<div id=" + tagid + " class='dot'></div></h5></label></div><div class='list' id=" + plistid + "></div></div>";
+                    sgw_html_data += "<div class='item'><div class='ui radio checkbox'><input type='radio' name='sgw' value=" + item.uuid + " id=" + cboxid + "><label><h5>Gateway -> " + item.uuid + "&nbsp;<div id=" + tagid + " class='dot'></div></h5></label></div><div class='list' id=" + plistid + "></div></div>";
+                });
+                if (html_data != "") {
+//                    html_data += "</ul>";
+                    console.log("gw html data : " + html_data);
+                    var $id = '#gws';
+//                        $($id).val(function (_, val) {
+//                            return val + html_data;
+//                        });
+                    $($id).html(html_data);
+                }
+            }
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+
+    $.ajax({
+        url: 'fetch_peripherals',
+        dataType: 'json',
+        type: 'GET',
+        data: {"email": username},
+        success: function (data, textStatus, jQxhr) {
+            //$('#progress_log_div').css('visibility', 'visible');
+            if (textStatus == "success") {
+                console.log("data of ajax req : ", data);
+                var initial_html = "<div class='list'>";
+                var html_data = initial_html;
+                var last_gw_uuid = -1;
+                data.forEach(function (item) {
+                    if (last_gw_uuid == -1) {
+                        last_gw_uuid = item.gw_uuid;
+                    } else if (last_gw_uuid != item.gw_uuid) {
+//                                var $id = '#' + last_gw_uuid;
+                        html_data += "</div>";
+                        console.log("peripheral html data : " + html_data);
+                        var $id = '#plistgw' + last_gw_uuid;
+                        $($id).html(html_data);
+                        html_data = initial_html;
+                        last_gw_uuid = item.gw_uuid;
+                    }
+                    var tagid = build_tagid(item);
+                    html_data += "<div class='item'><div class='ui child checkbox'><input type='checkbox' name='pp' value=" + item.gw_uuid + "_" + item.peripheral_uuid + "><label><h5>Peripheral -> " + item.peripheral_addr + "&nbsp;<div style='visibility: hidden' id=" + tagid + " class='dot'></div></h5></label></div></div>";
+                });
+                if (html_data != initial_html) {
+                    html_data += "</div>";
+                    console.log("peripheral html data : " + html_data);
+                    var $id = '#plistgw' + last_gw_uuid;
+//                        $($id).val(function (_, val) {
+//                            return val + html_data;
+//                        });
+                    $($id).html(html_data);
+                }
+            }
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+    //    }, 5000)
+</script>
 </body>
 </html>

@@ -1,12 +1,15 @@
+var globals = require('./globals');
 var request = require('request');
 var spawn = require('child_process').spawn;
 var rl = require('readline');
 var sudo = require('sudo');
 var proj_config = require('./proj_config');
-var configserver = proj_config.set1.configserver;
-var sockio = require('socket.io-client')(configserver);
+// var configserver = proj_config.set1.configserver;
+// var sockio = require('socket.io-client')(configserver);
+var sockio = globals.sockio;
 var events = require('events');
-var eventEmitter = new events.EventEmitter();
+// var eventEmitter = new events.EventEmitter();
+var eventEmitter = globals.eventEmitter;
 var pubnub_base = require('./pubnub_base');
 var gw_util = require('./gw_util');
 require('./gateway-specific')();
@@ -41,6 +44,23 @@ sockio.on('connect', function (data) {
     // });
 
     sockio.emit('creds', cred);
+    eventEmitter.emit('server_connected_to_gw');
+
+    // eventEmitter.on("peripheral_disconnected", function (peripheral_data) {
+    //     peripheral_data.email = cred.email;
+    //     peripheral_data.gw_uuid = cred.uuid;
+    //     peripheral_data.channel_name = cred.channel_name;
+    //     sockio.emit("peripheral_disconnected", peripheral_data);
+    //     console.log("event : peripheral offline : ", peripheral_data.peripheral_uuid);
+    // })
+    
+    // eventEmitter.on("upload_peripheral_data", function (peripheral_data) {
+    //     peripheral_data.email = cred.email;
+    //     peripheral_data.gw_uuid = cred.uuid;
+    //     peripheral_data.channel_name = cred.channel_name;
+    //     sockio.emit("upload_peripheral_data", peripheral_data);
+    //     console.log("uploading peripheral data : ", peripheral_data);
+    // })
 });
 
 sockio.on('ft_init_cmd_frm_server', function (data) {

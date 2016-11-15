@@ -203,7 +203,8 @@ module.exports.get_ready_for_firmware_update = function (filepath, gw_uuid) {
         source_uuid: proj_config.set1.uuid,
         dest_uuid: gw_uuid,
         no_of_packets: no_of_chunks,
-        channel_name: proj_config.codes.blank
+        channel_name: proj_config.codes.blank,
+        peripheral_uuid : proj_config.set1.all_peripherals
     }
 
     // if (!one_time_stuff_done) {
@@ -245,7 +246,7 @@ module.exports.resp_for_get_ready = function () {
             // console.log("ready to receive firmware");
             console.log("new firmware version available");
             app.ft_logger(data.source_uuid, data.dest_uuid, "firmware update command : version - " + data.version);
-            app.eventEmitter.emit('new_firmware_available');
+            app.eventEmitter.emit('new_firmware_available', data.peripheral_uuid);
             // data.reply = proj_config.codes.success;
             // generic_pubnub_publish(proj_config.set1.firmware_update_resp_channel, data);
         }

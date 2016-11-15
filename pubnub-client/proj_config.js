@@ -14,7 +14,10 @@ module.exports = {
 		firmware_update_req_channel : "firmware_update_req_channel",
         firmware_update_resp_channel : "firmware_update_resp_channel",
         file_transfer_packet_size : 20,
-        firmware_version : 2
+        firmware_version : 2,
+        max_BLE_connections : 4,
+        all_peripherals : "-1",
+        max_simultaneous_conns : 3
     },
     codes : {
         success : 1,
@@ -30,5 +33,12 @@ module.exports = {
         blank : 3,
         req_ready_for_ft : 4,
         update_finished : 5
+    },
+    ble_values : {
+        FT_SERVICE_UUID : '12ab',
+        FT_DATA_CHARACTERISTIC_UUID : '34cd',
+        FT_CONTROL_CHARACTERISTIC_UUID : '56ef',
+        FT_CONTROL_FVERSION_UUID : '78ab',
+        FT_CONTROL_FUPACKETS_RECV_STATUS_UUID : '21ab'
     }
 }
