@@ -89,6 +89,8 @@ require('./config/passport')(app, passport, eventEmitter);
 require('./routes/signup')(app, passport);
 require('./routes/profile')(app, io);
 require('./routes/file_transfer')(app, eventEmitter, io);
+require('./routes/network_monitoring')(app, io);
+require('./routes/port_monitoring')(app, io);
 var loginModules = require('./routes/loginModules');
 
 module.exports.eventEmitter = eventEmitter;

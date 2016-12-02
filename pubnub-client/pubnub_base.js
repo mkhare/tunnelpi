@@ -10,6 +10,7 @@ var pubnub = require("pubnub")({
     publish_key: proj_config.set1.publish_key,
     subscribe_key: proj_config.set1.subscribe_key
 });
+module.exports.pubnub = pubnub;
 var channel = proj_config.set1.channel_name;
 
 var one_time_stuff_done = false;

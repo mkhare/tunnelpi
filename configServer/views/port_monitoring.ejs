@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Port Monitoring</title>
+    <% include ./partials/head.ejs %>
+</head>
+<body>
+<% include ./partials/header.ejs %>
+<div class="ui grid">
+    <div class="ui four wide column">
+        <div class="ui raised container segment">
+            <center><h2>Open Ports</h2></center>
+            <ul>
+                <%
+                var last_gw = '';
+                console.log(open_ports_data);
+                if(open_ports_data && open_ports_data[0]) {
+                    last_gw = open_ports_data[0].uuid;
+
+                open_ports_data.forEach(function (gw_data, index, array) { %>
+
+                <li><h4>Gateway UUID: <%= gw_data.uuid %></h4>
+                    <ul>
+                        <%
+                        gw_data.open_ports.forEach(function(open_port){
+                        %>
+                        <li><%= open_port %></li>
+                        <%
+                        })
+                        %>
+                    </ul>
+                    <%
+                        if (gw_data.uuid != last_gw) {
+                            last_gw = item.uuid;
+                        }
+                    })} %>
+            </ul>
+
+            <!--<div class="row" id="progress_log_div">-->
+            <!--<div class="ui segment">-->
+            <!--<div class="field">-->
+            <!--<label>Progress : </label><br>-->
+            <!--<textarea id="progress_log_ta" style="width: 100%; height: 400px"></textarea>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+</body>
+</html>

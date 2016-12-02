@@ -72,16 +72,16 @@
             var $cb = $(this).children('input')[0];
             if ($cb.checked) {
                 var
-                        $childCheckbox = $(this).closest('.checkbox').siblings('.list').find('.checkbox')
-                        ;
+                    $childCheckbox = $(this).closest('.checkbox').siblings('.list').find('.checkbox')
+                    ;
                 $childCheckbox.checkbox('check');
             } else {
 //                ,
                 // uncheck all children
 //                onUnchecked: function () {
                 var
-                        $childCheckbox = $(this).closest('.checkbox').siblings('.list').find('.checkbox')
-                        ;
+                    $childCheckbox = $(this).closest('.checkbox').siblings('.list').find('.checkbox')
+                    ;
                 $childCheckbox.checkbox('uncheck');
             }
             //            })
@@ -94,12 +94,12 @@
             // Change parent state on each child checkbox change
 //                onChange: function () {
             var
-                    $listGroup = $(this).closest('.list'),
-                    $parentCheckbox = $listGroup.closest('.item').children('.checkbox'),
-                    $checkbox = $listGroup.find('.checkbox'),
-                    allChecked = true,
-                    allUnchecked = true
-                    ;
+                $listGroup = $(this).closest('.list'),
+                $parentCheckbox = $listGroup.closest('.item').children('.checkbox'),
+                $checkbox = $listGroup.find('.checkbox'),
+                allChecked = true,
+                allUnchecked = true
+                ;
             // check to see if all other siblings are checked or unchecked
             $checkbox.each(function () {
                 if ($(this).checkbox('is checked')) {

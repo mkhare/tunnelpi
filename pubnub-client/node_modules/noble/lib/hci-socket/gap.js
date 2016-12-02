@@ -89,7 +89,8 @@ Gap.prototype.onHciLeAdvertisingReport = function(status, type, address, address
     txPowerLevel: undefined,
     manufacturerData: undefined,
     serviceData: [],
-    serviceUuids: []
+    serviceUuids: [],
+    solicitationServiceUuids: []
   };
 
   var discoveryCount = previouslyDiscovered ? this._discoveries[address].count : 0;
@@ -101,6 +102,7 @@ Gap.prototype.onHciLeAdvertisingReport = function(status, type, address, address
     // reset service data every non-scan response event
     advertisement.serviceData = [];
     advertisement.serviceUuids = [];
+    advertisement.serviceSolicitationUuids = [];
   }
 
   discoveryCount++;
@@ -108,6 +110,7 @@ Gap.prototype.onHciLeAdvertisingReport = function(status, type, address, address
   var i = 0;
   var j = 0;
   var serviceUuid = null;
+  var serviceSolicitationUuid = null;
 
   while ((i + 1) < eir.length) {
     var length = eir.readUInt8(i);
@@ -156,6 +159,24 @@ Gap.prototype.onHciLeAdvertisingReport = function(status, type, address, address
         advertisement.txPowerLevel = bytes.readInt8(0);
         break;
 
+      case  0x14: // List of 16 bit solicitation UUIDs
+        for (j = 0; j < bytes.length; j += 2) {
+          serviceSolicitationUuid = bytes.readUInt16LE(j).toString(16);
+          if (advertisement.serviceSolicitationUuids.indexOf(serviceSolicitationUuid) === -1) {
+            advertisement.serviceSolicitationUuids.push(serviceSolicitationUuid);
+          }
+        }
+        break;
+
+      case  0x15: // List of 128 bit solicitation UUIDs
+        for (j = 0; j < bytes.length; j += 16) {
+          serviceSolicitationUuid = bytes.slice(j, j + 16).toString('hex').match(/.{1,2}/g).reverse().join('');
+          if (advertisement.serviceSolicitationUuids.indexOf(serviceSolicitationUuid) === -1) {
+            advertisement.serviceSolicitationUuids.push(serviceSolicitationUuid);
+          }
+        }
+        break;
+
       case 0x16: // Service Data, there can be multiple occurences
         var serviceDataUuid = bytes.slice(0, 2).toString('hex').match(/.{1,2}/g).reverse().join('');
         var serviceData = bytes.slice(2, bytes.length);
@@ -164,6 +185,15 @@ Gap.prototype.onHciLeAdvertisingReport = function(status, type, address, address
           uuid: serviceDataUuid,
           data: serviceData
         });
+        break;
+
+      case  0x1f: // List of 32 bit solicitation UUIDs
+        for (j = 0; j < bytes.length; j += 4) {
+          serviceSolicitationUuid = bytes.readUInt32LE(j).toString(16);
+          if (advertisement.serviceSolicitationUuids.indexOf(serviceSolicitationUuid) === -1) {
+            advertisement.serviceSolicitationUuids.push(serviceSolicitationUuid);
+          }
+        }
         break;
 
       case 0xff: // Manufacturer Specific Data
