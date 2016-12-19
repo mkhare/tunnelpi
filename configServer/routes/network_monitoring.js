@@ -63,14 +63,42 @@ module.exports = function (app, io) {
         }
     }
 
+    function demodata_insert(db) {
+
+        for (var i = 0; i < 4000; i++) {
+            var timestamp = 1482139860 + i*1;
+            db.collection('ut_data_col').insert({
+                "AA": "8e89bed6",
+                "validity": "invalid",
+                "bytes": 16,
+                "Channel_index": 38,
+                "Type": "ADV_SCAN_IND",
+                "AdvA": "56:56:8e:ff:02:76",
+                "addr_type": "public",
+                "AdvData": " 09 09 4d 69 20 50 68 6f 6e 65",
+                "advdata_fields": [
+                    {
+                        "Type": "09",
+                        "name": "Complete Local Name",
+                        "data": "Mi Phone"
+                    }
+                ],
+                "Data": " c8 a4 6c 1a 80 6d 09 09 4d 69 20 50 68 6f 6e 65",
+                "CRC": " a6 46 7e",
+                "timestamp": timestamp,
+                "email": "amit@gmail.com",
+                "gw_uuid": "2"
+            })
+        }
+    }
+
     MongoClient.connect(url, function (err, db) {
         assert.equal(null, err);
-
         subscribe_to_ut_data(db);
         browser_requests(db);
     });
 
-    var aggregate_data_count = function (db,email, field, callback) {
+    var aggregate_data_count = function (db, email, field, callback) {
         db.collection(ut_data_col).aggregate(
             [
                 {$match: {"email": email}},
@@ -94,7 +122,7 @@ module.exports = function (app, io) {
 
     function browser_requests(db) {
         app.get("/network_monitoring", function (req, res) {
-            if(req.session.email) {
+            if (req.session.email) {
                 res.render("network_monitoring.ejs");
             } else {
                 res.render("index");

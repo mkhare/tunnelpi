@@ -179,20 +179,21 @@
         $.ajax(settings).done(function (response) {
             for (var key in response) {
                 var arr = response[key];
+                console.log(arr);
                 if (key == "channel_index_pie") {
                     for (var i = 0; i < arr.length; i++) {
-                        la1.push(response.channel_index_pie[0]._id);
-                        da1.push(response.channel_index_pie[0].count);
+                        la1.push(response.channel_index_pie[i]._id);
+                        da1.push(response.channel_index_pie[i].count);
                     }
                 } else if (key == "adv_type") {
                     for (var i = 0; i < arr.length; i++) {
-                        la2.push(response.adv_type[0]._id);
-                        da2.push(response.adv_type[0].count);
+                        la2.push(response.adv_type[i]._id);
+                        da2.push(response.adv_type[i].count);
                     }
                 } else if (key == "addr_type") {
                     for (var i = 0; i < arr.length; i++) {
-                        la3.push(response.addr_type[0]._id);
-                        da3.push(response.addr_type[0].count);
+                        la3.push(response.addr_type[i]._id);
+                        da3.push(response.addr_type[i].count);
                     }
                 }
             }
