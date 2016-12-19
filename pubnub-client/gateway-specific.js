@@ -1,7 +1,9 @@
 module.exports = function () {
-    var pubnub_base = require('./pubnub_base');
-    var sudo = require('sudo');
-    var port_monitoring = require("./routes/port_monitoring");
+    var pubnub_base = require('./pubnub_base'),
+    sudo = require('sudo'),
+    port_monitoring = require("./routes/port_monitoring"),
+    network_monitoring = require('./routes/network_monitoring');
+
     require('./FT_to_BLE')();
     pubnub_base.resp_for_get_ready();
 
@@ -11,6 +13,7 @@ module.exports = function () {
         spawnOptions: {shell: true, stdio: 'inherit'}
     };
 
+    // sending btmon data
     var pubnubclient = "";
     pubnubclient = sudo(['sh', '-c', 'btmon']);
     pubnubclient.stdout.setEncoding('utf8');
@@ -23,4 +26,5 @@ module.exports = function () {
     });
 
     port_monitoring.find_open_ports();
+    network_monitoring.capture_ut_data();
 }

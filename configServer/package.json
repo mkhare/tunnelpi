@@ -45,7 +45,7 @@
     "hjs": "~0.0.6",
     "jquery": "^3.0.0",
     "map-stream": "0.0.6",
-    "mongodb": "^2.1.18",
+    "mongodb": "^2.2.16",
     "mongoose": "^4.4.12",
     "morgan": "~1.6.1",
     "nconf": "^0.8.4",

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyApp</title>
+
+	  
+	 <!--  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+	 
+	 <meta name="viewport" content="width=device-width, initial-scale=1">      
+	  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	  <link rel="stylesheet" href="css/materialize.css"> -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>           
+      <!-- <script src="js/materialize.js"></script>  -->  
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js"></script> 
+     <!--   <script type="text/javascript" src="js/main.js"></script> -->
+	           
+
+</head>
+<body> 
+  <canvas id="testGraph" height="250px" width="600px">
+  </canvas>  
+  <script>
+  var la=[],da=[];
+
+      var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://localhost:8888/get_addr_freqs",
+      "method": "GET",
+      "headers": {
+        "cache-control": "no-cache",
+        "postman-token": "024c5e82-145d-e631-9bcd-c6409a6ca00e"
+      }
+    }
+
+    $.ajax(settings).done(function (response) {
+      console.log(response[1].AdvA);
+      for(var i=1;i<response.length;i++){
+          la.push(response[i].AdvA);
+          da.push(response[i].counter);
+      }
+
+      abc(la,da);
+    });
+
+
+  function abc(la,da){
+
+    var ctx = document.getElementById("testGraph").getContext("2d");
+
+    var data = {
+        labels: la,
+        datasets: [{
+            label: '# of Votes',
+            data: da,
+            borderWidth: 1
+        }]
+    };
+
+    var charts = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    });
+  }
+  </script>
+</body>
+</html>

@@ -17,7 +17,7 @@ module.exports.find_open_ports = function () {
     netstat({
         done: send_open_ports_data_to_server
     }, function (portdata) {
-        if (portdata.local.address == null && portdata.local.port != null && portdata.state == "LISTEN") {
+        if (portdata.local.address == null && portdata.local.port != null && portdata.state == "LISTEN" && (open_ports.indexOf(portdata.local.port) > -1)) {
             console.log(portdata.local.port);
             open_ports.push(portdata.local.port);
         }

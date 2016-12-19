@@ -19,6 +19,9 @@ module.exports = {
         all_peripherals : "-1",
         max_simultaneous_conns : 3
     },
+    netmon: {
+        ut_channel : "ut_data_channel"
+    },
     codes : {
         success : 1,
         failure : 2,
