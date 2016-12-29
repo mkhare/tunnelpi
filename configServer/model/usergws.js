@@ -7,9 +7,7 @@ var usergwSchema = schema({
     email : String,
     subscribe_key : String,
     publish_key : String,
-    channel_name : String,
-    devices : [],
-    online : {type : Number, default : 0}
+    channel_name : String
 })
 
 module.exports = mongoose.model('usergws', usergwSchema);

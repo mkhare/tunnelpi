@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyApp</title>
+
+	  	 
+	 <meta name="viewport" content="width=device-width, initial-scale=1">      
+	  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>          
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script> 
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js"></script>     
+
+</head>
+<body> 
+
+	<nav>
+    <div class="nav-wrapper  teal lighten-1">
+      <a href="#" class="brand-logo" style="padding-left:10px; ">WISPERO</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="sass.html">Log In</a></li>
+        <li><a href="badges.html">About Us</a></li>
+        <li><a href="collapsible.html">Contact Us</a></li>
+      </ul>
+    </div>
+  	</nav>
+
+  	<div class="container section">
+  		<div class="row ">
+  		<div class=" col l10 s12 offset-l1">
+  		<canvas class="hoverable" id="mainGraph" height="250px" width="600px">
+ 		 </canvas> 
+  		</div>
+
+
+  		</div>
+  		<div class="row section">
+  			<div class="col s12 l4">
+  			    <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Addresses</a>
+
+				  <!-- Dropdown Structure -->
+				  <ul id='dropdown1' class='dropdown-content'>
+				    <li><a href="#!">one</a></li>
+				    
+				  </ul>
+  			</div>
+  			<div class="col s12 l6 ">
+  				<canvas  id="graph" height="250px" width="600px">
+ 		 		</canvas> 
+  			</div>
+  			<div class="col s12 l2 ">
+  			
+  			</div>
+  		</div>     
+  		<div class="divider"></div> 		
+   		 </div>
+
+   		 <div class="section">
+   		 	<div class="row">
+   		 	
+	   		 	<div class="col s12 l6">
+			        <canvas id="graph1" height="250px" width="600px">
+	 		 		</canvas> 
+			    </div>
+		   		 <div class="col s12 l6 ">
+		   		 	<canvas  id="graph2" height="250px" width="600px">
+	 				</canvas> 
+		   		</div>
+	   				
+   			 </div>
+	   		 <div class="row">
+	   		 	<div class="col s12 l6">
+			        <canvas id="graph3" height="250px" width="600px">
+	 		 		</canvas> 
+			    </div>
+		   		 <div class="col s12 l6 ">
+		   		 	<canvas  id="graph4" height="250px" width="600px">
+	 				</canvas> 
+		   		</div>
+	   		 </div>
+   		 </div>
+
+
+
+
+<!-- Footer -->
+
+<footer class="page-footer  teal lighten-1">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Wispero Networks</h5>
+                <p class="grey-text text-lighten-4">One of the leading Company in IOT Security and Management</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">About Us</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Contact Us</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">About IOT</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">About Team</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+
+		<script>
+			
+			function drawGraph(addr){
+		var settings = {
+	  "async": true,
+	  "crossDomain": true,
+	  "url": "http://localhost:8888/get_AdvA_details",
+	  "method": "POST",
+	  "headers": {
+	    "adva": addr,
+	    "content-type": "application/x-www-form-urlencoded",
+	    "cache-control": "no-cache",
+	    "postman-token": "96967447-b360-edbf-0074-e95dc54961a8"
+	  },
+	  "data": {
+	    "AdvA": addr
+	  }
+	}
+
+	$.ajax(settings).done(function (response) {
+          la.push(response.channel_index_pie[0]._id);
+          la.push(response.adv_type[0]._id);
+          la.push(response.addr_type[0]._id);
+          
+          da.push(response.channel_index_pie[0].count);
+          da.push(response.adv_type[0].count);
+          da.push(response.addr_type[0].count);
+          
+      abc(la,da);
+    });
+
+    function abc(la,da){
+
+    var ctx = document.getElementById("graph") ;
+
+    var data = {
+        labels: la,
+        datasets: [{
+            label: '# of Votes',
+            data: da,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    var charts = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    });
+  }
+}
+
+
+
+bar();
+//bar
+
+ function bar(){
+
+ 	var la=[],da=[];
+
+      var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://localhost:8888/get_addr_freqs",
+      "method": "GET",
+      "headers": {
+        "cache-control": "no-cache",
+        "postman-token": "024c5e82-145d-e631-9bcd-c6409a6ca00e"
+      }
+    }
+
+    $.ajax(settings).done(function (response) {
+      for(var i=1;i<response.length;i++){
+          la.push(response[i].AdvA);
+          da.push(response[i].counter);
+          document.getElementById('dropdown1').innerHTML += '<li onclick="drawGraph('+response[i].AdvA+')"><a href="#!">'+response[i].AdvA+'</a></li>';
+      }
+
+      abc(la,da);
+    });
+
+    function abc(la,da){
+
+    var ctx = document.getElementById("mainGraph") ;
+
+    var data = {
+        labels: la,
+        datasets: [{
+            label: '# of Votes',
+            data: da,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    var charts = new Chart(ctx, {
+    type: 'line',
+    data: data,
+    });
+  }
+
+  graph1();
+  graph2();
+  graph3();
+  graph4();
+ }
+
+//graph1
+ function graph1(){
+
+
+ 	var la=[],da=[];
+
+      var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://localhost:8888/adv_validity_full",
+      "method": "GET",
+      "headers": {
+        "cache-control": "no-cache",
+        "postman-token": "024c5e82-145d-e631-9bcd-c6409a6ca00e"
+      }
+    }
+
+    $.ajax(settings).done(function (response) {
+      console.log(response[1].AdvA);
+      for(var i=1;i<response.length;i++){
+          la.push(response[i]._id);
+          da.push(response[i].count);
+      }
+
+      abc(la,da);
+    });
+
+    function abc(la,da){
+
+    var ctx = document.getElementById("graph1") ;
+
+    var data = {
+        labels: la,
+        datasets: [{
+            label: '# of Votes',
+            data: da,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    var charts = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    });
+  }
+
+
+ }
+
+
+
+ //graph2
+ function graph2(){
+
+
+ 	var la=[],da=[];
+
+      var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://localhost:8888/adv_channel_index_full",
+      "method": "GET",
+      "headers": {
+        "cache-control": "no-cache",
+        "postman-token": "024c5e82-145d-e631-9bcd-c6409a6ca00e"
+      }
+    }
+
+    $.ajax(settings).done(function (response) {
+      console.log(response[1].AdvA);
+      for(var i=1;i<response.length;i++){
+          la.push(response[i]._id);
+          da.push(response[i].count);
+      }
+
+      abc(la,da);
+    });
+
+    function abc(la,da){
+
+    var ctx = document.getElementById("graph2") ;
+
+    var data = {
+        labels: la,
+        datasets: [{
+            label: '# of Votes',
+            data: da,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    var charts = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    });
+  }
+
+
+ }
+
+
+
+
+  //graph3
+ function graph3(){
+
+
+ 	var la=[],da=[];
+
+      var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://localhost:8888/adv_addr_types_full",
+      "method": "GET",
+      "headers": {
+        "cache-control": "no-cache",
+        "postman-token": "024c5e82-145d-e631-9bcd-c6409a6ca00e"
+      }
+    }
+
+    $.ajax(settings).done(function (response) {
+      console.log(response[1].AdvA);
+      for(var i=1;i<response.length;i++){
+          la.push(response[i]._id);
+          da.push(response[i].count);
+      }
+
+      abc(la,da);
+    });
+
+    function abc(la,da){
+
+    var ctx = document.getElementById("graph3") ;
+
+    var data = {
+        labels: la,
+        datasets: [{
+            label: '# of Votes',
+            data: da,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    var charts = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    });
+  }
+
+
+ }
+
+
+
+  //graph4
+ function graph4(){
+
+
+ 	var la=[],da=[];
+
+      var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://localhost:8888/adv_addr_types_full",
+      "method": "GET",
+      "headers": {
+        "cache-control": "no-cache",
+        "postman-token": "024c5e82-145d-e631-9bcd-c6409a6ca00e"
+      }
+    }
+
+    $.ajax(settings).done(function (response) {
+      console.log(response[1].AdvA);
+      for(var i=1;i<response.length;i++){
+          la.push(response[i]._id);
+          da.push(response[i].count);
+      }
+
+      abc(la,da);
+    });
+
+    function abc(la,da){
+
+    var ctx = document.getElementById("graph4") ;
+
+    var data = {
+        labels: la,
+        datasets: [{
+            label: '# of Votes',
+            data: da,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    var charts = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    });
+  }
+
+
+ }
+
+
+
+		</script>
+
+
+
+
+       
+</body>
+</html>

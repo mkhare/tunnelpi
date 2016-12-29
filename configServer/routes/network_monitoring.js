@@ -129,14 +129,6 @@ module.exports = function (app, io) {
             }
         })
 
-        app.get("/jquery-2.1.1.min.js", function (req, res) {
-            res.sendFile('/jquery-2.1.1.min.js', {root: __dirname});
-        })
-
-        app.get("/Chart.js", function (req, res) {
-            res.sendFile('/Chart.js', {root: __dirname});
-        })
-
         app.get("/adv_validity_full", function (req, res) {
             aggregate_data_count(db, req.session.email, "$validity", function (results) {
                 res.json(results);

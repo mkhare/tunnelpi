@@ -4,17 +4,12 @@ var spawn = require('child_process').spawn;
 var rl = require('readline');
 var sudo = require('sudo');
 var proj_config = require('./proj_config');
-// var configserver = proj_config.set1.configserver;
-// var sockio = require('socket.io-client')(configserver);
 var sockio = globals.sockio;
-var events = require('events');
-// var eventEmitter = new events.EventEmitter();
 var eventEmitter = globals.eventEmitter;
 var pubnub_base = require('./pubnub_base');
 var gw_util = require('./gw_util');
 require('./gateway-specific')();
 
-var gwlocation = gw_util.get_location();
 var cred = {
     uuid: proj_config.set1.uuid,
     email: proj_config.set1.email,
@@ -25,42 +20,15 @@ var cred = {
     devices: [{devuuid: 'bluetoothDev1'}, {devuuid: 'bluetoothDev2'}],
 };
 
-// pubnub_base.publish_location(gwlocation);
-// pubnub_base.publish_location_using_ip();
-// pubnub_base.publish_location_using_ip_eurekapi();
-pubnub_base.publish_location_using_ip_ipinfoAPI();
-
 sockio.on('connect', function (data) {
     console.log('socket connected to server');
-
-    // request.post(configserver, {form: cred}, function (error, response, body) {
-    //     console.log("gateway is sending request");
-    //     if (error)
-    //         console.log(error);
-
-    //     if (!error && response.statusCode == 200) {
-    //         console.log('succesfull login');
-    //     }
-    // });
-
     sockio.emit('creds', cred);
     eventEmitter.emit('server_connected_to_gw');
 
-    // eventEmitter.on("peripheral_disconnected", function (peripheral_data) {
-    //     peripheral_data.email = cred.email;
-    //     peripheral_data.gw_uuid = cred.uuid;
-    //     peripheral_data.channel_name = cred.channel_name;
-    //     sockio.emit("peripheral_disconnected", peripheral_data);
-    //     console.log("event : peripheral offline : ", peripheral_data.peripheral_uuid);
-    // })
-    
-    // eventEmitter.on("upload_peripheral_data", function (peripheral_data) {
-    //     peripheral_data.email = cred.email;
-    //     peripheral_data.gw_uuid = cred.uuid;
-    //     peripheral_data.channel_name = cred.channel_name;
-    //     sockio.emit("upload_peripheral_data", peripheral_data);
-    //     console.log("uploading peripheral data : ", peripheral_data);
-    // })
+    //send location to server
+    require("./routes/gw_location")(sockio);
+    require("./routes/gw_peripherals")(sockio);
+    require("./routes/nrf_dfu/nrf_dfu_index")();
 });
 
 sockio.on('ft_init_cmd_frm_server', function (data) {

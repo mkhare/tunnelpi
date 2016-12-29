@@ -14,16 +14,7 @@
 </head>
 <body>
 
-<nav>
-    <div class="nav-wrapper  teal lighten-1">
-        <a href="#" class="brand-logo" style="padding-left:10px; ">WISPERO</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="sass.html">Log In</a></li>
-            <li><a href="badges.html">About Us</a></li>
-            <li><a href="collapsible.html">Contact Us</a></li>
-        </ul>
-    </div>
-</nav>
+<% include ./partials/header.ejs %>
 
 <div class="container section">
     <div class="row ">
@@ -35,11 +26,11 @@
 
     </div>
     <div class="row section">
-      <div class="container">
-        <div class="col s12 l12 center-align ">
-            <h2>Address-Wise Statistics</h2>
+        <div class="container">
+            <div class="col s12 l12 center-align ">
+                <h2>Address-Wise Statistics</h2>
+            </div>
         </div>
-    </div>
         <div class="col s12 l2">
             <a class='dropdown-button btn' href='#' data-activates='dropdown1' id="addresses">Addresses</a>
 
@@ -123,9 +114,9 @@
 <script>
 
     function render_graph(la, da, canvas_id, graph_type, bool_display_title, graph_title) {
-        var arr_bgcolor = [], arr_border=[];
+        var arr_bgcolor = [], arr_border = [];
         for (i = 0; i < da.length; i++) {
-            var str_base = 'rgba(' + Math.floor((Math.random() * 1000) % 255) + ',' + Math.floor((Math.random() * 1000) % 255) + ',' + Math.floor((Math.random() * 1000) % 255) + ',' ;
+            var str_base = 'rgba(' + Math.floor((Math.random() * 1000) % 255) + ',' + Math.floor((Math.random() * 1000) % 255) + ',' + Math.floor((Math.random() * 1000) % 255) + ',';
             var str_bgcolor = str_base + '0.4)';
             var str_border = str_base + '1)';
             arr_bgcolor.push(str_bgcolor);

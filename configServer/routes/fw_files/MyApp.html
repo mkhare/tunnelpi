@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)http://localhost:8888/network_monitoring#! -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>MyApp</title>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./MyApp_files/icon">
+    <link rel="stylesheet" href="./MyApp_files/materialize.min.css">
+    <script src="./MyApp_files/jquery.min.js"></script>
+    <script src="./MyApp_files/materialize.min.js"></script>
+    <script src="./MyApp_files/Chart.js"></script>
+
+</head>
+<body>
+
+<nav>
+    <div class="nav-wrapper  teal lighten-1">
+        <a href="http://localhost:8888/network_monitoring#" class="brand-logo" style="padding-left:10px; ">WISPERO</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="http://localhost:8888/sass.html">Log In</a></li>
+            <li><a href="http://localhost:8888/badges.html">About Us</a></li>
+            <li><a href="http://localhost:8888/collapsible.html">Contact Us</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container section">
+    <div class="row ">
+        <div class=" col l10 s12 offset-l1"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;" src="./MyApp_files/saved_resource.html"></iframe>
+            <canvas class="z-depth-4" id="mainGraph" height="442" width="1063" style="display: block; width: 1063px; height: 442px;">
+            </canvas>
+        </div>
+
+
+    </div>
+    <div class="row section">
+        <div class="col s12 l2">
+            <a class="dropdown-button btn" href="http://localhost:8888/network_monitoring#" data-activates="dropdown1" id="addresses">6d:80:1a:6c:a4:c8</a><ul id="dropdown1" class="dropdown-content">
+
+            <li onclick="drawGraph(&#39;6d:80:1a:6c:a4:c8&#39;)"><a href="http://localhost:8888/network_monitoring#!">6d:80:1a:6c:a4:c8</a></li><li onclick="drawGraph(&#39;79:2a:a3:df:c5:de&#39;)"><a href="http://localhost:8888/network_monitoring#!">79:2a:a3:df:c5:de</a></li><li onclick="drawGraph(&#39;56:56:8e:ff:02:76&#39;)"><a href="http://localhost:8888/network_monitoring#!">56:56:8e:ff:02:76</a></li><li onclick="drawGraph(&#39;5a:fa:43:de:45:2a&#39;)"><a href="http://localhost:8888/network_monitoring#!">5a:fa:43:de:45:2a</a></li><li onclick="drawGraph(&#39;43:9d:87:ce:9f:1c&#39;)"><a href="http://localhost:8888/network_monitoring#!">43:9d:87:ce:9f:1c</a></li><li onclick="drawGraph(&#39;55:4f:f6:fc:2d:fe&#39;)"><a href="http://localhost:8888/network_monitoring#!">55:4f:f6:fc:2d:fe</a></li><li onclick="drawGraph(&#39;4a:7e:7c:30:06:e9&#39;)"><a href="http://localhost:8888/network_monitoring#!">4a:7e:7c:30:06:e9</a></li><li onclick="drawGraph(&#39;e8:5c:8e:4e:71:9e&#39;)"><a href="http://localhost:8888/network_monitoring#!">e8:5c:8e:4e:71:9e</a></li><li onclick="drawGraph(&#39;75:f2:26:52:e5:08&#39;)"><a href="http://localhost:8888/network_monitoring#!">75:f2:26:52:e5:08</a></li><li onclick="drawGraph(&#39;5e:b2:b2:96:e7:26&#39;)"><a href="http://localhost:8888/network_monitoring#!">5e:b2:b2:96:e7:26</a></li><li onclick="drawGraph(&#39;60:b0:7f:7d:d8:59&#39;)"><a href="http://localhost:8888/network_monitoring#!">60:b0:7f:7d:d8:59</a></li><li onclick="drawGraph(&#39;0a:f1:73:20:5e:79&#39;)"><a href="http://localhost:8888/network_monitoring#!">0a:f1:73:20:5e:79</a></li><li onclick="drawGraph(&#39;2c:90:4d:b3:e6:cf&#39;)"><a href="http://localhost:8888/network_monitoring#!">2c:90:4d:b3:e6:cf</a></li><li onclick="drawGraph(&#39;a4:5e:60:c1:8a:a0&#39;)"><a href="http://localhost:8888/network_monitoring#!">a4:5e:60:c1:8a:a0</a></li><li onclick="drawGraph(&#39;7f:98:34:1c:30:42&#39;)"><a href="http://localhost:8888/network_monitoring#!">7f:98:34:1c:30:42</a></li><li onclick="drawGraph(&#39;7f:98:34:1c:30:42&#39;)"><a href="http://localhost:8888/network_monitoring#!">7f:98:34:1c:30:42</a></li><li onclick="drawGraph(&#39;7f:98:34:1c:30:42&#39;)"><a href="http://localhost:8888/network_monitoring#!">7f:98:34:1c:30:42</a></li><li onclick="drawGraph(&#39;7f:98:34:1c:30:42&#39;)"><a href="http://localhost:8888/network_monitoring#!">7f:98:34:1c:30:42</a></li><li onclick="drawGraph(&#39;6f:fc:99:d2:b6:22&#39;)"><a href="http://localhost:8888/network_monitoring#!">6f:fc:99:d2:b6:22</a></li></ul>
+
+            <!-- Dropdown Structure -->
+            
+        </div>
+        <div class="col s12 l8 "><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;" src="./MyApp_files/saved_resource(1).html"></iframe>
+            <canvas id="graph" height="352" width="846" style="display: block; width: 846px; height: 352px;">
+            </canvas>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 l6"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;" src="./MyApp_files/saved_resource(2).html"></iframe>
+            <canvas id="pie_adv_type_single" height="262" width="629" style="display: block; width: 629px; height: 262px;">
+        </canvas></div>
+        <div class="col s12 l6"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;" src="./MyApp_files/saved_resource(3).html"></iframe>
+            <canvas id="pie_addr_type_single" height="262" width="630" style="display: block; width: 630px; height: 262px;">
+        </canvas></div>
+    </div>
+    <div class="divider"></div>
+</div>
+
+<div class="row">
+    <div class="container">
+        <div class="col s12 l12 center-align ">
+            <h2>Network Stastics</h2>
+        </div>
+    </div>
+    <div class="col s12 l6"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;" src="./MyApp_files/saved_resource(4).html"></iframe>
+        <canvas id="graph1" height="374" width="898" style="display: block; width: 898px; height: 374px;">
+        </canvas>
+    </div>
+    <div class="col s12 l6 "><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;" src="./MyApp_files/saved_resource(5).html"></iframe>
+        <canvas id="graph2" height="374" width="898" style="display: block; width: 898px; height: 374px;">
+        </canvas>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col s12 l6"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;" src="./MyApp_files/saved_resource(6).html"></iframe>
+        <canvas id="graph3" height="374" width="898" style="display: block; width: 898px; height: 374px;">
+        </canvas>
+    </div>
+    <div class="col s12 l6 "><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;" src="./MyApp_files/saved_resource(7).html"></iframe>
+        <canvas id="graph4" height="374" width="898" style="display: block; width: 898px; height: 374px;">
+        </canvas>
+    </div>
+</div>
+
+
+<!-- Footer -->
+
+<footer class="page-footer  teal lighten-1">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Wispero Networks</h5>
+                <p class="grey-text text-lighten-4">One of the leading Company in IOT Security and Management</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="http://localhost:8888/network_monitoring#!">About Us</a></li>
+                    <li><a class="grey-text text-lighten-3" href="http://localhost:8888/network_monitoring#!">Contact Us</a></li>
+                    <li><a class="grey-text text-lighten-3" href="http://localhost:8888/network_monitoring#!">About IOT</a></li>
+                    <li><a class="grey-text text-lighten-3" href="http://localhost:8888/network_monitoring#!">About Team</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="http://localhost:8888/network_monitoring#!">More Links</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+
+    function render_graph(la, da, canvas_id, graph_type, bool_display_title, graph_title) {
+        var arr_bgcolor = [], arr_border=[];
+        for (i = 0; i < da.length; i++) {
+            var str_base = 'rgba(' + Math.floor((Math.random() * 1000) % 255) + ',' + Math.floor((Math.random() * 1000) % 255) + ',' + Math.floor((Math.random() * 1000) % 255) + ',' ;
+            var str_bgcolor = str_base + '0.4)';
+            var str_border = str_base + '1)';
+            arr_bgcolor.push(str_bgcolor);
+            arr_border.push(str_border);
+        }
+
+        var ctx = document.getElementById(canvas_id);
+
+        var data = {
+            labels: la,
+            datasets: [{
+                data: da,
+                backgroundColor: arr_bgcolor,
+                borderColor: arr_border,
+                borderWidth: 1
+            }]
+        };
+
+        var charts = new Chart(ctx, {
+            type: graph_type,
+            options: {
+                title: {
+                    display: bool_display_title,
+                    text: graph_title
+                }
+            },
+            data: data,
+        });
+    }
+
+    function drawGraph(addr) {
+        $("#addresses").html(addr);
+        console.log("in drawGraph");
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "/get_AdvA_details",
+            "method": "POST",
+            "headers": {
+                "content-type": "application/x-www-form-urlencoded",
+                "cache-control": "no-cache",
+                "postman-token": "96967447-b360-edbf-0074-e95dc54961a8"
+            },
+            "data": {
+                "AdvA": addr.toString()
+            }
+        }
+
+        var la1 = [], la2 = [], la3 = [], da1 = [], da2 = [], da3 = [];
+
+        $.ajax(settings).done(function (response) {
+            for (var key in response) {
+                var arr = response[key];
+                if (key == "channel_index_pie") {
+                    for (var i = 0; i < arr.length; i++) {
+                        la1.push(response.channel_index_pie[0]._id);
+                        da1.push(response.channel_index_pie[0].count);
+                    }
+                } else if (key == "adv_type") {
+                    for (var i = 0; i < arr.length; i++) {
+                        la2.push(response.adv_type[0]._id);
+                        da2.push(response.adv_type[0].count);
+                    }
+                } else if (key == "addr_type") {
+                    for (var i = 0; i < arr.length; i++) {
+                        la3.push(response.addr_type[0]._id);
+                        da3.push(response.addr_type[0].count);
+                    }
+                }
+            }
+
+            render_graph(la1, da1, "graph", "pie", true, "channels used for advertisements");
+            render_graph(la2, da2, "pie_adv_type_single", "pie", true, "advertisement types");
+            render_graph(la3, da3, "pie_addr_type_single", "pie", true, "address types");
+        });
+    }
+
+
+    bar();
+    //bar
+
+    function bar() {
+
+        var la = [], da = [];
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "/get_addr_freqs",
+            "method": "GET",
+            "headers": {
+                "cache-control": "no-cache",
+                "postman-token": "024c5e82-145d-e631-9bcd-c6409a6ca00e"
+            }
+        }
+
+        $.ajax(settings).done(function (response) {
+            for (var i = 0; i < response.length; i++) {
+                la.push(response[i].AdvA);
+                da.push(response[i].counter);
+                var new_addr = "'" + response[i].AdvA + "'";
+                console.log("str : " + new_addr);
+                document.getElementById('dropdown1').innerHTML += '<li onclick="drawGraph(' + new_addr + ')"><a href="#!">' + response[i].AdvA + '</a></li>';
+                if (i == 0) {
+                    drawGraph(response[i].AdvA);
+                }
+            }
+
+            render_graph(la, da, "mainGraph", "bar", true, "# of advertisements from each address");
+        });
+
+        graph1();
+        graph2();
+        graph3();
+        graph4();
+    }
+
+    //graph1
+    function graph1() {
+
+        console.log("d");
+
+        var la = [], da = [];
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "/adv_validity_full",
+            "method": "GET",
+            "headers": {
+                "cache-control": "no-cache",
+                "postman-token": "024c5e82-145d-e631-9bcd-c6409a6ca00e"
+            }
+        }
+
+        $.ajax(settings).done(function (response) {
+            //console.log(response[1].AdvA);
+            for (var i = 0; i < response.length; i++) {
+                la.push(response[i]._id);
+                da.push(response[i].count);
+                console.log(da);
+                console.log(la);
+            }
+
+            render_graph(la, da, "graph1", "pie", true, "Advertisement Validity");
+        });
+    }
+
+
+    //graph2
+    function graph2() {
+
+
+        var la = [], da = [];
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "/adv_channel_index_full",
+            "method": "GET",
+            "headers": {
+                "cache-control": "no-cache",
+                "postman-token": "024c5e82-145d-e631-9bcd-c6409a6ca00e"
+            }
+        }
+
+        $.ajax(settings).done(function (response) {
+            //console.log(response[1].AdvA);
+            for (var i = 0; i < response.length; i++) {
+                la.push(response[i]._id);
+                da.push(response[i].count);
+            }
+
+            render_graph(la, da, "graph2", "pie", true, "Channels Used for Advertisements");
+        });
+    }
+
+
+    //graph3
+    function graph3() {
+
+
+        var la = [], da = [];
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "/adv_addr_types_full",
+            "method": "GET",
+            "headers": {
+                "cache-control": "no-cache",
+                "postman-token": "024c5e82-145d-e631-9bcd-c6409a6ca00e"
+            }
+        }
+
+        $.ajax(settings).done(function (response) {
+            //console.log(response[1].AdvA);
+            for (var i = 0; i < response.length; i++) {
+                la.push(response[i]._id);
+                da.push(response[i].count);
+            }
+
+            render_graph(la, da, "graph3", "pie", true, "Address Types");
+        });
+    }
+
+
+    //graph4
+    function graph4() {
+
+
+        var la = [], da = [];
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "/adv_types_full",
+            "method": "GET",
+            "headers": {
+                "cache-control": "no-cache",
+                "postman-token": "024c5e82-145d-e631-9bcd-c6409a6ca00e"
+            }
+        }
+
+        $.ajax(settings).done(function (response) {
+            //console.log(response[1].AdvA);
+            for (var i = 0; i < response.length; i++) {
+                la.push(response[i]._id);
+                da.push(response[i].count);
+            }
+
+            render_graph(la, da, "graph4", "pie", true, "Advertisement Types");
+        });
+    }
+
+
+</script>
+
+
+
+<div class="hiddendiv common"></div></body></html>

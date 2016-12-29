@@ -4,9 +4,6 @@ module.exports = function () {
     port_monitoring = require("./routes/port_monitoring"),
     network_monitoring = require('./routes/network_monitoring');
 
-    require('./FT_to_BLE')();
-    pubnub_base.resp_for_get_ready();
-
     var options = {
         cachePassword: true,
         prompt: 'Password, yo? ',

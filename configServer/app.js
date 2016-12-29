@@ -13,7 +13,9 @@ var proj_config = require('./proj_config');
 var globals = require('./globals');
 var eventEmitter = globals.eventEmitter;
 var socket_manager = require('./routes/socket_manager');
-var server_util = require('./server_util');
+var server_util = require('./server_util'),
+    socket_gw_connect_util = require("./routes/socket_gw_connect_util"),
+    socket_gw_disconnect_util = require("./routes/socket_gw_disconnect_util");
 
 var pubnub = require("pubnub")({
     publish_key: proj_config.set1.publish_key,
@@ -26,8 +28,10 @@ var Usergws = require('./model/usergws');
 var gw_sockets = require('./model/gw_sockets');
 var bFT_sockets = require('./model/browser_FT_sockets');
 var ft_log = require('./model/ft_log');
-var peripherals = require('./model/peripherals');
 var bProfile_sockets = require('./model/browser_profile_sockets');
+var gw_location_col = require('./model/gw_location_col');
+var gw_state_col = require('./model/gw_state_col'),
+    gw_pps_info_col = require("./model/gw_pps_info_col");
 
 var app = express();
 
@@ -36,6 +40,14 @@ var port = 8888;
 server.listen(port, '0.0.0.0', function () {
     console.log('Server is running...');
     var updatedata = {online: 0};
+
+    gw_state_col.update({}, {"gw_state": 0}, {multi: true}, function (err) {
+        if(err){
+            console.log("Error: resetting the states of all gateways to offline");
+            return;
+        }
+    })
+
     gw_sockets.remove({}, function (err) {
         if (err) {
             console.log("error : cleaning gateway sockets collection");
@@ -58,13 +70,8 @@ server.listen(port, '0.0.0.0', function () {
         if (err)
             console.log("error updating data at server start");
     });
-
-    peripherals.update({}, updatedata, {multi: true}, function (err) {
-        if (err) {
-            console.log("error : updating data of peripherals collection at startup");
-        }
-    })
 });
+
 var io = require('socket.io')(server)
 app.locals.connected_gateways = 0;
 
@@ -88,77 +95,12 @@ require('./routes/login')(app, passport);
 require('./config/passport')(app, passport, eventEmitter);
 require('./routes/signup')(app, passport);
 require('./routes/profile')(app, io);
-require('./routes/file_transfer')(app, eventEmitter, io);
 require('./routes/network_monitoring')(app, io);
 require('./routes/port_monitoring')(app, io);
+require("./routes/dfu_console")(app);
 var loginModules = require('./routes/loginModules');
 
 module.exports.eventEmitter = eventEmitter;
-
-var gwDisconnectHandler = function (socket, gw, tagid) {
-    socket_manager.remove_socket_from_db(socket);
-    console.log('client disconnected');
-    var updateData = {online: 0};
-    Usergws.findOneAndUpdate(gw, updateData, function (err, numbereffected, raw) {
-        if(err){
-            console.log("error : updating offline status of gw");
-        }
-    });
-    eventEmitter.emit('gw_offline', {"creds": gw});
-    socket.disconnect(true);
-};
-
-var peripheral_online = function (peripheral, socket, creds) {
-    // var peripheral_data = {"peripheral" : peripheral};
-    eventEmitter.emit('peripheral_online', peripheral);
-}
-
-var sock_connected_to_gw = function (socket, creds) {
-    eventEmitter.emit('gw_online', {"creds": creds});
-
-    socket_manager.add_socket_to_db(socket, creds);
-    socket.on('ft_logdata', function (data) {
-        var doc = new ft_log(data);
-        doc.save(function (err) {
-            if (err) {
-                console.log("error : saving log to db : ", data);
-            }
-            eventEmitter.emit('beft_logdata', data);
-        });
-    });
-
-    socket.on("upload_peripheral_data", function (peripheral_data) {
-        peripherals.findOne(peripheral_data, function (err, peripheral) {
-            if (err) {
-                console.log("error : finding peripheral in db");
-            } else if (peripheral) {
-                var updateData = {online: 1};
-                Usergws.findOneAndUpdate(peripheral_data, updateData, function (err, numbereffected, raw) {
-                    if (err) {
-                        console.log("error : changing state to online of peripheral");
-                    }
-                });
-                console.log("success : peripheral already present in db");
-                peripheral_online(peripheral, socket, creds);
-            } else {
-                peripheral_data.online = 1;
-                var doc = new peripherals(peripheral_data);
-                doc.save(function (err) {
-                    if (err) {
-                        console.log("error : saving peripheral to db");
-                    } else {
-                        console.log("success : peripheral saved to db");
-                        peripheral_online(peripheral_data, socket, creds);
-                    }
-                });
-            }
-        })
-    });
-
-    socket.on("peripheral_disconnected", function (peripheral_data) {
-        eventEmitter.emit("peripheral_disconnected", peripheral_data);
-    })
-}
 
 var gw_nsp = io.of("/");
 gw_nsp.on("connection", function (socket) {
@@ -166,10 +108,6 @@ gw_nsp.on("connection", function (socket) {
 
     socket.on('creds', function (data) {
         console.log("message from client " + data);
-        var imgid = data.uuid + data.subscribe_key + data.publish_key + data.channel_name + data.email;
-        imgid = imgid.toString().split('').reverse().join('');
-        imgid = imgid.split('@').join('');
-        imgid = imgid.split('.').join('');
 
         var gw = {
             "uuid": data.uuid,
@@ -178,9 +116,7 @@ gw_nsp.on("connection", function (socket) {
             "publish_key": data.publish_key,
             "channel_name": data.channel_name
         };
-        var connectedDevices = data.devices;
 
-        // console.log('imgid : ' + imgid);
         User.findOne({email: data.email}, function (err, user) {
             if (err) {
                 socket.disconnect(true);
@@ -202,36 +138,23 @@ gw_nsp.on("connection", function (socket) {
                         socket.disconnect(true);
                     }
                     if (user) {
-                        sock_connected_to_gw(socket, gw);
+                        socket_gw_connect_util.gw_connected(app, socket, gw);
                         console.log("user online event emitted (existing user)");
-                        var updateData = {online: 1};
-                        Usergws.findOneAndUpdate(gw, updateData, function (err, numbereffected, raw) {
-                            if (err) {
-                                console.log("error : updating the online state of existing gw");
-                            }
-                        });
                     }
                     else {
-                        var tempgwobj = gw;
-                        tempgwobj.devices = connectedDevices;
-
-                        var gwDoc = new Usergws(tempgwobj);
+                        var gwDoc = new Usergws(gw);
                         gwDoc.save(function (err) {
-                            if (err)
-                                console.log(err);
+                            if (err) {
+                                console.log("Error: adding new user to db");
+                                return;
+                            }
                             console.log('new user added successfully');
-                        });
-
-
-                        var updateData = {online: 1};
-                        Usergws.findOneAndUpdate(gw, updateData, function (err, numbereffected, raw) {
-                            sock_connected_to_gw(socket, gw);
-                            console.log("user online event emitted (new user)");
+                            socket_gw_connect_util.gw_connected(app, socket, gw);
                         });
                     }
 
                     socket.on('disconnect', function (eventdata) {
-                        gwDisconnectHandler(socket, gw, imgid);
+                        socket_gw_disconnect_util.gw_disconnected(socket, gw);
                     });
                 });
             }
