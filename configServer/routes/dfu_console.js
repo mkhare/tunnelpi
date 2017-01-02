@@ -111,8 +111,13 @@ module.exports = function (app) {
         console.log("pp_id_arr: ", pp_id_arr.length);
         for(var i = 0; i < pp_id_arr.length; i++) {
             query["pp_id"] = pp_id_arr[i].pp_id;
+
             var updated_data = JSON.parse(JSON.stringify(query));
+            updated_data.progress_pcnt = 8;
+            updated_data.progress_msg = "Task added to queue";
+            updated_data.times_failed = 0;
             updated_data.file_name = req.file.originalname;
+
             dfu_pending_tasks_col.update(query, updated_data, {upsert: true}, function (err) {
                 if (err) {
                     console.log("Error: updating pending tasks column");
@@ -137,17 +142,21 @@ module.exports = function (app) {
         for(var i = 0; i < pp_id_arr.length; i++){
             var pp_id = pp_id_arr[i].pp_id;
             var query = {"gw_uuid": gw_uuid, "pp_id": pp_id};
-            dfu_pending_tasks_col.findOne(query, function(err, task_details){
+            dfu_pending_tasks_col.findOne(query,"pp_id progress_pcnt progress_msg -_id", function(err, task_details){
                 if(err){
                     console.log("Error: getting progress from db", err);
                     return;
                 }
                 if(task_details) {
-                    tasks_progress.push({
-                        "pp_id": pp_id,
-                        "progress_pcnt": task_details.progress_pcnt,
-                        "progress_msg": task_details.progress_msg
-                    })
+                    tasks_progress.push(task_details);
+                    if(task_details.progress_pcnt == 100){
+                        dfu_pending_tasks_col.remove(task_details, function (err) {
+                            if(err){
+                                console.log("Error: removing completed tasks");
+                                return;
+                            }
+                        })
+                    }
                 }
                 if (i == pp_id_arr.length) {
                     res.json(tasks_progress);

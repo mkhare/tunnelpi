@@ -35,35 +35,52 @@ module.exports = function (app, socket, gw_info) {
         if(req.body) {
             dfu_pending_tasks_col.findOne({
                 "email": req.body.email,
-                "gw_uuid": req.body.gw_uuid
-            }, function (err, task) {
+                "gw_uuid": req.body.gw_uuid,
+                "progress_pcnt": {$lt: 100}
+            }, "pp_id _id", function (err, task) {
                 if (err) {
                     console.log("Error: nrf_dfu_gw: fetching tasks from db");
                     return;
                 }
                 // res.json({"pp_id": task.pp_id});
                 //res.json({"pp_id": "e85c8e4e719e"});
-                res.json({"pp_id": task.pp_id});
-                console.log("Peripheral ID sent to gateway: ", task.pp_id);
+                // if(task) {
+                    // res.json({"pp_id": task.pp_id, "task_id": task._id});
+                    res.json(task)
+                    console.log("Task sent to gateway: ", task);
+                // } else {
+                //     res.json({});
+                // }
             })
         }
     });
 
     app.get("/dfu_gw/get_dfu_file", function (req, res) {
         console.log("dfu file request from gateway");
-        res.sendFile(__dirname + "/fw_files/zippy.zip");
+        dfu_pending_tasks_col.findOne({"_id": req.query.task_id}, "file_name", function (err, task_details) {
+            if(err){
+                console.log("Error: getting filename from db");
+                return;
+            }
+            if(task_details) {
+                res.sendFile(__dirname + "/fw_files/" + task_details.file_name);
+            } else {
+                console.log("Error: No task entry found for this task ID in db");
+            }
+        })
     });
 
-    app.post("/dfu/task_progress", function (req, res) {
+    app.post("/dfu_gw/task_progress", function (req, res) {
         var query = {
             "_id": req.body.task_id
         }
+        console.log("progress received from gateway: ", req.body);
         dfu_pending_tasks_col.findOne(query, function(err, task_details){
             if(err){
                 console.log("Error: unable to update progress: task not found in collection");
                 return;
             }
-            if(task_details.progress_pcnt < req.body.progress_pcnt){
+            if(task_details && task_details != "null" && parseInt(task_details.progress_pcnt) < parseInt(req.body.progress_pcnt)){
                 dfu_pending_tasks_col.update(query, {"progress_pcnt": req.body.progress_pcnt}, function(err){
                     console.log("Error: updating the progress of task");
                     return;

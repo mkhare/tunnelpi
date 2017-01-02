@@ -10,7 +10,7 @@ var schema = Schema({
     gw_uuid: String,
     pp_id: String,
     file_name : String,
-    progress_pcnt: {type: String, default: "8"},
+    progress_pcnt: {type: Number, default: 8},
     progress_msg: {type: String, default: "Task added to queue"},
     times_failed: {type: Number, default: 0}
 })

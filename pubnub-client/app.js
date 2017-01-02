@@ -1,7 +1,5 @@
 var globals = require('./globals');
 var request = require('request');
-var spawn = require('child_process').spawn;
-var rl = require('readline');
 var sudo = require('sudo');
 var proj_config = require('./proj_config');
 var sockio = globals.sockio;
@@ -28,7 +26,6 @@ sockio.on('connect', function (data) {
     //send location to server
     require("./routes/gw_location")(sockio);
     require("./routes/gw_peripherals")(sockio);
-    require("./routes/nrf_dfu/nrf_dfu_index")();
 });
 
 sockio.on('ft_init_cmd_frm_server', function (data) {

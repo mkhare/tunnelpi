@@ -31,16 +31,8 @@
 </head>
 <body style="overflow-x: hidden;">
 
-<nav class="teal ">
-    <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Wispero</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
-        </ul>
-    </div>
-</nav>
+<% include ./partials/header.ejs %>
+
 <div class="col s12">
     <div class="row TitleDiv" style="background-image: url('/images/b.jpg');transition: all ease 1s;margin-bottom: 0;">
         <div class="col s12">&nbsp</div>
@@ -78,15 +70,47 @@
              </div> -->
 
 
-
         </div>
     </div>
 </div>
 
 <script>
+
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "/dfu/get_online_gws",
+        "method": "GET",
+        "headers": {
+            "cache-control": "no-cache",
+            "postman-token": "95841c1a-de69-5c3d-452f-37c67d3ba688"
+        }
+    }
+
+    $.ajax(settings).done(function (response) {
+//            console.log(response);
+        var online_gw_names = [];
+        for (var i = 0; i < response.length; i++) {
+            online_gw_names.push(response[i].gw_uuid);
+        }
+        populateGw(online_gw_names);
+    });
+
+    //	populateGw(["maninder","swastik","amit"]);
+    function populateGw(online_gw_Names) {
+        console.log("got details", online_gw_Names)
+        for (var i = 0; i < online_gw_Names.length; i++) {
+            var time = (1 + i / 2);
+            var gw = '<div class="col s12 m12 l4 animated fadeInUp hoverable" style="animation-delay: ' + time + 's;"> <div class="card blue-grey darken-1"> <div class="card-content white-text"><span class="card-title">Gateway UUID: </span> <span class="card-title" id="gw_uuid">' + online_gw_Names[i] + '</span> </div> <div class="card-action"> <button class="btn waves-effect waves-light gatewaybtn" type="submit" name="action">Select <i class="material-icons right">send</i> </button> </div> </div> </div>';
+            document.getElementById('containDetails').innerHTML += gw;
+        }
+
+    }
+
     /*var abt = '<div class="col s12 m12 l4 animated fadeInUp hoverable" style="animation-delay: 1.5s;"> <div class="card blue-grey darken-1" > <div class="card-content white-text"> <span class="card-title">Card Title</span> </div> <div class="card-action"> <div class="switch"> <label> Off <input type="checkbox"> <span class="lever"></span> On </label> </div> </div> </div> </div>';*/
     $('.containCards').on('click', '.gatewaybtn', function () {
         $(this).unbind().click(function () {
+            clearInterval(intvl_gw);
         });
         $(".animated").removeClass('fadeInUp');
         $(".animated").addClass('fadeOutDown');
@@ -165,17 +189,17 @@
 
 
             var pps_data = new FormData();
-            var gw_uuid = $(".Title").html().substr(14,$(".Title").html().length)
+            var gw_uuid = $(".Title").html().substr(14, $(".Title").html().length)
             pps_data.append('gw_uuid', gw_uuid)
             console.log(gw_uuid);
-            var pp_id_arr=[];
-           for (var i = 0; i < ($('input:checkbox:checked').length); i++) {
+            var pp_id_arr = [];
+            for (var i = 0; i < ($('input:checkbox:checked').length); i++) {
 
-              pp_id_arr.push({'pp_id': ($($('input:checkbox:checked')[i]).parent().parent().parent().siblings('.card-content').find('#pp_id').html())});
-                console.log("oke ",$($('input:checkbox:checked')[i]).parent().parent().parent().siblings('.card-content').find('#pp_id').html());
+                pp_id_arr.push({'pp_id': ($($('input:checkbox:checked')[i]).parent().parent().parent().siblings('.card-content').find('#pp_id').html())});
+                console.log("oke ", $($('input:checkbox:checked')[i]).parent().parent().parent().siblings('.card-content').find('#pp_id').html());
 
             }
-            console.log("pp_id_arr: ",JSON.stringify(pp_id_arr));
+            console.log("pp_id_arr: ", JSON.stringify(pp_id_arr));
             pps_data.append('pp_id_arr', JSON.stringify(pp_id_arr));
             pps_data.append('userPhoto', $('input[type=file]')[0].files[0]);
 
@@ -237,7 +261,7 @@
 
     function progressBar(gw_uuid, pp_id_arr) {
 
-        setInterval(function(){
+        var intervalId = setInterval(function () {
             var settings = {
                 "async": true,
                 "crossDomain": true,
@@ -251,58 +275,23 @@
                 "data": {"gw_uuid": gw_uuid, "pp_id_arr": pp_id_arr}
             }
             $.ajax(settings).done(function (response) {
-                for(var i=0;i<response.length;i++) {
+                for (var i = 0; i < response.length; i++) {
                     console.log(response);
                     $('.card-content').each(function () {
                         if (($(this).find('#pp_id').html()) == response[i].pp_id) {
-                            $(this).siblings('.card-action').find('.determinate').css("width", response[i].progress_pcnt+'%');
+                            $(this).siblings('.card-action').find('.determinate').css("width", response[i].progress_pcnt + '%');
+                            if (response[i].progress_pcnt == '100') {
+                                Materialize.toast('Peripheral Updated!', 4000, 'rounded');
+                                clearInterval(intervalId);
+                            }
                         }
                     });
                 }
             });
 
 
-
-        },5000);
+        }, 5000);
     }
-
-    //Get Gateway Names
-    $(document).ready(function () {
-
-        var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "/dfu/get_online_gws",
-            "method": "GET",
-            "headers": {
-                "cache-control": "no-cache",
-                "postman-token": "95841c1a-de69-5c3d-452f-37c67d3ba688"
-            }
-        }
-
-        $.ajax(settings).done(function (response) {
-//            console.log(response);
-            var online_gw_names = [];
-            for (var i = 0; i < response.length; i++) {
-                online_gw_names.push(response[i].gw_uuid);
-            }
-            populateGw(online_gw_names);
-        });
-
-    });
-
-    //	populateGw(["maninder","swastik","amit"]);
-    function populateGw(online_gw_Names) {
-        console.log("got details",online_gw_Names)
-        for (var i = 0; i < online_gw_Names.length; i++) {
-            var time = (1 + i / 2);
-            var gw = '<div class="col s12 m12 l4 animated fadeInUp hoverable" style="animation-delay: ' + time + 's;"> <div class="card blue-grey darken-1"> <div class="card-content white-text"><span class="card-title">Gateway UUID: </span> <span class="card-title" id="gw_uuid">' + online_gw_Names[i] + '</span> </div> <div class="card-action"> <button class="btn waves-effect waves-light gatewaybtn" type="submit" name="action">Select <i class="material-icons right">send</i> </button> </div> </div> </div>';
-            document.getElementById('containDetails').innerHTML += gw;
-        }
-
-    }
-
-
 </script>
 </body>
 </html>
