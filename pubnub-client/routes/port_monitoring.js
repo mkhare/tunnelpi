@@ -21,7 +21,6 @@ module.exports.find_open_ports = function () {
             console.log(portdata.local.port);
             open_ports.push(portdata.local.port);
         }
-        // console.log(JSON.stringify(portdata, null, 4));
     })
 
     function send_open_ports_data_to_server(err) {

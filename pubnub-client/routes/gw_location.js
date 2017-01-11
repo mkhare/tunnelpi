@@ -2,34 +2,31 @@
  * Created by amit on 20/12/16.
  */
 
-var http = require('http'),
-    proj_config = require("../proj_config");
+var proj_config = require("../proj_config"),
+    ipinfo = require("ipinfo");
 
 module.exports = function (sockio) {
 
-    setInterval(publish_location_using_ip_ipinfoAPI, 30000);
+    //publishing location every 30 seconds
+    publish_location_using_ipinfo();
+    setInterval(publish_location_using_ipinfo, 30000);
 
-    //getting and publishing location to server using ipinfo api
-    function publish_location_using_ip_ipinfoAPI() {
-
-        http.get('http://ipinfo.io', function (res) {
-            res.on('data', function (data) {
-                if (typeof data !== 'undefined' && data) {
-                    // console.log('gloc : ' + data);
-                    data = JSON.parse(data);
-                    console.log("ip : " + data.ip);
-                    var gloc = data["loc"].toString().split(",");
-                    var latitude = parseFloat(gloc[0]);
-                    var longitude = parseFloat(gloc[1]);
-                    var loc_data = {};
-                    loc_data.latitude = latitude;
-                    loc_data.longitude = longitude;
-                    var loc = [latitude, longitude];
-                    publish_location(loc_data);
-                } else {
-                    console.log("unable to find geolocation");
-                }
-            });
+    //method to publish geolocation to the server
+    function publish_location_using_ipinfo(){
+        ipinfo(function (err, data) {
+            if(err){
+                console.log("Error: getting location information: no internet connectivity");
+                return;
+            }
+            // console.log("ip : " + data.ip);
+            var gloc = data["loc"].toString().split(",");
+            var latitude = parseFloat(gloc[0]);
+            var longitude = parseFloat(gloc[1]);
+            var loc_data = {};
+            loc_data.latitude = latitude;
+            loc_data.longitude = longitude;
+            console.log("loc_data: ", loc_data);
+            publish_location(loc_data);
         })
     }
 
