@@ -1,0 +1,287 @@
+  <html>
+  <head>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+	   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	    <style type="text/css">
+	    ::-webkit-scrollbar { 
+		    display: none; 
+		}
+		::-moz-scrollbar { 
+		    display: none; 
+		}
+		.pow{
+		    box-shadow: inset 0 300px 0 0 #26a69a;
+		    color: #FFF;
+		}
+		.powdow{
+		    box-shadow: inset 0 600px 0 0 #4db6ac;
+		    color: #FFF;
+		}
+		.pointer{
+			cursor: pointer;
+		}
+	    </style>
+  </head>
+  <body style="overflow-x: hidden;">
+
+  	 <nav class="teal " >
+	    <div class="nav-wrapper">
+	      <a href="#" class="brand-logo">Wispero</a>
+	      <ul id="nav-mobile" class="right hide-on-med-and-down">
+	        <li><a href="sass.html">Sass</a></li>
+	        <li><a href="badges.html">Components</a></li>
+	        <li><a href="collapsible.html">JavaScript</a></li>
+	      </ul>
+	    </div>
+	  </nav>
+<div class="col s12">
+	<div class="row TitleDiv" style="background-image: url('b.jpg');transition: all ease 1s;margin-bottom: 0;">
+		<div class="col s12">&nbsp</div>
+		<div class="col s12">&nbsp</div>
+		<div class="col s12">&nbsp</div>
+		<div class="col s12">&nbsp</div>
+		<div class="col s12">
+			  <h5 class="flow-text center-align animated fadeInUp Title">List of all the Online Gateways</h5>
+	  	</div>
+	  	<div class="col s12">&nbsp</div>
+		<div class="col s12">&nbsp</div>
+		<div class="col s12">&nbsp</div>
+		<div class="col s12">&nbsp</div>
+	</div>
+</div>
+<div class="col s12 load center">
+	
+</div>
+    <div class="col s12 theCardsContainer" style="transition: all ease 1s;">
+	    <div class="container">
+		      <div class="row containCards" id="containDetails">
+		       
+		       <!-- <div class="col s12 m12 l4 animated fadeInUp hoverable" style="animation-delay: 1s;">
+			      <div class="card blue-grey darken-1">
+			        <div class="card-content white-text">
+			          <span class="card-title">Card Title</span>
+			          
+			        </div>
+			        <div class="card-action">
+			          <button class="btn waves-effect waves-light gatewaybtn" type="submit" name="action">Select
+					    <i class="material-icons right">send</i>
+					  </button>
+			        </div>
+			      </div>
+			    </div> -->
+
+		      </div>
+	 	</div>
+	</div>
+
+	<script>
+	/*var abt = '<div class="col s12 m12 l4 animated fadeInUp hoverable" style="animation-delay: 1.5s;"> <div class="card blue-grey darken-1" > <div class="card-content white-text"> <span class="card-title">Card Title</span> <p>Connected to Periperal - 78%</p> </div> <div class="card-action"> <div class="switch"> <label> Off <input type="checkbox"> <span class="lever"></span> On </label> </div> </div> </div> </div>';*/
+		$('.containCards').on('click', '.gatewaybtn', function(){
+			   $(this).unbind().click(function() {});
+			$(".animated").removeClass('fadeInUp');
+			$(".animated").addClass('fadeOutDown');
+			let title =($(this).parent().siblings('.card-content').find('.card-title').html());
+			setTimeout(function(){
+				Materialize.toast('Scanning For Periperals!', 4000, 'rounded')
+				$(".Title").removeClass('fadeOutDown');
+				$(".Title").addClass('fadeInUp');
+				$(".Title").html(title);
+				$(".load").html('<div class="preloader-wrapper big active center-align"> <div class="spinner-layer spinner-blue"> <div class="circle-clipper left"> <div class="circle"></div> </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div> </div> </div> <div class="spinner-layer spinner-red"> <div class="circle-clipper left"> <div class="circle"></div> </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div> </div> </div> <div class="spinner-layer spinner-yellow"> <div class="circle-clipper left"> <div class="circle"></div> </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div> </div> </div> <div class="spinner-layer spinner-green"> <div class="circle-clipper left"> <div class="circle"></div> </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div> </div> </div> </div>');
+				$(".TitleDiv").children()[0].remove();
+				$(".TitleDiv").children()[5].remove();
+			},1000)
+			setTimeout(function(){
+				Materialize.toast('Fetching Results!', 4000, 'rounded')
+				$(".containCards").html('');	
+			},4500)
+			setTimeout(function(){
+				$(".TitleDiv").addClass('pow');
+			},2000)
+			$('html, body').animate({ scrollTop: 0 }, 'slow', function () {});
+			setTimeout(function(){
+				requestPeripheralNames($(this).parent().siblings('.card-content').find('.card-title').html());	
+			},6000)
+			
+		})
+
+		function requestPeripheralNames(dataId){
+			/*var settings = {
+				"async": true,
+				"crossDomain": true,
+				"url": "/dfu/get_gw_pps_details",
+				"method": "POST",
+				"headers": {
+				"authorization": "Basic YXNzOnBhc3N3b3Jkc3Nk",
+				"cache-control": "no-cache",
+				"postman-token": "95841c1a-de69-5c3d-452f-37c67d3ba688"
+				},
+				"data": {"pp_id":dataId}
+			}
+
+			$.ajax(settings).done(function (response) {
+				var ppNames=[];
+				for(var i=0;i<response.length;i++)
+					{
+						ppNames.push(response[i]);
+					}
+					ppNamesRender(ppNames);
+				});*/
+				ppNamesRender(["hey","hello","bbie","whatsup"]);
+			}
+		
+			//ppNamesRender(["hey","hello","bbie","whatsip"]);
+
+		//$("nav").click(function(){
+			function ppNamesRender(ppNames){
+			Materialize.toast('Found Periperals!', 4000, 'rounded');
+			$(".load").remove();
+			for(var i=0;i<ppNames.length;i++){
+				time=(1+i/2);
+				var abt = '<div class="col s12 m12 l4 animated fadeInUp hoverable" style="animation-delay: '+time+'s;"> <div class="card blue-grey darken-1" > <div class="card-content white-text"> <span class="card-title">'+ppNames[i]+'</span> <p>Connected to Periperal - 78%</p> </div> <div class="card-action"> <div class="switch"> <label> Off <input type="checkbox"> <span class="lever"></span> On </label> </div> </div> </div> </div>';
+				
+				$(".containCards").append(abt);
+			}
+
+
+			//$(".containCards").html(abt+abt+abt+abt+abt+abt+abt+abt+abt+abt+abt);
+			$(".TitleDiv").children()[4].remove();
+			$(".TitleDiv").children()[5].remove();
+			$(".TitleDiv").append('<div class="col s6"><form id="dataForm" class="animated bounceInLeft"action="#" style="position:relative;left:15%;"> <div class="file-field input-field"> <div class="btn red waves-effect waves-light"> <span>Upload Zip<i class="material-icons right">archive</i></span> <input type="file" name="group1"> </div> <div class="file-path-wrapper"> <input class="file-path validate" type="text"> </div> </div> </form></div><div class="col s6"><a style="position:relative;left:60%;" class="btn-floating btn-large waves-effect waves-light red animated bounceInRight startDfuBtn"><i class="material-icons">done</i></a></div>');
+		}
+		
+
+		$('.TitleDiv').on('click', '.startDfuBtn', function() {
+			//console.log(($('input[name=group1]:checked', '#dataForm').val()));
+			 file = document.forms['dataForm']['group1'].files.length;
+			 //if(file!=0 && )
+		 if((document.forms['dataForm']['group1'].files.length)!=0 && ($('input:checkbox:checked').length)!=0){
+			$(this).removeClass('bounceInRight');
+			$(this).addClass('bounceOutRight');
+			$(this).parent().siblings('.s6').find('form').removeClass('bounceInLeft')
+			$(this).parent().siblings('.s6').find('form').addClass('bounceOutLeft')
+			setTimeout(function(){
+				$(".TitleDiv").children()[1].remove();
+				$(".TitleDiv").children()[4].remove();
+				$(".TitleDiv").children()[4].remove();
+				$(".TitleDiv").append('<div class="col s12">&nbsp</div>');
+			},1000)
+			$(this).unbind().click(function() {});
+		   /* $('input:checkbox:not(:checked)').parent().parent().parent().parent().parent().removeClass('fadeInUp');
+			$('input:checkbox:not(:checked)').parent().parent().parent().parent().parent().addClass('fadeOutDown');*/
+			$('input:checkbox').parent().parent().parent().parent().parent().removeClass('fadeInUp');
+			$('input:checkbox').parent().parent().parent().parent().parent().addClass('fadeOutDown');
+			$('input:checkbox:checked').parent().parent().parent().parent().parent().addClass('pointer');
+			setTimeout(function(){
+				$('input:checkbox:not(:checked)').parent().parent().parent().parent().parent().remove();
+				$('input:checkbox').parent().parent().parent().parent().parent().removeClass('fadeOutDown');	
+				$('input:checkbox:checked').parent().parent().parent().parent().parent().addClass('fadeInUp');
+				$('html, body').animate({ scrollTop: 0 }, 'slow', function () {});
+				Materialize.toast('File Uploading!', 4000, 'rounded');
+				$('input:checkbox:checked').parent().parent().parent().html('<div class="progress"> <div class="determinate" style="width: 70%"></div> </div>')
+			},3500)
+		}else{
+			Materialize.toast('Select Peripherals and Upload File', 4000, 'rounded');
+		}
+
+		});
+
+
+	// 	//Get Gateway Names
+	// $(document).ready(function() {
+		
+	// 		var settings = {
+	// 			"async": true,
+	// 			"crossDomain": true,
+	// 			"url": "/dfu/get_online_gws",
+	// 			"method": "GET",
+	// 			"headers": {
+	// 			"authorization": "Basic YXNzOnBhc3N3b3Jkc3Nk",
+	// 			"cache-control": "no-cache",
+	// 			"postman-token": "95841c1a-de69-5c3d-452f-37c67d3ba688"
+	// 			},
+	// 			"data": dataId
+	// 		}
+
+	// 		$.ajax(settings).done(function (response) {
+	// 			console.log(response);
+	// 			var online_gw_Names=[];
+	// 			for(var i=0;i<response.length;i++)
+	// 				{
+	// 					online_gw_Names.push(response[i]);
+	// 				}
+	// 			populateGw(online_gw_Names);
+	// 		});
+		
+	// });
+
+	populateGw(["maninder","swastik","amit"]);
+	function populateGw(online_gw_Names){
+		
+		for(var i=0;i<online_gw_Names.length;i++){
+			var time=(1+i/2);
+			var gw='<div class="col s12 m12 l4 animated fadeInUp hoverable" style="animation-delay: '+time+'s;"> <div class="card blue-grey darken-1"> <div class="card-content white-text"> <span class="card-title">'+online_gw_Names[i]+'</span> </div> <div class="card-action"> <button class="btn waves-effect waves-light gatewaybtn" type="submit" name="action">Select <i class="material-icons right">send</i> </button> </div> </div> </div>';
+			document.getElementById('containDetails').innerHTML+=gw;
+		}
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+  </body>
+  </html>
+
+
+<!-- 
+  gateway card
+  -------------
+
+   <div class="col s12 m12 l4 animated fadeInUp hoverable" style="animation-delay: 1s;">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Card Title</span>
+          <p>I am a very simple card. I am good at containing small bits of information.</p>
+        </div>
+        <div class="card-action">
+          <button class="btn waves-effect waves-light gatewaybtn" type="submit" name="action">Submit
+		    <i class="material-icons right">send</i>
+		  </button>
+        </div>
+      </div>
+    </div> -->
+
+
+<!--     peripehral card
+    ---------------
+    <div class="col s12 m12 l4 animated fadeInUp hoverable" style="animation-delay: 1.5s;">
+      <div class="card blue-grey darken-1" >
+        <div class="card-content white-text">
+          <span class="card-title">Card Title</span>
+          <p>I am a very simple card. I am good at containing small bits of information.</p>
+        </div>
+        <div class="card-action">
+          <div class="switch">
+		    <label>
+		      Off
+		      <input type="checkbox">
+		      <span class="lever"></span>
+		      On
+		    </label>
+		  </div>
+        </div>
+      </div>
+    </div> -->
+  <!--   ($($('input:checkbox:checked')[0]).parent().parent().parent().siblings('.card-content').find('.card-title').html()) -->

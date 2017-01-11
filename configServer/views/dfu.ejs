@@ -1,0 +1,339 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style type="text/css">
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        ::-moz-scrollbar {
+            display: none;
+        }
+
+        .pow {
+            box-shadow: inset 0 300px 0 0 #26a69a;
+            color: #FFF;
+        }
+
+        .powdow {
+            box-shadow: inset 0 600px 0 0 #4db6ac;
+            color: #FFF;
+        }
+
+        .pointer {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body style="overflow-x: hidden;">
+
+<% include ./partials/header.ejs %>
+
+<div class="col s12">
+    <div class="row TitleDiv" style="background-image: url('/images/b.jpg');transition: all ease 1s;margin-bottom: 0;">
+        <div class="col s12">&nbsp</div>
+        <div class="col s12">&nbsp</div>
+        <div class="col s12">&nbsp</div>
+        <div class="col s12">&nbsp</div>
+        <div class="col s12">
+            <h5 class="flow-text center-align animated fadeInUp Title">List of all the Online Gateways</h5>
+        </div>
+        <div class="col s12">&nbsp</div>
+        <div class="col s12">&nbsp</div>
+        <div class="col s12">&nbsp</div>
+        <div class="col s12">&nbsp</div>
+    </div>
+</div>
+<div class="col s12 load center">
+
+</div>
+<div class="col s12 theCardsContainer" style="transition: all ease 1s;">
+    <div class="container">
+        <div class="row containCards" id="containDetails">
+
+            <!-- <div class="col s12 m12 l4 animated fadeInUp hoverable" style="animation-delay: 1s;">
+               <div class="card blue-grey darken-1">
+                 <div class="card-content white-text">
+                   <span class="card-title">Card Title</span>
+
+                 </div>
+                 <div class="card-action">
+                   <button class="btn waves-effect waves-light gatewaybtn" type="submit" name="action">Select
+                     <i class="material-icons right">send</i>
+                   </button>
+                 </div>
+               </div>
+             </div> -->
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "/dfu/get_online_gws",
+        "method": "GET",
+        "headers": {
+            "cache-control": "no-cache",
+            "postman-token": "95841c1a-de69-5c3d-452f-37c67d3ba688"
+        }
+    }
+
+    $.ajax(settings).done(function (response) {
+//            console.log(response);
+        var online_gw_names = [];
+        for (var i = 0; i < response.length; i++) {
+            online_gw_names.push(response[i].gw_uuid);
+        }
+        populateGw(online_gw_names);
+    });
+
+    //	populateGw(["maninder","swastik","amit"]);
+    function populateGw(online_gw_Names) {
+        console.log("got details", online_gw_Names)
+        for (var i = 0; i < online_gw_Names.length; i++) {
+            var time = (1 + i / 2);
+            var gw = '<div class="col s12 m12 l4 animated fadeInUp hoverable" style="animation-delay: ' + time + 's;"> <div class="card blue-grey darken-1"> <div class="card-content white-text"><span class="card-title">Gateway UUID: </span> <span class="card-title" id="gw_uuid">' + online_gw_Names[i] + '</span> </div> <div class="card-action"> <button class="btn waves-effect waves-light gatewaybtn" type="submit" name="action">Select <i class="material-icons right">send</i> </button> </div> </div> </div>';
+            document.getElementById('containDetails').innerHTML += gw;
+        }
+
+    }
+
+    /*var abt = '<div class="col s12 m12 l4 animated fadeInUp hoverable" style="animation-delay: 1.5s;"> <div class="card blue-grey darken-1" > <div class="card-content white-text"> <span class="card-title">Card Title</span> </div> <div class="card-action"> <div class="switch"> <label> Off <input type="checkbox"> <span class="lever"></span> On </label> </div> </div> </div> </div>';*/
+    $('.containCards').on('click', '.gatewaybtn', function () {
+        $(this).unbind().click(function () {
+            clearInterval(intvl_gw);
+        });
+        $(".animated").removeClass('fadeInUp');
+        $(".animated").addClass('fadeOutDown');
+        let title = "Gateway UUID: ";
+        title += ($(this).parent().siblings('.card-content').find('#gw_uuid').html());
+        setTimeout(function () {
+            Materialize.toast('Scanning For Periperals!', 4000, 'rounded')
+            $(".Title").removeClass('fadeOutDown');
+            $(".Title").addClass('fadeInUp');
+            $(".Title").html(title);
+            $(".load").html('<div class="preloader-wrapper big active center-align"> <div class="spinner-layer spinner-blue"> <div class="circle-clipper left"> <div class="circle"></div> </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div> </div> </div> <div class="spinner-layer spinner-red"> <div class="circle-clipper left"> <div class="circle"></div> </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div> </div> </div> <div class="spinner-layer spinner-yellow"> <div class="circle-clipper left"> <div class="circle"></div> </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div> </div> </div> <div class="spinner-layer spinner-green"> <div class="circle-clipper left"> <div class="circle"></div> </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div> </div> </div> </div>');
+            $(".TitleDiv").children()[0].remove();
+            $(".TitleDiv").children()[5].remove();
+        }, 1000)
+        /*   setTimeout(function () {
+         Materialize.toast('Fetching Results!', 4000, 'rounded')
+         $(".containCards").html('');
+         }, 4500)*/
+        setTimeout(function () {
+            $(".TitleDiv").addClass('pow');
+        }, 2000)
+        $('html, body').animate({scrollTop: 0}, 'slow', function () {
+        });
+        setTimeout(function () {
+            requestPeripheralNames($(this).parent().siblings('.card-content').find('#gw_uuid').html());
+        }, 4000)
+
+    })
+
+    function requestPeripheralNames(gw_uuid) {
+        Materialize.toast('Fetching Results!', 2000, 'rounded')
+        $(".containCards").html('')
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "/dfu/get_gw_pps_details",
+            "method": "POST",
+            "headers": {
+                "cache-control": "no-cache",
+                "postman-token": "95841c1a-de69-5c3d-452f-37c67d3ba688"
+            },
+            "data": {"pp_id": gw_uuid}
+        }
+
+        $.ajax(settings).done(function (response) {
+            var ppNames = [];
+            for (var i = 0; i < response.length; i++) {
+                ppNames.push(response[i].pp_id);
+            }
+            ppNamesRender(ppNames);
+        });
+        //   ppNamesRender(["hey", "hello", "bbie", "whatsup"]);
+    }
+
+    //ppNamesRender(["hey","hello","bbie","whatsip"]);
+
+    //$("nav").click(function(){
+    function ppNamesRender(ppNames) {
+        Materialize.toast('Found Periperals!', 4000, 'rounded');
+        $(".load").remove();
+        for (var i = 0; i < ppNames.length; i++) {
+            time = (1 + i / 2);
+            var abt = '<div class="col s12 m12 l4 animated fadeInUp hoverable" style="animation-delay: ' + time + 's;"> <div class="card blue-grey darken-1" > <div class="card-content white-text center-align"><span class="card-title">Peripheral ID: </span> <span class="card-title" id="pp_id">' + ppNames[i] + '</span> </div> <div class="card-action"> <div class="switch"> <label> Off <input type="checkbox"> <span class="lever"></span> On </label> </div> </div> </div> </div>';
+
+            $(".containCards").append(abt);
+        }
+
+        $(".TitleDiv").children()[4].remove();
+        $(".TitleDiv").children()[5].remove();
+        $(".TitleDiv").append('<div class="col s6 "> <form id="dataForm" class="animated bounceInLeft" style="position:relative;left:15%;"> <div class="file-field input-field"> <div class="btn red waves-effect waves-light"><span>Upload Zip<i class="material-icons right">archive</i></span> <input type="file" name="userPhoto"></div> <div class="file-path-wrapper"><input class="file-path validate" type="text"></div> </div> </form> </div> <div class="col s6"><a style="position:relative;left:60%;" class="btn-floating btn-large waves-effect waves-light red animated bounceInRight startDfuBtn"><i class="material-icons">done</i></a> </div>');
+    }
+
+    $('.TitleDiv').on('click', '.startDfuBtn', function () {
+
+        if ((document.forms['dataForm']['userPhoto'].files.length) != 0 && ($('input:checkbox:checked').length) != 0) {
+
+
+            var pps_data = new FormData();
+            var gw_uuid = $(".Title").html().substr(14, $(".Title").html().length)
+            pps_data.append('gw_uuid', gw_uuid)
+            console.log(gw_uuid);
+            var pp_id_arr = [];
+            for (var i = 0; i < ($('input:checkbox:checked').length); i++) {
+
+                pp_id_arr.push({'pp_id': ($($('input:checkbox:checked')[i]).parent().parent().parent().siblings('.card-content').find('#pp_id').html())});
+                console.log("oke ", $($('input:checkbox:checked')[i]).parent().parent().parent().siblings('.card-content').find('#pp_id').html());
+
+            }
+            console.log("pp_id_arr: ", JSON.stringify(pp_id_arr));
+            pps_data.append('pp_id_arr', JSON.stringify(pp_id_arr));
+            pps_data.append('userPhoto', $('input[type=file]')[0].files[0]);
+
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "/dfu/pp_id_and_file",
+                "method": "POST",
+                "headers": {
+                    "cache-control": "no-cache",
+                    "postman-token": "28090140-e8a9-6687-70dd-32c3c8482dea"
+                },
+                "processData": false,
+                "contentType": false,
+                "mimeType": "multipart/form-data",
+                "data": pps_data
+            }
+
+            $.ajax(settings).done(function (response) {
+                //$("#status").empty().text(response);
+
+                $(this).removeClass('bounceInRight');
+                $(this).addClass('bounceOutRight');
+                $(this).parent().siblings('.s6').find('form').removeClass('bounceInLeft')
+                $(this).parent().siblings('.s6').find('form').addClass('bounceOutLeft')
+                setTimeout(function () {
+                    $(".TitleDiv").children()[1].remove();
+                    $(".TitleDiv").children()[4].remove();
+                    $(".TitleDiv").children()[4].remove();
+                    $(".TitleDiv").append('<div class="col s12">&nbsp</div>');
+                }, 1000)
+                $(this).unbind().click(function () {
+                });
+                /* $('input:checkbox:not(:checked)').parent().parent().parent().parent().parent().removeClass('fadeInUp');
+                 $('input:checkbox:not(:checked)').parent().parent().parent().parent().parent().addClass('fadeOutDown');*/
+                $('input:checkbox').parent().parent().parent().parent().parent().removeClass('fadeInUp');
+                $('input:checkbox').parent().parent().parent().parent().parent().addClass('fadeOutDown');
+                $('input:checkbox:checked').parent().parent().parent().parent().parent().addClass('pointer');
+                setTimeout(function () {
+                    $('input:checkbox:not(:checked)').parent().parent().parent().parent().parent().remove();
+                    $('input:checkbox').parent().parent().parent().parent().parent().removeClass('fadeOutDown');
+                    $('input:checkbox:checked').parent().parent().parent().parent().parent().addClass('fadeInUp');
+                    $('html, body').animate({scrollTop: 0}, 'slow', function () {
+                    });
+                    Materialize.toast('File Uploading!', 4000, 'rounded');
+                    $('input:checkbox:checked').parent().parent().parent().html('<div class="progress"> <div class="determinate" style="width: 0%"></div> </div>')
+                    progressBar(gw_uuid, pp_id_arr);
+                }, 3500)
+
+            });
+
+            return false;
+
+        } else {
+            Materialize.toast('Select Peripherals and Upload File', 4000, 'rounded');
+        }
+
+    });
+
+    function progressBar(gw_uuid, pp_id_arr) {
+
+        var intervalId = setInterval(function () {
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "/dfu/progress_update",
+                "method": "POST",
+                "headers": {
+                    "cache-control": "no-cache",
+                    "postman-token": "28090140-e8a9-6687-70dd-32c3c8482dea"
+                },
+
+                "data": {"gw_uuid": gw_uuid, "pp_id_arr": pp_id_arr}
+            }
+            $.ajax(settings).done(function (response) {
+                for (var i = 0; i < response.length; i++) {
+                    console.log(response);
+                    $('.card-content').each(function () {
+                        if (($(this).find('#pp_id').html()) == response[i].pp_id) {
+                            $(this).siblings('.card-action').find('.determinate').css("width", response[i].progress_pcnt + '%');
+                            if (response[i].progress_pcnt == '100') {
+                                Materialize.toast('Peripheral Updated!', 4000, 'rounded');
+                                clearInterval(intervalId);
+                            }
+                        }
+                    });
+                }
+            });
+
+
+        }, 5000);
+    }
+</script>
+</body>
+</html>
+
+
+<!-- 
+  gateway card
+  -------------
+
+   <div class="col s12 m12 l4 animated fadeInUp hoverable" style="animation-delay: 1s;">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Card Title</span>
+          <p>I am a very simple card. I am good at containing small bits of information.</p>
+        </div>
+        <div class="card-action">
+          <button class="btn waves-effect waves-light gatewaybtn" type="submit" name="action">Submit
+		    <i class="material-icons right">send</i>
+		  </button>
+        </div>
+      </div>
+    </div> -->
+
+
+<!--     peripehral card
+    ---------------
+    <div class="col s12 m12 l4 animated fadeInUp hoverable" style="animation-delay: 1.5s;">
+      <div class="card blue-grey darken-1" >
+        <div class="card-content white-text">
+          <span class="card-title">Card Title</span>
+          <p>I am a very simple card. I am good at containing small bits of information.</p>
+        </div>
+        <div class="card-action">
+          <div class="switch">
+		    <label>
+		      Off
+		      <input type="checkbox">
+		      <span class="lever"></span>
+		      On
+		    </label>
+		  </div>
+        </div>
+      </div>
+    </div> -->
+<!--   ($($('input:checkbox:checked')[0]).parent().parent().parent().siblings('.card-content').find('.card-title').html()) -->

@@ -1,327 +1,118 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <% include ./partials/head.ejs %>
-    <script type="text/javascript">
-        $(document).ready(function () {
+    <title></title>
 
-            var username = '<%= user %>'.trim();
-            console.log('username : ' + username);
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
 
-            var socket = io.connect("/profile_nsp");
-            console.log("socket on profile : ", io.socket);
+    <!-- MAP -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
 
-            socket.on('connect', function (data) {
-                socket.emit('beConnect', {uname: username});
-                socket.on('mongodata', function (mongodata) {
-                    console.log("mongodata : " + mongodata);
-                    mongodata.data.forEach(function (item, index, array) {
-                        var divid = item.uuid + item.subscribe_key + item.publish_key + item.channel_name + item.email;
-                        divid = divid.split('').reverse().join('').split('@').join('').split('.').join('');
-                        $("#" + divid).addClass('user-online');
-                    })
-                });
-                socket.on("online_peripheral_data", function (peripherals) {
-                    console.log("be_online peripheral data : ", peripherals);
-                    peripherals.forEach(function (tagid) {
-                        $("#" + tagid).addClass('user-online');
-                    });
-                })
-            })
-
-            socket.on('beUserOnline', function (data) {
-                console.log('user online event');
-                var ele = data.tagid.toString();
-                console.log(ele);
-                $("#" + ele).addClass('user-online');
-                socket.on("be_peripheral_online", function (peripheral_data) {
-                    var ele = peripheral_data.tagid.toString();
-                    console.log("event : peripheral offline : " + peripheral_data.peripheral_uuid);
-                    $("#" + ele).addClass('user-online');
-                });
-
-                socket.on("be_peripheral_offline", function (peripheral_data) {
-                    var ele = peripheral_data.tagid.toString();
-                    console.log("event : peripheral offline : " + peripheral_data.peripheral_uuid);
-                    $("#" + ele).removeClass('user-online');
-                });
-
-            });
-
-            socket.on('beUserOffline', function (data) {
-                console.log('user offline event');
-                var ele = data.tagid.toString();
-                console.log(ele);
-                $("#" + ele).removeClass('user-online');
-
-                //can't  change the link color when the gateway is offline
-                //since the colour has to be changed, when the gateway will be online again
-//                var ele = ele + 'url';
-//                $('#' + ele).css('color', 'black');
-            });
-
-            socket.on('disconnect', function (data) {
-                window.alert("Server disconnected. Please refresh the page.");
-                socket.disconnect();
-            })
-
-            socket.on('eoninit', function (data) {
-                console.log('json data : ' + JSON.stringify(data));
-                var pn = PUBNUB.init({
-                    publish_key: data.publish_key,
-                    subscribe_key: data.subscribe_key
-                });
-
-//                var username = $('#username').html();
-//                console.log("channel name received from server : " + data.channel_name);
-
-//                mb_token: 'pk.eyJ1IjoiYW1pdGNoYWhhcjM4NCIsImEiOiJjaXFsdXBmenAwMDU2ZnBubnV5dG9rY241In0.fhR8Vj-CCDSioBvBNKGnUA',
-//                        mb_id: 'amitchahar384.0lgk03ih',
-
-                var urlreq_channel_name = username + "_urlreq";
-                var urlresp_channel_name = username + "_urlresp";
-                var url_not_recvd = true;
-//                console.log('url channel name : ' + url_channel_name)
-                pn.subscribe({
-                    channel: urlresp_channel_name,
-                    callback: url_received
-                });
-
-                function url_received(urldata) {
-//                    urldata = JSON.parse(urldata);
-                    clearInterval(urlreq_timer);
-                    if (url_not_recvd) {
-                        console.log("Received url : " + JSON.stringify(urldata));
-                        var gwurlid = '#' + urldata.gwurlid;
-                        var gwurl = urldata.gwurl;
-                        $(gwurlid).wrap("<a target='_blank' href='" + gwurl + "'></a>");
-                        $(gwurlid).css('color', 'blue');
-//                        url_not_recvd = false;
-                    }
-                }
-
-                var urlreq_timer = setInterval(function () {
-                    pn.publish({
-                        channel: urlreq_channel_name,
-                        message: "url request",
-                        callback: log,
-                        error: retry
-                    });
-
-                    function log(e) {
-                        console.log("requesting url over pubnub");
-                    }
-
-                    function retry() {
-                        console.log('error occurred.');
-                    }
-                }, 1000);
-                var map = eon.map({
-                    pubnub: pn,
-                    id: 'map',
-                    mb_token: 'pk.eyJ1IjoiYW1pdGNoYWhhcjM4NCIsImEiOiJjaXFsdXBmenAwMDU2ZnBubnV5dG9rY241In0.fhR8Vj-CCDSioBvBNKGnUA',
-                    mb_id: 'amitchahar384.0lgk03ih',
-                    subscribe_key: 'data.subscribe_key',
-                    channel: username,
-//                    message: function (data) {
-////                        console.log("data in mapview : ");
-//
-//                        for ( var obj in data){
-////                            console.log("obj in data : " + JSON.stringify(data[obj]));
-//                            map.setView(data[obj].latlng, 2);
-//                            break;
-//                        }
-////                        map.setView(data.point_10.latlng, 2);
-//                    },
-                    connect: connect,
-                    marker: function (latlng, data) {
-
-                        var marker = new L.RotatedMarker(latlng, {});
-                        console.log("data in marker : " + JSON.stringify(data));
-                        marker.bindPopup('UUID : ' + data);
-                        return marker;
-                    }
-                });
-
-                function connect() {
-                    console.log("connected to the pubnub eon");
-                };
-            })
-        })
-    </script>
-    <style type="text/css">
-        html, body {
-            height: 100%;
-        }
-
-        .ui.grid {
-            height: 100%;
-        }
-
-        ul {
-            display: table;
-            margin: auto;
-            text-align: left;
-        }
-
-        .list {
-            text-align: center
-        }
-
-        .list ul {
-            display: inline-block;
-            text-align: left;
-        }
-
-        #map {
-            height: 100%;
-            width: 100%;
-            display: inline-block;
-        }
-    </style>
 </head>
 <body>
-<div class="row" id="msg"></div>
+
 <% include ./partials/header.ejs %>
-<!--<center>-->
-<!--<h2 class="ui header">-->
-<!--<img src="/images/avatar/user1.png" class="ui circular image">-->
-<!--<div id="username"></div>-->
-<!--</h2>-->
-<!--</center>-->
 
-<div class="ui padded equal height stackable grid">
-    <div class="eight wide center aligned column">
-        <h3 class="ui header">No. of connected gateways : <%= connected_gateways %></h3>
-        <h3 class="ui header">Connected gateways details : </h3>
-        <br><br>
-        <ul>
-            <%
-            var lastChannel = '';
-            if(mongoData && mongoData[0]) {
-                lastChannel = mongoData[0].channelName;
+<div id="mapid" style="height: 450px;"></div>
+<div class=" grey lighten-4">
+    <div class="container section  ">
+        <div class="row" id="dataCard">
 
-            mongoData.forEach(function (item, index, array) {
-                var imgid = item.uuid + item.subscribe_key + item.publish_key + item.channel_name + item.email;
-                imgid = imgid.toString().split('').reverse().join('');
-                imgid = imgid.split('@').join('');
-                imgid = imgid.split('.').join('');
-
-                var urlid = imgid + 'url';
-
-            if (index == 0) { %>
-
-            <li><h4>Channel Name : <%= item.channelName %></h4>
-                <ul>
-                    <li>
-                        <h4 class="ui header" style="display: inline-block;" id="<%= urlid %>">Gateway UUID : <%= item.uuid %> &nbsp;
-                            <div id="<%= imgid %>" class="dot"></div>
-                        </h4>
-                        <div id="gw<%= item.uuid %>"></div>
-                        <br>
-                    </li>
-                    <% }
-                    else if (item.channelName == lastChannel) { %>
-                    <li>
-                        <h4 class="ui header" style="display: inline-block;" id="<%= urlid %>">Gateway UUID : <%= item.uuid %> &nbsp;
-                            <div id="<%= imgid %>" class="dot"></div>
-                        </h4>
-                        <div id="gw<%= item.uuid %>"></div>
-                        <br>
-                    </li>
-                    <% }
-                    else { %>
-                </ul>
-            </li>
-            <br>
-            <% lastChannel = item.channelName; %>
-
-            <li><h4> Channel Name : <%= item.channelName %></h4>
-                <ul>
-                    <li>
-                        <h4 class="ui header" style="display: inline-block;" id="<%= urlid %>">Gateway UUID : <%= item.uuid %> &nbsp;
-                            <div id="<%= imgid %>" class="dot"></div>
-                        </h4>
-                        <div id="gw<%= item.uuid %>"></div>
-                        <br>
-                    </li>
-                    <% }
-                    });
-                    %>
-                </ul>
-            </li>
-        </ul>
-
-        <%
-        }
-        %>
-        </ul>
-    </div>
-    <!--<div class="ui vertical divider"></div>-->
-    <div class="eight wide column">
-        <div class="ui grid">
-            <div class="sixteen wide column">
-                <div id='map'></div>
-            </div>
         </div>
+
     </div>
 </div>
 
-<script type="text/javascript">
-//    setTimeout(function () {
+<script>
 
-        function build_tagid(peripheral_data){
-            var tagid = peripheral_data.peripheral_uuid + peripheral_data.channel_name + peripheral_data.gw_uuid + peripheral_data.email;
-            tagid = tagid.toString().split('').reverse().join('');
-            tagid = tagid.split('@').join('');
-            tagid = tagid.split('.').join('');
-            return tagid;
+    var mymap = L.map('mapid').setView([12.9716, 77.5946], 3);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        setView: true,
+        id: 'maninder.2eaonek5',
+        accessToken: 'pk.eyJ1IjoibWFuaW5kZXIiLCJhIjoiY2l3eWxyd3NiMDF6aDJ6cGhnOTk1N3d0cyJ9.wZ2KhXUxblDQ5rQmKcuaSg'
+    }).addTo(mymap);
+
+    get_gw_details();
+    setInterval(get_gw_details, 10000);
+
+
+    function get_gw_details() {
+
+        var firsttime = true;
+        mymap.eachLayer(function (layer) {
+            if (!firsttime) {
+                mymap.removeLayer(layer);
+            }
+            firsttime = false;
+        })
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "/get_gw_details",
+            "method": "GET",
+            "headers": {
+                "cache-control": "no-cache",
+                "postman-token": "09e78491-7070-bfe0-af31-4c142be58554"
+            }
         }
 
-        var username = '<%= user %>'.trim();
-        $.ajax({
-            url: 'fetch_peripherals',
-            dataType: 'json',
-            type: 'GET',
-            data: {"email": username},
-            success: function (data, textStatus, jQxhr) {
-                //$('#progress_log_div').css('visibility', 'visible');
-                if (textStatus == "success") {
-                    console.log("data of ajax req : ", data);
-                    var html_data = "<ul>";
-                    var last_gw_uuid = -1;
-                    data.forEach(function (item) {
-                        if (last_gw_uuid == -1) {
-                            last_gw_uuid = item.gw_uuid;
-                        } else if (last_gw_uuid != item.gw_uuid) {
-//                                var $id = '#' + last_gw_uuid;
-                            html_data += "</ul>";
-                            console.log("peripheral html data : " + html_data);
-                            var $id = '#gw' + last_gw_uuid;
-                            $($id).html(html_data);
-                            html_data = "<ul>"
-                            last_gw_uuid = item.gw_uuid;
-                        }
-                        var tagid = build_tagid(item);
-                        html_data += "<li><h5>Peripheral -> " + item.peripheral_addr + "&nbsp;<div style='visibility: hidden' id=" + tagid + " class='dot'></div></h5></li>";
-                    });
-                    if (html_data != "<ul>") {
-                        html_data += "</ul>";
-                        console.log("peripheral html data : " + html_data);
-                        var $id = '#gw' + last_gw_uuid;
-//                        $($id).val(function (_, val) {
-//                            return val + html_data;
-//                        });
-                        $($id).html(html_data);
-                    }
+        $.ajax(settings).done(function (response) {
+
+            document.getElementById('dataCard').innerHTML = "";
+            var id, state, lat, long;
+
+            for (var i = 0; i < response.gw_loc_details.length; i++) {
+                id = response.gw_loc_details[i].gw_uuid;
+                long = response.gw_loc_details[i].longitude;
+                lat = response.gw_loc_details[i].latitude;
+                graphRender(id, long, lat);
+            }
+
+            for (var i = 0; i < response.gw_pps_info.length; i++) {
+                var pp_info = response.gw_pps_info[i];
+                id = pp_info.gw_uuid;
+                var ppName = [];
+                for (var j = 0; j < pp_info.gw_pps.length; j++) {
+                    ppName.push(pp_info.gw_pps[j].pp_name);
                 }
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                console.log(errorThrown);
+                cardRender(id, ppName);
+            }
+
+            for (var i = 0; i < response.gw_state_info.length; i++) {
+                id = response.gw_state_info[i].gw_uuid;
+                state = response.gw_state_info[i].gw_state;
+                set_gw_state(id, state);
             }
         });
-//    }, 5000)
-</script>
+    }
 
+    function graphRender(id, lat, long) {
+        var marker = new L.marker([long, lat]);
+        mymap.addLayer(marker);
+        marker.bindPopup("UUID : " + id);
+    }
+
+    function cardRender(id, ppName) {
+
+        var data = '<div class="col s12 l4 "><div class="card-panel teal lighten-1" id="a' + id + '"><span class="white-text">Gateway UUID : ' + id + '<div class="divider"></div><p>';
+
+        for (var i = 0; i < ppName.length; i++) {
+            data += ppName[i] + '<br>';
+        }
+        data += '</p></span></div></div>';
+        document.getElementById('dataCard').innerHTML += data;
+    }
+
+    function set_gw_state(id, state) {
+        if (state == 0)
+            document.getElementById('a' + id).className = 'card-panel teal lighten-3';
+    }
+</script>
 </body>
 </html>

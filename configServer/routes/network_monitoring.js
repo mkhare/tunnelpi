@@ -110,16 +110,6 @@ module.exports = function (app, io) {
         });
     };
 
-    var aggregate_data_match_count = function (db, callback) {
-        db.restaurants.aggregate(
-            [
-                {$match: {"borough": "Queens", "cuisine": "Brazilian"}},
-                {$group: {"_id": "$address.zipcode", "count": {$sum: 1}}}
-            ]
-        );
-
-    }
-
     function browser_requests(db) {
         app.get("/network_monitoring", function (req, res) {
             if (req.session.email) {
@@ -127,14 +117,6 @@ module.exports = function (app, io) {
             } else {
                 res.render("index");
             }
-        })
-
-        app.get("/jquery-2.1.1.min.js", function (req, res) {
-            res.sendFile('/jquery-2.1.1.min.js', {root: __dirname});
-        })
-
-        app.get("/Chart.js", function (req, res) {
-            res.sendFile('/Chart.js', {root: __dirname});
         })
 
         app.get("/adv_validity_full", function (req, res) {

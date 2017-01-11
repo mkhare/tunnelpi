@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="http://malsup.github.com/jquery.form.js"></script>
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+	  <!-- MAP -->
+	   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+	    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+
+
+</head>
+<body>
+
+
+      <form id="uploadForm" >
+                      <div class="row">
+
+                      <div class="file-field input-field">
+	                  	<div class="col l2 ">
+	                    <div class="btn">
+	                        <span>Choose File</span>
+	                        <input type="file" name="userPhoto">
+	                    </div>   
+	                    </div>
+	                    <div class="col l8">
+                      	<div class="file-path-wrapper">
+				        	<input class="file-path validate" type="text" placeholder="Upload one or more files">
+				      	</div>
+				      	</div>
+				      	<div class="col l2">
+                       		<input  class="btn" type="submit" value="Start DFU" name="submit" >
+                      </div>
+                      </div>
+                     <div class="col l2">
+                     	 <span id = "status"></span>
+                     	 </div> 
+                     </div>
+        </form>
+        
+<script>
+
+ /* $(document).ready(function() {*/
+  	 
+     $('#uploadForm').submit(function() {
+
+	/*	var ppN=($('input[name=group1]:checked', '#dataForm').val()); 
+	
+     	var settings = {
+		  "async": true,
+		  "crossDomain": true,
+		  "url": "/api/photo",
+		  "method": "POST",
+		  "headers": {
+		    "authorization": "Basic YXNzOnBhc3N3b3Jkc3Nk",
+		    "cache-control": "no-cache",
+		    "postman-token": "95841c1a-de69-5c3d-452f-37c67d3ba688"
+		  },
+		  "data": ppN
+		}
+
+		$.ajax(settings).done(function (response) {
+		  	document.getElementById('uploadForm').style.display="none";
+		  	document.getElementById('progBar').style.display="block";
+		});
+
+		 $("#status").empty().text("File is uploading...");
+
+        $(this).ajaxSubmit({
+
+            error: function(xhr) {
+		            status('Error: ' + xhr.status);
+            },
+
+            success: function(response) {
+					console.log(response)
+					$("#status").empty().text(response);
+            }
+	});*/
+
+	var form = new FormData();
+		form.append("abc", "asd");
+		//form.append("file", "oldLogin.png");
+		form.append('userPhoto', $('input[type=file]')[0].files[0]);
+		var settings = {
+			"async": true,
+			"crossDomain": true,
+			"url": "http://localhost:3000/profile",
+			"method": "POST",
+			"headers": {
+			"authorization": "Basic YXNzOnBhc3N3b3Jkc3Nk",
+			"cache-control": "no-cache",
+			"postman-token": "28090140-e8a9-6687-70dd-32c3c8482dea"
+		},
+			"processData": false,
+			"contentType": false,
+			"mimeType": "multipart/form-data",
+			"data": form
+		}
+
+		$.ajax(settings).done(function (response) {
+			$("#status").empty().text(response);
+		console.log(response);
+		});
+
+
+
+
+	return false;
+    });    
+/*});*/
+
+		
+
+
+
+
+</script>
+</body>
+</html>
