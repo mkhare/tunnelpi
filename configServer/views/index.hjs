@@ -28,9 +28,6 @@
             <button class="ui blue submit button" type="submit">Login</button>
         </form>
     </div>
-    <div class="ui vertical divider">
-        Or
-    </div>
     <form method="get" action="/signup" class="center aligned column">
         <button class="ui blue submit button" type="submit">Signup</button>
     </form>
